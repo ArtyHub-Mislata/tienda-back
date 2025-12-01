@@ -15,7 +15,7 @@ class User {
 
 class Artwork {
     - id : Long
-    - title : String
+    - name : String
     - description : String
     - imageUrl : String
     - price : double
@@ -50,7 +50,6 @@ User -- "*" Artwork
 User -- "0...1" ShoppingCart
 ShoppingCart -- "*" Detail
 Detail -- "*" Artwork
-User -- "*" Artwork
 ShoppingCart -- PayMethod
 User -- "*" PayMethod
 Artwork "*" -- Category
