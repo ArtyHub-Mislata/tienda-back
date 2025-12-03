@@ -25,7 +25,12 @@ public class UserMapper {
             userDto.nAccount(),
             userDto.description(),
             userDto.address(),
+<<<<<<< HEAD
             userDto.imageProfileUrl());
+=======
+            userDto.imageProfileUrl(),
+            userDto.artworks().stream().map(ArtworkMapper.getInstance()::fromArtworkDtoToArtwork).toList());
+>>>>>>> develop
     }
 
     public UserDto fromUserToUserDto(User user) {
@@ -37,6 +42,11 @@ public class UserMapper {
             user.getnAccount(),
             user.getDescription(),
             user.getAddress(),
+<<<<<<< HEAD
             user.getImageProfileUrl());
+=======
+            user.getImageProfileUrl(),
+            user.getArtworks().stream().map(ArtworkMapper.getInstance()::fromArtworkToArtworkDto).toList());
+>>>>>>> develop
     }
 }

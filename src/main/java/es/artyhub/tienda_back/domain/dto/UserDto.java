@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
+
 public record UserDto(
         Long id,
 
@@ -27,5 +30,9 @@ public record UserDto(
         String address,
 
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
-        String imageProfileUrl) {
+
+        String imageProfileUrl,
+
+        List<ArtworkDto> artworks) {
+
 }
