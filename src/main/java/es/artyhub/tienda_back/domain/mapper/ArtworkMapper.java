@@ -27,7 +27,7 @@ public class ArtworkMapper {
                 artwork.getImageUrl(),
                 artwork.getPrice(),
                 artwork.getStock(),
-                artwork.getCategory().getId()
+                artwork.getCategoryDto()
         );
     }
 
@@ -42,7 +42,7 @@ public class ArtworkMapper {
                 artworkDto.image(),
                 artworkDto.price(),
                 artworkDto.stock(),
-                artworkDto.findCategoryById(artworkDto.categoryId())
+                artworkDto.categoryDto()
         );
     }
 }

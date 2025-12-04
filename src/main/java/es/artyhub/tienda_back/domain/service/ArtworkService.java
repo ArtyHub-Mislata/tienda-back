@@ -8,6 +8,7 @@ public interface ArtworkService {
     
     Page<ArtworkDto> findAll(int pageNumber, int pageSize);
 
+
     Optional<ArtworkDto> findById(Long id);
 
     ArtworkDto insert(ArtworkDto artworkDto);

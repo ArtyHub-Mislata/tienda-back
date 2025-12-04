@@ -3,7 +3,6 @@ package es.artyhub.tienda_back.domain.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import es.artyhub.tienda_back.domain.model.Category;
 
 public record ArtworkDto(
 
@@ -24,12 +23,9 @@ public record ArtworkDto(
 
         @NotBlank(message = "El stock no puede ser vacío")
         @Positive(message = "El stock debe ser mayor a 0")
-        Integer stock,
+        int stock,
         
         @NotBlank(message = "La categoría no puede ser vacía")
-        Long categoryId) {
+        CategoryDto categoryDto) {
 
-                public Category findCategoryById(Long categoryId) {
-                        return new Category(categoryId);
-                }
 }
