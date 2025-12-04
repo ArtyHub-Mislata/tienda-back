@@ -4,6 +4,8 @@ public class Detail {
 
     private Long id;
     private int quantity;
+    //TODO ESTO TIENE Q SER UN BIGINTEGER PERO ME DA PATEO AHORA ENCARGATE TU LUISMI
+    //TODO ( .)(. ) BUFARRACAS
     private double price;
 
     public Detail() {
