@@ -1,7 +1,7 @@
 package es.artyhub.tienda_back.domain.repository;
 
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
-import org.springframework.data.domain.Page;
+import es.artyhub.tienda_back.domain.model.Page;
 import java.util.Optional;
 
 public interface CategoryRepositoy {

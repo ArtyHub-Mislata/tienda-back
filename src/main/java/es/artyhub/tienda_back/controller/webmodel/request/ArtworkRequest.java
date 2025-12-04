@@ -7,7 +7,7 @@ public record ArtworkRequest(
     String imageUrl,
     double price,
     int stock,
-    Long categoryId
+    CategoryRequest categoryRequest
 ) {
     
 }

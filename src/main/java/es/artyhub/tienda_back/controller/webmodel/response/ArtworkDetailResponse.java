@@ -7,7 +7,7 @@ public record ArtworkDetailResponse(
     String imageUrl,
     double price,
     int stock,
-    CategorySummaryResponse category
+    CategoryDetailResponse categoryDetailResponse
 ) {
     
 }

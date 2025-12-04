@@ -4,11 +4,11 @@ public record UserRequest(
     Long id,
     String name,
     String email,
-    String password,
     String nAccount,
     String description,
     String address,
-    String imageProfileUrl
+    String imageProfileUrl,
+    ArtworkRequest[] artworkRequests
 ) {
     
 }
