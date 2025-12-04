@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(UserDto userDto) {
-        if (!findById(userDto.id()).isEmpty()) {
+        if (findById(userDto.id()).isEmpty()) {
             throw new BusinessException("User with id " + userDto.id() + " does not exist");
         }
         return userRepository.save(userDto);

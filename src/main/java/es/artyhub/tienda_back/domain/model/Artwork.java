@@ -1,5 +1,7 @@
 package es.artyhub.tienda_back.domain.model;
 
+import es.artyhub.tienda_back.domain.dto.CategoryDto;
+
 public class Artwork {
 
     private Long id;
@@ -8,20 +10,20 @@ public class Artwork {
     private String imageUrl;
     private double price;
     private int stock;
-    private Category category;
+    private CategoryDto categoryDto;
 
     public Artwork() {
     }
 
     public Artwork(Long id, String name, String description, String imageUrl, double price, int stock,
-            Category category) {
+            CategoryDto categoryDto) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.stock = stock;
-        this.category = category;
+        this.categoryDto = categoryDto;
     }
 
     public Long getId() {
@@ -72,12 +74,12 @@ public class Artwork {
         this.stock = stock;
     }
 
-    public Category getCategory() {
-        return category;
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryDto(CategoryDto categoryDto) {
+        this.categoryDto = categoryDto;
     }
 
 }
