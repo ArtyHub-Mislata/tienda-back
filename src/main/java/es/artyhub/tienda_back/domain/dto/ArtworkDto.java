@@ -17,13 +17,13 @@ public record ArtworkDto(
         @NotBlank(message = "La imagen no puede ser vacía")
         String image,
 
-        @NotBlank(message = "El precio no puede ser vacío")
+        @NotNull(message = "El precio no puede ser nulo")
         @Positive(message = "El precio debe ser mayor a 0")
         Double price,
 
-        @NotBlank(message = "El stock no puede ser vacío")
+        @NotNull(message = "El stock no puede ser nulo")
         @Positive(message = "El stock debe ser mayor a 0")
-        int stock,
+        Integer stock,
         
         @NotBlank(message = "La categoría no puede ser vacía")
         CategoryDto categoryDto) {
