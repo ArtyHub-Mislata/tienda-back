@@ -3,29 +3,98 @@ package es.artyhub.tienda_back.domain.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
 
-public record ArtworkDto(
+public class ArtworkDto {
 
-        Long id,
+        private Long id;
 
         @NotBlank(message = "El nombre no puede ser vacío")
-        String name,
+        private String name;
 
         @NotNull(message = "La descripción no puede ser nula")
-        String description,
+        private String description;
 
         @NotBlank(message = "La imagen no puede ser vacía")
-        String image,
+        private String image;
 
         @NotNull(message = "El precio no puede ser nulo")
         @Positive(message = "El precio debe ser mayor a 0")
-        Double price,
+        private BigDecimal price;
 
         @NotNull(message = "El stock no puede ser nulo")
         @Positive(message = "El stock debe ser mayor a 0")
-        Integer stock,
+        private Integer stock;
         
         @NotBlank(message = "La categoría no puede ser vacía")
-        CategoryDto categoryDto) {
+        private CategoryDto categoryDto;
 
+    public ArtworkDto() {
+    }
+
+    public ArtworkDto(Long id, String name, String description, String image, BigDecimal price, Integer stock, CategoryDto categoryDto) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.price = price;
+        this.stock = stock;
+        this.categoryDto = categoryDto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public CategoryDto getCategoryDto() {
+        return categoryDto;
+    }
+
+    public void setCategoryDto(CategoryDto categoryDto) {
+        this.categoryDto = categoryDto;
+    }
 }

@@ -51,10 +51,12 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDetailResponse> getCategoryById(@PathVariable Long id) {
-        return categoryService.findById(id)
-            .map(CategoryMapper::fromCategoryDtoToCategoryDetailResponse)
-            .map(categoryDetailResponse -> new ResponseEntity<>(categoryDetailResponse,HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        CategoryDto categoryDto = categoryService.findById(id);
+        if (categoryDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(categoryDto);
+        return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping
@@ -63,7 +65,7 @@ public class CategoryController {
             DtoValidator.validate(categoryDto);
             CategoryDto createCategoryDto = categoryService.insert(categoryDto);
             CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(createCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -75,7 +77,7 @@ public class CategoryController {
             DtoValidator.validate(categoryDto);
             CategoryDto updateCategoryDto = categoryService.update(categoryDto);
             CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(updateCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

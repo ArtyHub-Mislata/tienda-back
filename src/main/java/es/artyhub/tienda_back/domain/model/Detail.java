@@ -1,15 +1,17 @@
 package es.artyhub.tienda_back.domain.model;
 
+import java.math.BigDecimal;
+
 public class Detail {
 
     private Long id;
     private int quantity;
-    private double price;
+    private BigDecimal price;
 
     public Detail() {
     }
 
-    public Detail(Long id, int quantity, double price) {
+    public Detail(Long id, int quantity, BigDecimal price) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -31,11 +33,11 @@ public class Detail {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

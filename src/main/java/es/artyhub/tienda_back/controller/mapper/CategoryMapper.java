@@ -10,8 +10,8 @@ public class CategoryMapper {
             return null;
         }
         return new CategorySummaryResponse(
-            categoryDto.id(),
-            categoryDto.name()
+            categoryDto.getId(),
+            categoryDto.getName()
         );
     }
 
@@ -20,8 +20,8 @@ public class CategoryMapper {
             return null;
         }
         return new CategoryDetailResponse(
-            categoryDto.id(),
-            categoryDto.name()
+            categoryDto.getId(),
+            categoryDto.getName()
         );
     }
 }

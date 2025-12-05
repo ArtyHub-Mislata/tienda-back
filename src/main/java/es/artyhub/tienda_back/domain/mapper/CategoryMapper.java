@@ -21,8 +21,8 @@ public class CategoryMapper {
             return null;
         }
         return new Category(
-            categoryDto.id(), 
-            categoryDto.name()
+            categoryDto.getId(), 
+            categoryDto.getName()
         );
     }
 

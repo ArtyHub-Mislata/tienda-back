@@ -60,11 +60,11 @@ class CategoryServiceImplTest {
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
                 () -> assertEquals(categories.size(), result.data().size(), "Result size should be equal to categories size"),
-                () -> assertEquals(categories.getFirst().id(), result.data().getFirst().id(), "Result first id should be equal to categories first id"),
-                () -> assertEquals(categories.get(2).id(), result.data().get(2).id(), "Result second id should be equal to categories second id"),
-                () -> assertEquals(categories.get(3).id(), result.data().get(3).id(), "Result third id should be equal to categories third id"),
-                () -> assertEquals(categories.get(4).id(), result.data().get(4).id(), "Result fourth id should be equal to categories fourth id"),
-                () -> assertEquals(categories.getLast().id(), result.data().getLast().id(), "Result last id should be equal to categories last id")
+                () -> assertEquals(categories.getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to categories first id"),
+                () -> assertEquals(categories.get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to categories second id"),
+                () -> assertEquals(categories.get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to categories third id"),
+                () -> assertEquals(categories.get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to categories fourth id"),
+                () -> assertEquals(categories.getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to categories last id")
             );
 
             Mockito.verify(categoryRepository).findAll(page, size);
@@ -85,11 +85,11 @@ class CategoryServiceImplTest {
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
                 () -> assertEquals(categories.data().size(), result.data().size(), "Result size should be equal to categories size"),
-                () -> assertEquals(categories.data().getFirst().id(), result.data().getFirst().id(), "Result first id should be equal to categories first id"),
-                () -> assertEquals(categories.data().get(2).id(), result.data().get(2).id(), "Result second id should be equal to categories second id"),
-                () -> assertEquals(categories.data().get(3).id(), result.data().get(3).id(), "Result third id should be equal to categories third id"),
-                () -> assertEquals(categories.data().get(4).id(), result.data().get(4).id(), "Result fourth id should be equal to categories fourth id"),
-                () -> assertEquals(categories.data().getLast().id(), result.data().getLast().id(), "Result last id should be equal to categories last id")
+                () -> assertEquals(categories.data().getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to categories first id"),
+                () -> assertEquals(categories.data().get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to categories second id"),
+                () -> assertEquals(categories.data().get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to categories third id"),
+                () -> assertEquals(categories.data().get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to categories fourth id"),
+                () -> assertEquals(categories.data().getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to categories last id")
             );
 
             Mockito.verify(categoryRepository).findAll(page, size);
@@ -108,12 +108,12 @@ class CategoryServiceImplTest {
 
             when(categoryRepository.findById(id)).thenReturn(categoryDto);
 
-            Optional<CategoryDto> result = categoryService.findById(id);
+            CategoryDto result = categoryService.findById(id);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(categoryDto.get().id(), result.get().id(), "Result id should be equal to categoryDto id"),
-                () -> assertEquals(categoryDto.get().name(), result.get().name(), "Result name should be equal to categoryDto name")
+                () -> assertEquals(categoryDto.get().getId(), result.getId(), "Result id should be equal to categoryDto id"),
+                () -> assertEquals(categoryDto.get().getName(), result.getName(), "Result name should be equal to categoryDto name")
             );
 
             Mockito.verify(categoryRepository).findById(id);
@@ -142,18 +142,18 @@ class CategoryServiceImplTest {
         void whileCategoryIsValid_ShouldCreateCategory() {
             CategoryDto categoryDto = new CategoryDto(1L, "category");
             
-            when(categoryRepository.findById(categoryDto.id())).thenReturn(Optional.empty());
+            when(categoryRepository.findById(categoryDto.getId())).thenReturn(Optional.empty());
             when(categoryRepository.save(categoryDto)).thenReturn(categoryDto);
 
             CategoryDto result = categoryService.insert(categoryDto);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(categoryDto.id(), result.id(), "Result id should be equal to categoryDto id"),
-                () -> assertEquals(categoryDto.name(), result.name(), "Result name should be equal to categoryDto name")
+                () -> assertEquals(categoryDto.getId(), result.getId(), "Result id should be equal to categoryDto id"),
+                () -> assertEquals(categoryDto.getName(), result.getName(), "Result name should be equal to categoryDto name")
             );
 
-            Mockito.verify(categoryRepository).findById(categoryDto.id());
+            Mockito.verify(categoryRepository).findById(categoryDto.getId());
             Mockito.verify(categoryRepository).save(categoryDto);
         }
 
@@ -162,11 +162,11 @@ class CategoryServiceImplTest {
         void whileCategoryExists_ShouldThrowBusinessException() {
             CategoryDto categoryDto = new CategoryDto(1L, "category");
             
-            when(categoryRepository.findById(categoryDto.id())).thenReturn(Optional.of(categoryDto));
+            when(categoryRepository.findById(categoryDto.getId())).thenReturn(Optional.of(categoryDto));
 
             assertThrows(BusinessException.class, () -> categoryService.insert(categoryDto));
 
-            Mockito.verify(categoryRepository).findById(categoryDto.id());
+            Mockito.verify(categoryRepository).findById(categoryDto.getId());
             Mockito.verify(categoryRepository, never()).save(categoryDto);
         }
 
@@ -191,15 +191,15 @@ class CategoryServiceImplTest {
             CategoryDto categoryDto = new CategoryDto(1L, "category");
             CategoryDto updatedCategoryDto = new CategoryDto(1L, "updated category");
             
-            when(categoryRepository.findById(categoryDto.id())).thenReturn(Optional.of(categoryDto));
+            when(categoryRepository.findById(categoryDto.getId())).thenReturn(Optional.of(categoryDto));
             when(categoryRepository.save(updatedCategoryDto)).thenReturn(updatedCategoryDto);
 
             CategoryDto result = categoryService.update(updatedCategoryDto);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(updatedCategoryDto.id(), result.id(), "Result id should be equal to categoryDto id"),
-                () -> assertEquals("updated category", result.name(), "Result name should be equal to categoryDto name")
+                () -> assertEquals(updatedCategoryDto.getId(), result.getId(), "Result id should be equal to categoryDto id"),
+                () -> assertEquals("updated category", result.getName(), "Result name should be equal to categoryDto name")
             );
 
             Mockito.verify(categoryRepository).save(updatedCategoryDto);
@@ -210,11 +210,11 @@ class CategoryServiceImplTest {
         void whileCategoryDoesNotExist_ShouldThrowBusinessException() {
             CategoryDto categoryDto = new CategoryDto(1L, "category");
             
-            when(categoryRepository.findById(categoryDto.id())).thenReturn(Optional.empty());
+            when(categoryRepository.findById(categoryDto.getId())).thenReturn(Optional.empty());
 
             assertThrows(BusinessException.class, () -> categoryService.update(categoryDto));
 
-            Mockito.verify(categoryRepository).findById(categoryDto.id());
+            Mockito.verify(categoryRepository).findById(categoryDto.getId());
             Mockito.verify(categoryRepository, never()).save(categoryDto);
         }
     }
@@ -228,11 +228,11 @@ class CategoryServiceImplTest {
         void whileCategoryExists_ShouldDeleteCategory() {
             CategoryDto categoryDto = new CategoryDto(1L, "category");
             
-            when(categoryRepository.findById(categoryDto.id())).thenReturn(Optional.of(categoryDto));
+            when(categoryRepository.findById(categoryDto.getId())).thenReturn(Optional.of(categoryDto));
 
-            categoryService.delete(categoryDto.id());
+            categoryService.delete(categoryDto.getId());
 
-            Mockito.verify(categoryRepository).delete(categoryDto.id());
+            Mockito.verify(categoryRepository).delete(categoryDto.getId());
         }
 
         @Test

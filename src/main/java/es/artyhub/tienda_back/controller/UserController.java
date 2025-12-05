@@ -49,10 +49,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDetailResponse> getUserById(@PathVariable Long id) {
-        return userService.findById(id)
-            .map(UserMapper::fromUserDtoToUserDetailResponse)
-            .map(userDetailResponse -> new ResponseEntity<>(userDetailResponse, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        UserDto userDto = userService.findById(id);
+        if (userDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(userDto);
+        return new ResponseEntity<>(userDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping
@@ -61,7 +63,7 @@ public class UserController {
             DtoValidator.validate(userDto);
             UserDto createUserDto = userService.insert(userDto);
             UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(createUserDto);
-            return new ResponseEntity<>(userDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(userDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -73,7 +75,7 @@ public class UserController {
             DtoValidator.validate(userDto);
             UserDto updateUserDto = userService.update(userDto);
             UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(updateUserDto);
-            return new ResponseEntity<>(userDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(userDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

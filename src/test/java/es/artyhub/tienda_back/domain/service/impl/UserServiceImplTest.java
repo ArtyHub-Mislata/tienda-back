@@ -58,10 +58,10 @@ class UserServiceImplTest {
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
                 () -> assertEquals(users.size(), result.data().size(), "Result size should be equal to users size"),
-                () -> assertEquals(users.getFirst().id(), result.data().getFirst().id(), "Result first id should be equal to users first id"),
-                () -> assertEquals(users.get(2).id(), result.data().get(2).id(), "Result second id should be equal to users second id"),
-                () -> assertEquals(users.get(3).id(), result.data().get(3).id(), "Result third id should be equal to users third id"),
-                () -> assertEquals(users.getLast().id(), result.data().getLast().id(), "Result last id should be equal to users last id")
+                () -> assertEquals(users.getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to users first id"),
+                () -> assertEquals(users.get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to users second id"),
+                () -> assertEquals(users.get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to users third id"),
+                () -> assertEquals(users.getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to users last id")
             );
             
             Mockito.verify(userRepository).findAll(page, size);
@@ -97,11 +97,11 @@ class UserServiceImplTest {
 
             when(userRepository.findById(id)).thenReturn(Optional.of(new UserDto(id, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of())));
         
-            Optional<UserDto> result = userServiceImpl.findById(id);
+            UserDto result = userServiceImpl.findById(id);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(result.get().id(), id, "Result id should be equal to id")
+                () -> assertEquals(result.getId(), id, "Result id should be equal to id")
             );
 
             Mockito.verify(userRepository).findById(id);
@@ -129,21 +129,21 @@ class UserServiceImplTest {
         void whileUserIsValid_ShouldCreateUser() {
             UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
 
-            when(userRepository.findById(userDto.id())).thenReturn(Optional.empty());
+            when(userRepository.findById(userDto.getId())).thenReturn(Optional.empty());
             when(userRepository.save(userDto)).thenReturn(userDto);
 
             UserDto result = userServiceImpl.insert(userDto);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(result.id(), userDto.id(), "Result id should be equal to userDto id"),
-                () -> assertEquals(result.name(), userDto.name(), "Result name should be equal to userDto name"),
-                () -> assertEquals(result.email(), userDto.email(), "Result email should be equal to userDto email"),
-                () -> assertEquals(result.password(), userDto.password(), "Result password should be equal to userDto password"),
-                () -> assertEquals(result.nAccount(), userDto.nAccount(), "Result nAccount should be equal to userDto nAccount"),
-                () -> assertEquals(result.description(), userDto.description(), "Result description should be equal to userDto description"),
-                () -> assertEquals(result.address(), userDto.address(), "Result address should be equal to userDto address"),
-                () -> assertEquals(result.imageProfileUrl(), userDto.imageProfileUrl(), "Result imageProfileUrl should be equal to userDto imageProfileUrl")
+                () -> assertEquals(result.getId(), userDto.getId(), "Result id should be equal to userDto id"),
+                () -> assertEquals(result.getName(), userDto.getName(), "Result name should be equal to userDto name"),
+                () -> assertEquals(result.getEmail(), userDto.getEmail(), "Result email should be equal to userDto email"),
+                () -> assertEquals(result.getPassword(), userDto.getPassword(), "Result password should be equal to userDto password"),
+                () -> assertEquals(result.getnAccount(), userDto.getnAccount(), "Result nAccount should be equal to userDto nAccount"),
+                () -> assertEquals(result.getDescription(), userDto.getDescription(), "Result description should be equal to userDto description"),
+                () -> assertEquals(result.getAddress(), userDto.getAddress(), "Result address should be equal to userDto address"),
+                () -> assertEquals(result.getImageProfileUrl(), userDto.getImageProfileUrl(), "Result imageProfileUrl should be equal to userDto imageProfileUrl")
             );
 
             Mockito.verify(userRepository).save(userDto);
@@ -154,11 +154,11 @@ class UserServiceImplTest {
         void whileUserExists_ShouldThrowBusinessException() {
             UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
 
-            when(userRepository.findById(userDto.id())).thenReturn(Optional.of(userDto));
+            when(userRepository.findById(userDto.getId())).thenReturn(Optional.of(userDto));
 
             assertThrows(BusinessException.class, () -> userServiceImpl.insert(userDto));
 
-            Mockito.verify(userRepository).findById(userDto.id());
+            Mockito.verify(userRepository).findById(userDto.getId());
             Mockito.verify(userRepository, never()).save(userDto);
         }
 
@@ -263,19 +263,19 @@ class UserServiceImplTest {
             UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
             UserDto userDtoUpdated = new UserDto(1L, "updatedName", "updatedEmail", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
 
-            when(userRepository.findById(userDto.id())).thenReturn(Optional.of(userDto));
+            when(userRepository.findById(userDto.getId())).thenReturn(Optional.of(userDto));
             when(userRepository.save(userDtoUpdated)).thenReturn(userDtoUpdated);
 
             UserDto result = userServiceImpl.update(userDtoUpdated);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(result.id(), userDtoUpdated.id(), "Result id should be equal to userDtoUpdated id"),
-                () -> assertEquals(result.name(), "updatedName", "Result name should be equal to userDtoUpdated name"),
-                () -> assertEquals(result.email(), "updatedEmail", "Result email should be equal to userDtoUpdated email")
+                () -> assertEquals(result.getId(), userDtoUpdated.getId(), "Result id should be equal to userDtoUpdated id"),
+                () -> assertEquals(result.getName(), "updatedName", "Result name should be equal to userDtoUpdated name"),
+                () -> assertEquals(result.getEmail(), "updatedEmail", "Result email should be equal to userDtoUpdated email")
             );
 
-            Mockito.verify(userRepository).findById(userDto.id());
+            Mockito.verify(userRepository).findById(userDto.getId());
             Mockito.verify(userRepository).save(userDtoUpdated);
         }
 
@@ -284,11 +284,11 @@ class UserServiceImplTest {
         void whileUserNotExists_ShouldThrowBusinessException() {
             UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
 
-            when(userRepository.findById(userDto.id())).thenReturn(Optional.empty());
+            when(userRepository.findById(userDto.getId())).thenReturn(Optional.empty());
 
             assertThrows(BusinessException.class, () -> userServiceImpl.update(userDto));
 
-            Mockito.verify(userRepository).findById(userDto.id());
+            Mockito.verify(userRepository).findById(userDto.getId());
             Mockito.verify(userRepository, never()).save(userDto);
         }
     }
@@ -302,12 +302,12 @@ class UserServiceImplTest {
         void whileUserExists_ShouldDeleteUser() {
             UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of());
 
-            when(userRepository.findById(userDto.id())).thenReturn(Optional.of(userDto));
+            when(userRepository.findById(userDto.getId())).thenReturn(Optional.of(userDto));
 
-            userServiceImpl.delete(userDto.id());
+            userServiceImpl.delete(userDto.getId());
 
-            Mockito.verify(userRepository).findById(userDto.id());
-            Mockito.verify(userRepository).delete(userDto.id());
+            Mockito.verify(userRepository).findById(userDto.getId());
+            Mockito.verify(userRepository).delete(userDto.getId());
         }
 
         @Test

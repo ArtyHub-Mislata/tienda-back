@@ -2,10 +2,10 @@ package es.artyhub.tienda_back.domain.service.impl;
 
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
+import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.repository.UserRepository;
 import es.artyhub.tienda_back.domain.service.UserService;
-import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     
@@ -21,28 +21,48 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserDto> findById(Long id) {
-        return userRepository.findById(id);
+    public UserDto findById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new BusinessException("User with id " + id + " not found"));
     }
 
     @Override
     public UserDto insert(UserDto userDto) {
-        if (findById(userDto.id()).isPresent()) {
-            throw new BusinessException("User with id " + userDto.id() + " already exists");
+        if (userRepository.findById(userDto.getId()).isPresent()) {
+            throw new BusinessException("User with id " + userDto.getId() + " already exists");
+        } else if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
+            throw new ValidationException("User name is required");
+        } else if (userDto.getEmail() == null || userDto.getEmail().trim().isEmpty()) {
+            throw new ValidationException("User email is required");
+        } else if (userDto.getPassword() == null || userDto.getPassword().trim().isEmpty()) {
+            throw new ValidationException("User password is required");
+        } else if (userDto.getnAccount() == null || userDto.getnAccount().trim().isEmpty()) {
+            throw new ValidationException("User nAccount is required");
+        } else if (userDto.getnAccount().length() != 16) {
+            throw new ValidationException("User nAccount must have 16 characters");
+        } else if (userDto.getAddress() == null || userDto.getAddress().trim().isEmpty()) {
+            throw new ValidationException("User address is required");
+        } else if (userDto.getImageProfileUrl() == null) {
+            throw new ValidationException("User imageProfileUrl cannot be null");
+        } else {
+            return userRepository.save(userDto);
         }
-        return userRepository.save(userDto);
     }
 
     @Override
     public UserDto update(UserDto userDto) {
-        if (findById(userDto.id()).isEmpty()) {
-            throw new BusinessException("User with id " + userDto.id() + " does not exist");
+        if (userRepository.findById(userDto.getId()).isEmpty()) {
+            throw new BusinessException("User with id " + userDto.getId() + " does not exist");
+        } else {
+            return userRepository.save(userDto);
         }
-        return userRepository.save(userDto);
     }
 
     @Override
     public void delete(Long id) {
-        userRepository.delete(id);
+        if (userRepository.findById(id).isEmpty()) {
+            throw new BusinessException("User with id " + id + " does not exist");
+        } else {
+            userRepository.delete(id);
+        }
     }
 }

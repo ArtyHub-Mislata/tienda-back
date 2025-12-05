@@ -18,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +46,7 @@ class CategoryControllerTest {
 
         when(categoryService.findAll(1, 10)).thenReturn(categoryDtoPage);
 
-        mockMvc.perform(get("/api/categories?pageNumber=1&pageSize=10"))
+        mockMvc.perform(get("/api/categories?pageNumber=" + categoryDtoPage.pageNumber() + "&pageSize=" + categoryDtoPage.pageSize()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.data.length()").value(3))
@@ -64,9 +63,9 @@ class CategoryControllerTest {
     void findCategoryById() throws Exception {
         CategoryDto categoryDto = new CategoryDto(1L, "Category 1");
 
-        when(categoryService.findById(1L)).thenReturn(Optional.of(categoryDto));
+        when(categoryService.findById(1L)).thenReturn(categoryDto);
 
-        mockMvc.perform(get("/api/categories/1"))
+        mockMvc.perform(get("/api/categories/" + categoryDto.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
@@ -90,7 +89,7 @@ class CategoryControllerTest {
         mockMvc.perform(post("/api/categories")
             .contentType(MediaType.APPLICATION_JSON)
             .content(categoryJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isCreated())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("Category 1"));
@@ -111,10 +110,10 @@ class CategoryControllerTest {
 
         when(categoryService.update(categoryDto)).thenReturn(updatedCategoryDto);
 
-        mockMvc.perform(put("/api/categories/1")
+        mockMvc.perform(put("/api/categories/" + categoryDto.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(categoryJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("updatedName"));
@@ -125,9 +124,9 @@ class CategoryControllerTest {
     void deleteCategory() throws Exception {
         CategoryDto categoryDto = new CategoryDto(1L, "name1");
 
-        when(categoryService.findById(categoryDto.id())).thenReturn(Optional.of(categoryDto));
+        when(categoryService.findById(categoryDto.getId())).thenReturn(categoryDto);
 
-        mockMvc.perform(delete("/api/categories/1"))
+        mockMvc.perform(delete("/api/categories/" + categoryDto.getId()))
             .andExpect(status().isNoContent());
     }
 }

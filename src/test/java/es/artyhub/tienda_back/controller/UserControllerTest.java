@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.MediaType;
 
@@ -45,7 +44,7 @@ class UserControllerTest {
 
         when(userService.findAll(1, 10)).thenReturn(userDtoPage);
 
-        mockMvc.perform(get("/api/users?pageNumber=1&pageSize=10"))
+        mockMvc.perform(get("/api/users?pageNumber="+userDtoPage.pageNumber()+"&pageSize="+userDtoPage.pageSize()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.data.length()").value(2))
@@ -61,9 +60,9 @@ class UserControllerTest {
     void findUserById() throws Exception {
         UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
 
-        when(userService.findById(userDto.id())).thenReturn(Optional.of(userDto));
+        when(userService.findById(userDto.getId())).thenReturn(userDto);
 
-        mockMvc.perform(get("/api/users/" + userDto.id()))
+        mockMvc.perform(get("/api/users/" + userDto.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
@@ -100,7 +99,7 @@ class UserControllerTest {
         mockMvc.perform(post("/api/users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isCreated())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("name1"))
@@ -134,10 +133,10 @@ class UserControllerTest {
 
         when(userService.update(userDto)).thenReturn(updatedUserDto);
 
-        mockMvc.perform(put("/api/users/1")
+        mockMvc.perform(put("/api/users/" + userDto.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("updatedName1"))
@@ -152,7 +151,11 @@ class UserControllerTest {
     @Test
     @DisplayName("Test delete user")
     void deleteUser() throws Exception {
-        mockMvc.perform(delete("/api/users/1"))
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+
+        when(userService.findById(userDto.getId())).thenReturn(userDto);
+
+        mockMvc.perform(delete("/api/users/" + userDto.getId()))
             .andExpect(status().isNoContent());
     }
 }

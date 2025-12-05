@@ -18,15 +18,15 @@ public class UserMapper {
 
     public User fromUserDtoToUser(UserDto userDto) {
         return new User(
-            userDto.id(),
-            userDto.name(),
-            userDto.email(),
-            userDto.password(),
-            userDto.nAccount(),
-            userDto.description(),
-            userDto.address(),
-            userDto.imageProfileUrl(),
-            userDto.artworks().stream().map(ArtworkMapper.getInstance()::fromArtworkDtoToArtwork).toList());
+            userDto.getId(),
+            userDto.getName(),
+            userDto.getEmail(),
+            userDto.getPassword(),
+            userDto.getnAccount(),
+            userDto.getDescription(),
+            userDto.getAddress(),
+            userDto.getImageProfileUrl(),
+            userDto.getArtworks().stream().map(ArtworkMapper.getInstance()::fromArtworkDtoToArtwork).toList());
     }
 
     public UserDto fromUserToUserDto(User user) {

@@ -21,9 +21,9 @@ public class DetailMapper {
             return null;
         }
         return new Detail(
-            detailDto.id(),
-            detailDto.quantity(),
-            detailDto.price()
+            detailDto.getId(),
+            detailDto.getQuantity(),
+            detailDto.getPrice()
         );
     }
 

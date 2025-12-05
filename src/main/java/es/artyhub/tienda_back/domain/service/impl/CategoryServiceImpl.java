@@ -3,9 +3,9 @@ package es.artyhub.tienda_back.domain.service.impl;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
+import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.service.CategoryService;
-import java.util.Optional;
 
 public class CategoryServiceImpl implements CategoryService {
     
@@ -21,28 +21,36 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<CategoryDto> findById(Long id) {
-        return categoryRepositoy.findById(id);
+    public CategoryDto findById(Long id) {
+        return categoryRepositoy.findById(id).orElseThrow(() -> new BusinessException("Category with id " + id + " not found"));
     }
 
     @Override
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (findById(categoryDto.id()).isPresent()) {
-            throw new BusinessException("Category with id " + categoryDto.id() + " already exists");
+        if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
+            throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
+        } else if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
+            throw new ValidationException("Category name is required");
+        } else {
+            return categoryRepositoy.save(categoryDto);
         }
-        return categoryRepositoy.save(categoryDto);
     }
 
     @Override
     public CategoryDto update(CategoryDto categoryDto) {
-        if (findById(categoryDto.id()).isEmpty()) {
-            throw new BusinessException("Category with id " + categoryDto.id() + " does not exist");
+        if (categoryRepositoy.findById(categoryDto.getId()).isEmpty()) {
+            throw new BusinessException("Category with id " + categoryDto.getId() + " does not exist");
+        } else {
+            return categoryRepositoy.save(categoryDto);
         }
-        return categoryRepositoy.save(categoryDto);
     }
 
     @Override
     public void delete(Long id) {
-        categoryRepositoy.delete(id);
+        if (categoryRepositoy.findById(id).isEmpty()) {
+            throw new BusinessException("Category with id " + id + " does not exist");
+        } else {
+            categoryRepositoy.delete(id);
+        }
     }
 }
