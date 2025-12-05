@@ -3,6 +3,7 @@ package es.artyhub.tienda_back.domain.dto;
 import java.util.List;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
 import es.artyhub.tienda_back.domain.model.User;
 
 public record ShoppingCartDto(
@@ -20,7 +21,7 @@ public record ShoppingCartDto(
 
         @NotBlank(message = "El total no puede ser vacío")
         @Positive(message = "El total debe ser mayor a 0")
-        double total,
+        BigDecimal total,
 
         @NotBlank(message = "El estado no puede ser vacío")
         String state) {

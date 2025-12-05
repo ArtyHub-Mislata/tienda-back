@@ -12,6 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
+import java.math.BigDecimal;
 
 class ArtworkDtoTest {
     
@@ -23,7 +24,7 @@ class ArtworkDtoTest {
             "name",
             "description",
             "image",
-            1.0,
+            new BigDecimal(1.0),
             1,
             new CategoryDto(1L, "name")
         );
@@ -33,22 +34,22 @@ class ArtworkDtoTest {
 
     static Stream<ArtworkDto> invalidArtworks() {
         return Stream.of(
-            new ArtworkDto( 1L, null, "description", "image", 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "", "description", "image", 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, " ", "description", "image", 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", null, "image", 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", null, 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "", 1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", " ", 1.0, 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, null, "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, " ", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", null, "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", null, new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", " ", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")),
             new ArtworkDto( 1L, "name", "description", "image", null, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", -1.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", 0.0, 1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, null, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, 0, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, -1, new CategoryDto(1L, "name")),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, 1, new CategoryDto(null, null)),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "")),
-            new ArtworkDto( 1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, " "))
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(-1.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(0.0), 1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), null, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), 0, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), -1, new CategoryDto(1L, "name")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(null, null)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "")),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, " "))
         );
     }
 

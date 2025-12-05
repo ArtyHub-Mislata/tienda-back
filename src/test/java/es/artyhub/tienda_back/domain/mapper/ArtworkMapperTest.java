@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -28,7 +30,7 @@ class ArtworkMapperTest {
                 "Artwork",
                 "Description",
                 "Image",
-                1.0,
+                new BigDecimal(1.0),
                 1,
                 new CategoryDto(1L, "Category")
             );
@@ -68,7 +70,7 @@ class ArtworkMapperTest {
                 "Artwork",
                 "Description",
                 "Image",
-                1.0,
+                new BigDecimal(1.0),
                 1,
                 new CategoryDto(1L, "Category")
             );

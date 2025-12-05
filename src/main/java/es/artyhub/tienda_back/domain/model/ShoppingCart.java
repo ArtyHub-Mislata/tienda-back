@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.domain.model;
 
 import java.util.List;
+import java.math.BigDecimal;
 
 public class ShoppingCart {
 
@@ -8,13 +9,13 @@ public class ShoppingCart {
     private User user;
     private List<Detail> details;
     private PayMethod payMethod;
-    private double total;
+    private BigDecimal total;
     private String state;
 
     public ShoppingCart() {
     }
 
-    public ShoppingCart(Long id, User user, List<Detail> details, PayMethod payMethod, double total, String state) {
+    public ShoppingCart(Long id, User user, List<Detail> details, PayMethod payMethod, BigDecimal total, String state) {
         this.id = id;
         this.user = user;
         this.details = details;
@@ -55,11 +56,11 @@ public class ShoppingCart {
         this.payMethod = payMethod;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 

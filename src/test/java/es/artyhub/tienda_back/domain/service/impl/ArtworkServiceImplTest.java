@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.when;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,11 +46,11 @@ class ArtworkServiceImplTest {
             int size = 10;
 
             List<ArtworkDto> artworks = List.of(
-                new ArtworkDto(1L, "name1", "description1", "image1", 1.0, 1, new CategoryDto(1L, "category1")),
-                new ArtworkDto(2L, "name2", "description2", "image2", 2.0, 2, new CategoryDto(2L, "category2")),
-                new ArtworkDto(3L, "name3", "description3", "image3", 3.0, 3, new CategoryDto(3L, "category3")),
-                new ArtworkDto(4L, "name4", "description4", "image4", 4.0, 4, new CategoryDto(4L, "category4")),
-                new ArtworkDto(5L, "name5", "description5", "image5", 5.0, 5, new CategoryDto(5L, "category5"))
+                new ArtworkDto(1L, "name1", "description1", "image1", new BigDecimal(1.0), 1, new CategoryDto(1L, "category1")),
+                new ArtworkDto(2L, "name2", "description2", "image2", new BigDecimal(2.0), 2, new CategoryDto(2L, "category2")),
+                new ArtworkDto(3L, "name3", "description3", "image3", new BigDecimal(3.0), 3, new CategoryDto(3L, "category3")),
+                new ArtworkDto(4L, "name4", "description4", "image4", new BigDecimal(4.0), 4, new CategoryDto(4L, "category4")),
+                new ArtworkDto(5L, "name5", "description5", "image5", new BigDecimal(5.0), 5, new CategoryDto(5L, "category5"))
             );
 
             when(artworkRepository.findAll(page, size)).thenReturn(new Page<>(artworks, page, size, artworks.size()));
@@ -104,7 +105,7 @@ class ArtworkServiceImplTest {
         void whileArtworkExists_ShouldReturnArtwork() {
             Long id = 1L;
 
-            when(artworkRepository.findById(id)).thenReturn(Optional.of(new ArtworkDto(id, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"))));
+            when(artworkRepository.findById(id)).thenReturn(Optional.of(new ArtworkDto(id, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"))));
 
             ArtworkDto result = artworkService.findById(id);
 
@@ -142,7 +143,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork is valid should create artwork")
         void whileArtworkIsValid_ShouldCreateArtwork() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.empty());
             when(artworkRepository.save(artworkDto)).thenReturn(artworkDto);
@@ -166,7 +167,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork exists should throw BusinessException")
         void whileArtworkExists_ShouldThrowBusinessException() {
-            ArtworkDto existingArtworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto existingArtworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             when(artworkRepository.findById(existingArtworkDto.id())).thenReturn(Optional.of(existingArtworkDto));
 
@@ -179,7 +180,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have no valid name should throw ValidationException")
         void whileArtworkHaveNoValidName_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -189,7 +190,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have null description should throw ValidationException")
         void whileArtworkHaveNullDescription_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", null, "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", null, "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -199,7 +200,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have no valid image should throw ValidationException")
         void whileArtworkHaveNoValidImage_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -219,7 +220,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have negative price should throw ValidationException")
         void whileArtworkHaveNegativePrice_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", -1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(-1.0), 1, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -229,7 +230,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have null stock should throw ValidationException")
         void whileArtworkHaveNullStock_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, null, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), null, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -239,7 +240,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have negative stock should throw ValidationException")
         void whileArtworkHaveNegativeStock_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, -1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), -1, new CategoryDto(1L, "category"));
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -249,7 +250,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork have no valid category should throw ValidationException")
         void whileArtworkHaveNoValidCategory_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, null);
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, null);
 
             assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
 
@@ -264,8 +265,8 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork exists should update artwork")
         void whileArtworkExists_ShouldUpdateArtwork() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
-            ArtworkDto updatedArtworkDto = new ArtworkDto(1L, "updatedName", "updatedDescription", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
+            ArtworkDto updatedArtworkDto = new ArtworkDto(1L, "updatedName", "updatedDescription", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.of(artworkDto));
             when(artworkRepository.save(updatedArtworkDto)).thenReturn(updatedArtworkDto);
@@ -285,7 +286,7 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork doesn't exist should throw BusinessException")
         void whileArtworkDoesntExist_ShouldThrowBusinessException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
             when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.empty());
 
@@ -303,10 +304,11 @@ class ArtworkServiceImplTest {
         @Test
         @DisplayName("While artwork exists should delete artwork")
         void whileArtworkExists_ShouldDeleteArtwork() {
+            Long id = 1L;
             
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"));
+            ArtworkDto artworkDto = new ArtworkDto(id, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
             
-            when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.of(artworkDto));
+            when(artworkRepository.findById(id)).thenReturn(Optional.of(artworkDto));
             
             assertAll(
                 () -> assertNotNull(artworkDto),
