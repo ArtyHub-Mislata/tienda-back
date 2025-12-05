@@ -30,7 +30,6 @@ public record UserDto(
         String address,
 
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
-
         String imageProfileUrl,
 
         List<ArtworkDto> artworks) {
