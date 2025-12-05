@@ -108,12 +108,12 @@ class CategoryServiceImplTest {
 
             when(categoryRepository.findById(id)).thenReturn(categoryDto);
 
-            Optional<CategoryDto> result = categoryService.findById(id);
+            CategoryDto result = categoryService.findById(id);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(categoryDto.get().id(), result.get().id(), "Result id should be equal to categoryDto id"),
-                () -> assertEquals(categoryDto.get().name(), result.get().name(), "Result name should be equal to categoryDto name")
+                () -> assertEquals(categoryDto.get().id(), result.id(), "Result id should be equal to categoryDto id"),
+                () -> assertEquals(categoryDto.get().name(), result.name(), "Result name should be equal to categoryDto name")
             );
 
             Mockito.verify(categoryRepository).findById(id);

@@ -49,10 +49,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDetailResponse> getUserById(@PathVariable Long id) {
-        return userService.findById(id)
-            .map(UserMapper::fromUserDtoToUserDetailResponse)
-            .map(userDetailResponse -> new ResponseEntity<>(userDetailResponse, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        UserDto userDto = userService.findById(id);
+        if (userDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(userDto);
+        return new ResponseEntity<>(userDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping

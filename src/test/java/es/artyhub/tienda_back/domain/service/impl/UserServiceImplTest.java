@@ -97,11 +97,11 @@ class UserServiceImplTest {
 
             when(userRepository.findById(id)).thenReturn(Optional.of(new UserDto(id, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", List.of())));
         
-            Optional<UserDto> result = userServiceImpl.findById(id);
+            UserDto result = userServiceImpl.findById(id);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(result.get().id(), id, "Result id should be equal to id")
+                () -> assertEquals(result.id(), id, "Result id should be equal to id")
             );
 
             Mockito.verify(userRepository).findById(id);

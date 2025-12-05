@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,7 @@ public class ArtworkControllerTest {
 
         when(artworkService.findAll(1, 10)).thenReturn(artworkDtoPage);
 
-        mockMvc.perform(get("/api/artworks?pageNumber=1&pageSize=10"))
+        mockMvc.perform(get("/api/artworks?pageNumber=" + artworkDtoPage.pageNumber() + "&pageSize=" + artworkDtoPage.pageSize()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.data.length()").value(2))
@@ -61,9 +60,9 @@ public class ArtworkControllerTest {
     void findArtworkById() throws Exception {
         ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", 1.0, 1, new CategoryDto(1L, "name1"));
 
-        when(artworkService.findById(1L)).thenReturn(Optional.of(artworkDto));
+        when(artworkService.findById(1L)).thenReturn(artworkDto);
 
-        mockMvc.perform(get("/api/artworks/1"))
+        mockMvc.perform(get("/api/artworks/" + artworkDto.id()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.title").value("name1"))
@@ -125,7 +124,7 @@ public class ArtworkControllerTest {
 
         when(artworkService.update(artworkDto)).thenReturn(artworkDtoUpdated);
 
-        mockMvc.perform(put("/api/artworks/1")
+        mockMvc.perform(put("/api/artworks/" + artworkDto.id())
             .contentType(MediaType.APPLICATION_JSON)
             .content(artworkJson))
             .andExpect(status().isNoContent())
@@ -144,9 +143,9 @@ public class ArtworkControllerTest {
     void deleteArtwork() throws Exception {
         ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", 1.0, 1, new CategoryDto(1L, "name1"));
 
-        when(artworkService.findById(artworkDto.id())).thenReturn(Optional.of(artworkDto));
+        when(artworkService.findById(artworkDto.id())).thenReturn(artworkDto);
 
-        mockMvc.perform(delete("/api/artworks/1"))
+        mockMvc.perform(delete("/api/artworks/" + artworkDto.id()))
             .andExpect(status().isNoContent());
     }
 }

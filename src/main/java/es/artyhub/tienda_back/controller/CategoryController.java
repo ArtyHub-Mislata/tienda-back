@@ -51,10 +51,12 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CategoryDetailResponse> getCategoryById(@PathVariable Long id) {
-        return categoryService.findById(id)
-            .map(CategoryMapper::fromCategoryDtoToCategoryDetailResponse)
-            .map(categoryDetailResponse -> new ResponseEntity<>(categoryDetailResponse,HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        CategoryDto categoryDto = categoryService.findById(id);
+        if (categoryDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(categoryDto);
+        return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping

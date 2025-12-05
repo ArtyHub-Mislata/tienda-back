@@ -5,7 +5,6 @@ import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.service.CategoryService;
-import java.util.Optional;
 
 public class CategoryServiceImpl implements CategoryService {
     
@@ -21,13 +20,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<CategoryDto> findById(Long id) {
-        return categoryRepositoy.findById(id);
+    public CategoryDto findById(Long id) {
+        return categoryRepositoy.findById(id).orElseThrow(() -> new BusinessException("Category with id " + id + " not found"));
     }
 
     @Override
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (findById(categoryDto.id()).isPresent()) {
+        if (findById(categoryDto.id()) != null) {
             throw new BusinessException("Category with id " + categoryDto.id() + " already exists");
         }
         return categoryRepositoy.save(categoryDto);
@@ -35,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto update(CategoryDto categoryDto) {
-        if (findById(categoryDto.id()).isEmpty()) {
+        if (findById(categoryDto.id()) == null) {
             throw new BusinessException("Category with id " + categoryDto.id() + " does not exist");
         }
         return categoryRepositoy.save(categoryDto);

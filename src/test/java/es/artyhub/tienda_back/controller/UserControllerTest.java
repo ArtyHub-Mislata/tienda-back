@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.MediaType;
 
@@ -45,7 +44,7 @@ class UserControllerTest {
 
         when(userService.findAll(1, 10)).thenReturn(userDtoPage);
 
-        mockMvc.perform(get("/api/users?pageNumber=1&pageSize=10"))
+        mockMvc.perform(get("/api/users?pageNumber="+userDtoPage.pageNumber()+"&pageSize="+userDtoPage.pageSize()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.data.length()").value(2))
@@ -61,7 +60,7 @@ class UserControllerTest {
     void findUserById() throws Exception {
         UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
 
-        when(userService.findById(userDto.id())).thenReturn(Optional.of(userDto));
+        when(userService.findById(userDto.id())).thenReturn(userDto);
 
         mockMvc.perform(get("/api/users/" + userDto.id()))
             .andExpect(status().isOk())
@@ -134,7 +133,7 @@ class UserControllerTest {
 
         when(userService.update(userDto)).thenReturn(updatedUserDto);
 
-        mockMvc.perform(put("/api/users/1")
+        mockMvc.perform(put("/api/users/" + userDto.id())
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
             .andExpect(status().isNoContent())
@@ -152,7 +151,11 @@ class UserControllerTest {
     @Test
     @DisplayName("Test delete user")
     void deleteUser() throws Exception {
-        mockMvc.perform(delete("/api/users/1"))
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+
+        when(userService.findById(userDto.id())).thenReturn(userDto);
+
+        mockMvc.perform(delete("/api/users/" + userDto.id()))
             .andExpect(status().isNoContent());
     }
 }

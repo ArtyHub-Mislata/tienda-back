@@ -49,10 +49,12 @@ public class ArtworkController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ArtworkDetailResponse> getArtworkById(@PathVariable Long id) {
-        return artworkService.findById(id)
-            .map(ArtworkMapper::fromArtworkDtoToArtworkDetailResponse)
-            .map(artworkDetailResponse -> new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        ArtworkDto artworkDto = artworkService.findById(id);
+        if (artworkDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(artworkDto);
+        return new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping

@@ -106,17 +106,17 @@ class ArtworkServiceImplTest {
 
             when(artworkRepository.findById(id)).thenReturn(Optional.of(new ArtworkDto(id, "name", "description", "image", 1.0, 1, new CategoryDto(1L, "category"))));
 
-            Optional<ArtworkDto> result = artworkService.findById(id);
+            ArtworkDto result = artworkService.findById(id);
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(id, result.get().id(), "Result id should be equal to artwork id"),
-                () -> assertEquals("name", result.get().name(), "Result name should be equal to artwork name"),
-                () -> assertEquals("description", result.get().description(), "Result description should be equal to artwork description"),
-                () -> assertEquals("image", result.get().image(), "Result image should be equal to artwork image"),
-                () -> assertEquals(1.0, result.get().price(), "Result price should be equal to artwork price"),
-                () -> assertEquals(1, result.get().stock(), "Result stock should be equal to artwork stock"),
-                () -> assertEquals(1L, result.get().categoryDto().id(), "Result category id should be equal to artwork category id")
+                () -> assertEquals(id, result.id(), "Result id should be equal to artwork id"),
+                () -> assertEquals("name", result.name(), "Result name should be equal to artwork name"),
+                () -> assertEquals("description", result.description(), "Result description should be equal to artwork description"),
+                () -> assertEquals("image", result.image(), "Result image should be equal to artwork image"),
+                () -> assertEquals(1.0, result.price(), "Result price should be equal to artwork price"),
+                () -> assertEquals(1, result.stock(), "Result stock should be equal to artwork stock"),
+                () -> assertEquals(1L, result.categoryDto().id(), "Result category id should be equal to artwork category id")
             );
 
             Mockito.verify(artworkRepository).findById(id);
