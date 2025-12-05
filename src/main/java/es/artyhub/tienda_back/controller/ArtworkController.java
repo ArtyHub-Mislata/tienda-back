@@ -63,7 +63,7 @@ public class ArtworkController {
             DtoValidator.validate(artworkDto);
             ArtworkDto createArtworkDto = artworkService.insert(artworkDto);
             ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(createArtworkDto);
-            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -75,7 +75,7 @@ public class ArtworkController {
             DtoValidator.validate(artworkDto);
             ArtworkDto updateArtworkDto = artworkService.update(artworkDto);
             ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(updateArtworkDto);
-            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

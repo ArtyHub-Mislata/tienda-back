@@ -63,7 +63,7 @@ public class UserController {
             DtoValidator.validate(userDto);
             UserDto createUserDto = userService.insert(userDto);
             UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(createUserDto);
-            return new ResponseEntity<>(userDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(userDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -75,7 +75,7 @@ public class UserController {
             DtoValidator.validate(userDto);
             UserDto updateUserDto = userService.update(userDto);
             UserDetailResponse userDetailResponse = UserMapper.fromUserDtoToUserDetailResponse(updateUserDto);
-            return new ResponseEntity<>(userDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(userDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

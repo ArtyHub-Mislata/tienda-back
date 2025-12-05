@@ -89,7 +89,7 @@ class CategoryControllerTest {
         mockMvc.perform(post("/api/categories")
             .contentType(MediaType.APPLICATION_JSON)
             .content(categoryJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isCreated())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("Category 1"));
@@ -113,7 +113,7 @@ class CategoryControllerTest {
         mockMvc.perform(put("/api/categories/" + categoryDto.id())
             .contentType(MediaType.APPLICATION_JSON)
             .content(categoryJson))
-            .andExpect(status().isNoContent())
+            .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
             .andExpect(jsonPath("$.name").value("updatedName"));

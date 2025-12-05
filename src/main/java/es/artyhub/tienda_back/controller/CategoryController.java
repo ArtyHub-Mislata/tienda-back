@@ -65,7 +65,7 @@ public class CategoryController {
             DtoValidator.validate(categoryDto);
             CategoryDto createCategoryDto = categoryService.insert(categoryDto);
             CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(createCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -77,7 +77,7 @@ public class CategoryController {
             DtoValidator.validate(categoryDto);
             CategoryDto updateCategoryDto = categoryService.update(categoryDto);
             CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(updateCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
