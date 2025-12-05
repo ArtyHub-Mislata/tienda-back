@@ -39,13 +39,13 @@ class ArtworkMapperTest {
 
             assertAll(
                 () -> assertNotNull(artworkDto, "Mapped Artwork should not be null"),
-                () -> assertEquals(artwork.getId(), artworkDto.id()),
-                () -> assertEquals(artwork.getName(), artworkDto.name()),
-                () -> assertEquals(artwork.getDescription(), artworkDto.description()),
-                () -> assertEquals(artwork.getImageUrl(), artworkDto.image()),
-                () -> assertEquals(artwork.getPrice(), artworkDto.price()),
-                () -> assertEquals(artwork.getStock(), artworkDto.stock()),
-                () -> assertEquals(artwork.getCategoryDto(), artworkDto.categoryDto())
+                () -> assertEquals(artwork.getId(), artworkDto.getId()),
+                () -> assertEquals(artwork.getName(), artworkDto.getName()),
+                () -> assertEquals(artwork.getDescription(), artworkDto.getDescription()),
+                () -> assertEquals(artwork.getImageUrl(), artworkDto.getImage()),
+                () -> assertEquals(artwork.getPrice(), artworkDto.getPrice()),
+                () -> assertEquals(artwork.getStock(), artworkDto.getStock()),
+                () -> assertEquals(artwork.getCategoryDto(), artworkDto.getCategoryDto())
             );
         }
     
@@ -79,13 +79,13 @@ class ArtworkMapperTest {
 
             assertAll(
                 () -> assertNotNull(artwork, "Mapped Artwork should not be null"),
-                () -> assertEquals(artworkDto.id(), artwork.getId()),
-                () -> assertEquals(artworkDto.name(), artwork.getName()),
-                () -> assertEquals(artworkDto.description(), artwork.getDescription()),
-                () -> assertEquals(artworkDto.image(), artwork.getImageUrl()),
-                () -> assertEquals(artworkDto.price(), artwork.getPrice()),
-                () -> assertEquals(artworkDto.stock(), artwork.getStock()),
-                () -> assertEquals(artworkDto.categoryDto(), artwork.getCategoryDto())
+                () -> assertEquals(artworkDto.getId(), artwork.getId()),
+                () -> assertEquals(artworkDto.getName(), artwork.getName()),
+                () -> assertEquals(artworkDto.getDescription(), artwork.getDescription()),
+                () -> assertEquals(artworkDto.getImage(), artwork.getImageUrl()),
+                () -> assertEquals(artworkDto.getPrice(), artwork.getPrice()),
+                () -> assertEquals(artworkDto.getStock(), artwork.getStock()),
+                () -> assertEquals(artworkDto.getCategoryDto(), artwork.getCategoryDto())
             );
         }
     

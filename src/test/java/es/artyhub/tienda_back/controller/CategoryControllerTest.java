@@ -65,7 +65,7 @@ class CategoryControllerTest {
 
         when(categoryService.findById(1L)).thenReturn(categoryDto);
 
-        mockMvc.perform(get("/api/categories/" + categoryDto.id()))
+        mockMvc.perform(get("/api/categories/" + categoryDto.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
@@ -110,7 +110,7 @@ class CategoryControllerTest {
 
         when(categoryService.update(categoryDto)).thenReturn(updatedCategoryDto);
 
-        mockMvc.perform(put("/api/categories/" + categoryDto.id())
+        mockMvc.perform(put("/api/categories/" + categoryDto.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(categoryJson))
             .andExpect(status().isOk())
@@ -124,9 +124,9 @@ class CategoryControllerTest {
     void deleteCategory() throws Exception {
         CategoryDto categoryDto = new CategoryDto(1L, "name1");
 
-        when(categoryService.findById(categoryDto.id())).thenReturn(categoryDto);
+        when(categoryService.findById(categoryDto.getId())).thenReturn(categoryDto);
 
-        mockMvc.perform(delete("/api/categories/" + categoryDto.id()))
+        mockMvc.perform(delete("/api/categories/" + categoryDto.getId()))
             .andExpect(status().isNoContent());
     }
 }

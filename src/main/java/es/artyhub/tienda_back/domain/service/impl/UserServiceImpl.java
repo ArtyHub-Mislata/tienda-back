@@ -27,21 +27,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto insert(UserDto userDto) {
-        if (userRepository.findById(userDto.id()).isPresent()) {
-            throw new BusinessException("User with id " + userDto.id() + " already exists");
-        } else if (userDto.name() == null || userDto.name().trim().isEmpty()) {
+        if (userRepository.findById(userDto.getId()).isPresent()) {
+            throw new BusinessException("User with id " + userDto.getId() + " already exists");
+        } else if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
             throw new ValidationException("User name is required");
-        } else if (userDto.email() == null || userDto.email().trim().isEmpty()) {
+        } else if (userDto.getEmail() == null || userDto.getEmail().trim().isEmpty()) {
             throw new ValidationException("User email is required");
-        } else if (userDto.password() == null || userDto.password().trim().isEmpty()) {
+        } else if (userDto.getPassword() == null || userDto.getPassword().trim().isEmpty()) {
             throw new ValidationException("User password is required");
-        } else if (userDto.nAccount() == null || userDto.nAccount().trim().isEmpty()) {
+        } else if (userDto.getnAccount() == null || userDto.getnAccount().trim().isEmpty()) {
             throw new ValidationException("User nAccount is required");
-        } else if (userDto.nAccount().length() != 16) {
+        } else if (userDto.getnAccount().length() != 16) {
             throw new ValidationException("User nAccount must have 16 characters");
-        } else if (userDto.address() == null || userDto.address().trim().isEmpty()) {
+        } else if (userDto.getAddress() == null || userDto.getAddress().trim().isEmpty()) {
             throw new ValidationException("User address is required");
-        } else if (userDto.imageProfileUrl() == null) {
+        } else if (userDto.getImageProfileUrl() == null) {
             throw new ValidationException("User imageProfileUrl cannot be null");
         } else {
             return userRepository.save(userDto);
@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto update(UserDto userDto) {
-        if (userRepository.findById(userDto.id()).isEmpty()) {
-            throw new BusinessException("User with id " + userDto.id() + " does not exist");
+        if (userRepository.findById(userDto.getId()).isEmpty()) {
+            throw new BusinessException("User with id " + userDto.getId() + " does not exist");
         } else {
             return userRepository.save(userDto);
         }

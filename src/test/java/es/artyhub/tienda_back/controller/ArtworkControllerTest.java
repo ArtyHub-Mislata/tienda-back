@@ -63,7 +63,7 @@ public class ArtworkControllerTest {
 
         when(artworkService.findById(1L)).thenReturn(artworkDto);
 
-        mockMvc.perform(get("/api/artworks/" + artworkDto.id()))
+        mockMvc.perform(get("/api/artworks/" + artworkDto.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.title").value("name1"))
@@ -125,7 +125,7 @@ public class ArtworkControllerTest {
 
         when(artworkService.update(artworkDto)).thenReturn(artworkDtoUpdated);
 
-        mockMvc.perform(put("/api/artworks/" + artworkDto.id())
+        mockMvc.perform(put("/api/artworks/" + artworkDto.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(artworkJson))
             .andExpect(status().isOk())
@@ -144,9 +144,9 @@ public class ArtworkControllerTest {
     void deleteArtwork() throws Exception {
         ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), 1, new CategoryDto(1L, "name1"));
 
-        when(artworkService.findById(artworkDto.id())).thenReturn(artworkDto);
+        when(artworkService.findById(artworkDto.getId())).thenReturn(artworkDto);
 
-        mockMvc.perform(delete("/api/artworks/" + artworkDto.id()))
+        mockMvc.perform(delete("/api/artworks/" + artworkDto.getId()))
             .andExpect(status().isNoContent());
     }
 }

@@ -11,9 +11,9 @@ public class ArtworkMapper {
             return null;
         }
         return new ArtworkSummaryResponse(
-            artworkDto.id(),
-            artworkDto.name(),
-            artworkDto.price()
+            artworkDto.getId(),
+            artworkDto.getName(),
+            artworkDto.getPrice()
         );
     }
 
@@ -22,13 +22,13 @@ public class ArtworkMapper {
             return null;
         }
         return new ArtworkDetailResponse(
-            artworkDto.id(),
-            artworkDto.name(),
-            artworkDto.description(),
-            artworkDto.image(),
-            artworkDto.price(),
-            artworkDto.stock(),
-            CategoryMapper.fromCategoryDtoToCategoryDetailResponse(artworkDto.categoryDto())
+            artworkDto.getId(),
+            artworkDto.getName(),
+            artworkDto.getDescription(),
+            artworkDto.getImage(),
+            artworkDto.getPrice(),
+            artworkDto.getStock(),
+            CategoryMapper.fromCategoryDtoToCategoryDetailResponse(artworkDto.getCategoryDto())
         );
     }
 }

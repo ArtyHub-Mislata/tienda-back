@@ -28,8 +28,8 @@ class CategoryMapperTest {
             
             assertAll(
                 () -> assertNotNull(categoryDto, "CategoryDto should not be null"),
-                () -> assertEquals(categoryDto.id(), category.getId(), "CategoryDto id should be equal to Category id"),
-                () -> assertEquals(categoryDto.name(), category.getName(), "CategoryDto name should be equal to Category name")
+                () -> assertEquals(categoryDto.getId(), category.getId(), "CategoryDto id should be equal to Category id"),
+                () -> assertEquals(categoryDto.getName(), category.getName(), "CategoryDto name should be equal to Category name")
             );
         }
         
@@ -55,8 +55,8 @@ class CategoryMapperTest {
             
             assertAll(
                 () -> assertNotNull(category, "Category should not be null"),
-                () -> assertEquals(category.getId(), categoryDto.id(), "Category id should be equal to CategoryDto id"),
-                () -> assertEquals(category.getName(), categoryDto.name(), "Category name should be equal to CategoryDto name")
+                () -> assertEquals(category.getId(), categoryDto.getId(), "Category id should be equal to CategoryDto id"),
+                () -> assertEquals(category.getName(), categoryDto.getName(), "Category name should be equal to CategoryDto name")
             );
         }
         

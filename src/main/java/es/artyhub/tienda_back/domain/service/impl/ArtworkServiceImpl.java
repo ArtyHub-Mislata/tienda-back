@@ -29,23 +29,23 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public ArtworkDto insert(ArtworkDto artworkDto) {
-        if (artworkRepository.findById(artworkDto.id()).isPresent()) {
-            throw new BusinessException("Artwork with id " + artworkDto.id() + " already exists");
-        } else if (artworkDto.name() == null || artworkDto.name().trim().isEmpty()) {
+        if (artworkRepository.findById(artworkDto.getId()).isPresent()) {
+            throw new BusinessException("Artwork with id " + artworkDto.getId() + " already exists");
+        } else if (artworkDto.getName() == null || artworkDto.getName().trim().isEmpty()) {
             throw new ValidationException("Artwork name is required");
-        } else if (artworkDto.description() == null) {
+        } else if (artworkDto.getDescription() == null) {
             throw new ValidationException("Artwork description cannot be null");
-        } else if (artworkDto.image() == null || artworkDto.image().trim().isEmpty()) {
+        } else if (artworkDto.getImage() == null || artworkDto.getImage().trim().isEmpty()) {
             throw new ValidationException("Artwork image is required");
-        } else if (artworkDto.price() == null) {
+        } else if (artworkDto.getPrice() == null) {
             throw new ValidationException("Artwork price cannot be null");
-        } else if (artworkDto.price().compareTo(BigDecimal.ZERO) < 0) {
+        } else if (artworkDto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new ValidationException("Artwork price cannot be negative");
-        } else if (artworkDto.stock() == null) {
+        } else if (artworkDto.getStock() == null) {
             throw new ValidationException("Artwork stock cannot be null");
-        } else if (artworkDto.stock() < 0) {
+        } else if (artworkDto.getStock() < 0) {
             throw new ValidationException("Artwork stock cannot be negative");
-        } else if (artworkDto.categoryDto() == null) {
+        } else if (artworkDto.getCategoryDto() == null) {
             throw new ValidationException("Artwork category cannot be null");
         } else {
             return artworkRepository.save(artworkDto);
@@ -54,8 +54,8 @@ public class ArtworkServiceImpl implements ArtworkService {
 
     @Override
     public ArtworkDto update(ArtworkDto artworkDto) {
-        if (artworkRepository.findById(artworkDto.id()).isEmpty()) {
-            throw new BusinessException("Artwork with id " + artworkDto.id() + " not found");
+        if (artworkRepository.findById(artworkDto.getId()).isEmpty()) {
+            throw new BusinessException("Artwork with id " + artworkDto.getId() + " not found");
         }
         return artworkRepository.save(artworkDto);
     }

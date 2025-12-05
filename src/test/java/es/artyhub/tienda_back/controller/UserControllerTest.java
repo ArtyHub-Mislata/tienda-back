@@ -60,9 +60,9 @@ class UserControllerTest {
     void findUserById() throws Exception {
         UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
 
-        when(userService.findById(userDto.id())).thenReturn(userDto);
+        when(userService.findById(userDto.getId())).thenReturn(userDto);
 
-        mockMvc.perform(get("/api/users/" + userDto.id()))
+        mockMvc.perform(get("/api/users/" + userDto.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(1L))
@@ -133,7 +133,7 @@ class UserControllerTest {
 
         when(userService.update(userDto)).thenReturn(updatedUserDto);
 
-        mockMvc.perform(put("/api/users/" + userDto.id())
+        mockMvc.perform(put("/api/users/" + userDto.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))
             .andExpect(status().isOk())
@@ -153,9 +153,9 @@ class UserControllerTest {
     void deleteUser() throws Exception {
         UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
 
-        when(userService.findById(userDto.id())).thenReturn(userDto);
+        when(userService.findById(userDto.getId())).thenReturn(userDto);
 
-        mockMvc.perform(delete("/api/users/" + userDto.id()))
+        mockMvc.perform(delete("/api/users/" + userDto.getId()))
             .andExpect(status().isNoContent());
     }
 }

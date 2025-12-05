@@ -30,15 +30,15 @@ class UserMapperTest {
             
             assertAll(
                 () -> assertNotNull(userDto, "UserDto should not be null"),
-                () -> assertEquals(userDto.id(), user.getId(), "UserDto id should be equal to User id"),
-                () -> assertEquals(userDto.name(), user.getName(), "UserDto name should be equal to User name"),
-                () -> assertEquals(userDto.email(), user.getEmail(), "UserDto email should be equal to User email"),
-                () -> assertEquals(userDto.password(), user.getPassword(), "UserDto password should be equal to User password"),
-                () -> assertEquals(userDto.nAccount(), user.getnAccount(), "UserDto nAccount should be equal to User nAccount"),
-                () -> assertEquals(userDto.description(), user.getDescription(), "UserDto description should be equal to User description"),
-                () -> assertEquals(userDto.address(), user.getAddress(), "UserDto address should be equal to User address"),
-                () -> assertEquals(userDto.imageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
-                () -> assertEquals(userDto.artworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
+                () -> assertEquals(userDto.getId(), user.getId(), "UserDto id should be equal to User id"),
+                () -> assertEquals(userDto.getName(), user.getName(), "UserDto name should be equal to User name"),
+                () -> assertEquals(userDto.getEmail(), user.getEmail(), "UserDto email should be equal to User email"),
+                () -> assertEquals(userDto.getPassword(), user.getPassword(), "UserDto password should be equal to User password"),
+                () -> assertEquals(userDto.getnAccount(), user.getnAccount(), "UserDto nAccount should be equal to User nAccount"),
+                () -> assertEquals(userDto.getDescription(), user.getDescription(), "UserDto description should be equal to User description"),
+                () -> assertEquals(userDto.getAddress(), user.getAddress(), "UserDto address should be equal to User address"),
+                () -> assertEquals(userDto.getImageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
+                () -> assertEquals(userDto.getArtworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
             );
         }
 
@@ -64,15 +64,15 @@ class UserMapperTest {
             
             assertAll(
                 () -> assertNotNull(user, "User should not be null"),
-                () -> assertEquals(userDto.id(), user.getId(), "UserDto id should be equal to User id"),
-                () -> assertEquals(userDto.name(), user.getName(), "UserDto name should be equal to User name"),
-                () -> assertEquals(userDto.email(), user.getEmail(), "UserDto email should be equal to User email"),
-                () -> assertEquals(userDto.password(), user.getPassword(), "UserDto password should be equal to User password"),
-                () -> assertEquals(userDto.nAccount(), user.getnAccount(), "UserDto nAccount should be equal to User nAccount"),
-                () -> assertEquals(userDto.description(), user.getDescription(), "UserDto description should be equal to User description"),
-                () -> assertEquals(userDto.address(), user.getAddress(), "UserDto address should be equal to User address"),
-                () -> assertEquals(userDto.imageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
-                () -> assertEquals(userDto.artworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
+                () -> assertEquals(userDto.getId(), user.getId(), "UserDto id should be equal to User id"),
+                () -> assertEquals(userDto.getName(), user.getName(), "UserDto name should be equal to User name"),
+                () -> assertEquals(userDto.getEmail(), user.getEmail(), "UserDto email should be equal to User email"),
+                () -> assertEquals(userDto.getPassword(), user.getPassword(), "UserDto password should be equal to User password"),
+                () -> assertEquals(userDto.getnAccount(), user.getnAccount(), "UserDto nAccount should be equal to User nAccount"),
+                () -> assertEquals(userDto.getDescription(), user.getDescription(), "UserDto description should be equal to User description"),
+                () -> assertEquals(userDto.getAddress(), user.getAddress(), "UserDto address should be equal to User address"),
+                () -> assertEquals(userDto.getImageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
+                () -> assertEquals(userDto.getArtworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
             );
         }
 

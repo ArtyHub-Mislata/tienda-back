@@ -27,9 +27,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (categoryRepositoy.findById(categoryDto.id()).isPresent()) {
-            throw new BusinessException("Category with id " + categoryDto.id() + " already exists");
-        } else if (categoryDto.name() == null || categoryDto.name().trim().isEmpty()) {
+        if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
+            throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
+        } else if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
             throw new ValidationException("Category name is required");
         } else {
             return categoryRepositoy.save(categoryDto);
@@ -38,8 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto update(CategoryDto categoryDto) {
-        if (categoryRepositoy.findById(categoryDto.id()).isEmpty()) {
-            throw new BusinessException("Category with id " + categoryDto.id() + " does not exist");
+        if (categoryRepositoy.findById(categoryDto.getId()).isEmpty()) {
+            throw new BusinessException("Category with id " + categoryDto.getId() + " does not exist");
         } else {
             return categoryRepositoy.save(categoryDto);
         }

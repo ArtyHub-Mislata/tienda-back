@@ -60,11 +60,11 @@ class ArtworkServiceImplTest {
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
                 () -> assertEquals(artworks.size(), result.data().size(), "Result size should be equal to artworks size"),
-                () -> assertEquals(artworks.getFirst().id(), result.data().getFirst().id(), "Result first id should be equal to artworks first id"),
-                () -> assertEquals(artworks.get(2).id(), result.data().get(2).id(), "Result second id should be equal to artworks second id"),
-                () -> assertEquals(artworks.get(3).id(), result.data().get(3).id(), "Result third id should be equal to artworks third id"),
-                () -> assertEquals(artworks.get(4).id(), result.data().get(4).id(), "Result fourth id should be equal to artworks fourth id"),
-                () -> assertEquals(artworks.getLast().id(), result.data().getLast().id(), "Result last id should be equal to artworks last id")
+                () -> assertEquals(artworks.getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to artworks first id"),
+                () -> assertEquals(artworks.get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to artworks second id"),
+                () -> assertEquals(artworks.get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to artworks third id"),
+                () -> assertEquals(artworks.get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to artworks fourth id"),
+                () -> assertEquals(artworks.getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to artworks last id")
             );
 
             Mockito.verify(artworkRepository).findAll(page, size);
@@ -85,11 +85,11 @@ class ArtworkServiceImplTest {
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
                 () -> assertEquals(artworks.data().size(), result.data().size(), "Result size should be equal to artworks size"),
-                () -> assertEquals(artworks.data().getFirst().id(), result.data().getFirst().id(), "Result first id should be equal to artworks first id"),
-                () -> assertEquals(artworks.data().get(2).id(), result.data().get(2).id(), "Result second id should be equal to artworks second id"),
-                () -> assertEquals(artworks.data().get(3).id(), result.data().get(3).id(), "Result third id should be equal to artworks third id"),
-                () -> assertEquals(artworks.data().get(4).id(), result.data().get(4).id(), "Result fourth id should be equal to artworks fourth id"),
-                () -> assertEquals(artworks.data().getLast().id(), result.data().getLast().id(), "Result last id should be equal to artworks last id")
+                () -> assertEquals(artworks.data().getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to artworks first id"),
+                () -> assertEquals(artworks.data().get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to artworks second id"),
+                () -> assertEquals(artworks.data().get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to artworks third id"),
+                () -> assertEquals(artworks.data().get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to artworks fourth id"),
+                () -> assertEquals(artworks.data().getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to artworks last id")
             );
 
             Mockito.verify(artworkRepository).findAll(page, size);
@@ -111,13 +111,13 @@ class ArtworkServiceImplTest {
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(id, result.id(), "Result id should be equal to artwork id"),
-                () -> assertEquals("name", result.name(), "Result name should be equal to artwork name"),
-                () -> assertEquals("description", result.description(), "Result description should be equal to artwork description"),
-                () -> assertEquals("image", result.image(), "Result image should be equal to artwork image"),
-                () -> assertEquals(1.0, result.price(), "Result price should be equal to artwork price"),
-                () -> assertEquals(1, result.stock(), "Result stock should be equal to artwork stock"),
-                () -> assertEquals(1L, result.categoryDto().id(), "Result category id should be equal to artwork category id")
+                () -> assertEquals(id, result.getId(), "Result id should be equal to artwork id"),
+                () -> assertEquals("name", result.getName(), "Result name should be equal to artwork name"),
+                () -> assertEquals("description", result.getDescription(), "Result description should be equal to artwork description"),
+                () -> assertEquals("image", result.getImage(), "Result image should be equal to artwork image"),
+                () -> assertEquals(1.0, result.getPrice(), "Result price should be equal to artwork price"),
+                () -> assertEquals(1, result.getStock(), "Result stock should be equal to artwork stock"),
+                () -> assertEquals(1L, result.getCategoryDto().getId(), "Result category id should be equal to artwork category id")
             );
 
             Mockito.verify(artworkRepository).findById(id);
@@ -145,20 +145,20 @@ class ArtworkServiceImplTest {
         void whileArtworkIsValid_ShouldCreateArtwork() {
             ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
-            when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.empty());
+            when(artworkRepository.findById(artworkDto.getId())).thenReturn(Optional.empty());
             when(artworkRepository.save(artworkDto)).thenReturn(artworkDto);
 
             ArtworkDto createArtworkDto = artworkService.insert(artworkDto);
 
             assertAll(
                 () -> assertNotNull(createArtworkDto, "Create artwork should not be null"),
-                () -> assertEquals(artworkDto.id(), createArtworkDto.id(), "Create artwork id should be equal to artwork id"),
-                () -> assertEquals(artworkDto.name(), createArtworkDto.name(), "Create artwork name should be equal to artwork name"),
-                () -> assertEquals(artworkDto.description(), createArtworkDto.description(), "Create artwork description should be equal to artwork description"),
-                () -> assertEquals(artworkDto.image(), createArtworkDto.image(), "Create artwork image should be equal to artwork image"),
-                () -> assertEquals(artworkDto.price(), createArtworkDto.price(), "Create artwork price should be equal to artwork price"),
-                () -> assertEquals(artworkDto.stock(), createArtworkDto.stock(), "Create artwork stock should be equal to artwork stock"),
-                () -> assertEquals(artworkDto.categoryDto().id(), createArtworkDto.categoryDto().id(), "Create artwork category id should be equal to artwork category id")
+                () -> assertEquals(artworkDto.getId(), createArtworkDto.getId(), "Create artwork id should be equal to artwork id"),
+                () -> assertEquals(artworkDto.getName(), createArtworkDto.getName(), "Create artwork name should be equal to artwork name"),
+                () -> assertEquals(artworkDto.getDescription(), createArtworkDto.getDescription(), "Create artwork description should be equal to artwork description"),
+                () -> assertEquals(artworkDto.getImage(), createArtworkDto.getImage(), "Create artwork image should be equal to artwork image"),
+                () -> assertEquals(artworkDto.getPrice(), createArtworkDto.getPrice(), "Create artwork price should be equal to artwork price"),
+                () -> assertEquals(artworkDto.getStock(), createArtworkDto.getStock(), "Create artwork stock should be equal to artwork stock"),
+                () -> assertEquals(artworkDto.getCategoryDto().getId(), createArtworkDto.getCategoryDto().getId(), "Create artwork category id should be equal to artwork category id")
             );
 
             Mockito.verify(artworkRepository).save(artworkDto);
@@ -169,11 +169,11 @@ class ArtworkServiceImplTest {
         void whileArtworkExists_ShouldThrowBusinessException() {
             ArtworkDto existingArtworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
-            when(artworkRepository.findById(existingArtworkDto.id())).thenReturn(Optional.of(existingArtworkDto));
+            when(artworkRepository.findById(existingArtworkDto.getId())).thenReturn(Optional.of(existingArtworkDto));
 
             assertThrows(BusinessException.class, () -> artworkService.insert(existingArtworkDto));
 
-            Mockito.verify(artworkRepository).findById(existingArtworkDto.id());
+            Mockito.verify(artworkRepository).findById(existingArtworkDto.getId());
             Mockito.verify(artworkRepository, never()).save(existingArtworkDto);
         }
 
@@ -268,16 +268,16 @@ class ArtworkServiceImplTest {
             ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
             ArtworkDto updatedArtworkDto = new ArtworkDto(1L, "updatedName", "updatedDescription", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
-            when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.of(artworkDto));
+            when(artworkRepository.findById(artworkDto.getId())).thenReturn(Optional.of(artworkDto));
             when(artworkRepository.save(updatedArtworkDto)).thenReturn(updatedArtworkDto);
 
             ArtworkDto result = artworkService.update(updatedArtworkDto);
 
             assertAll(
                 () -> assertNotNull(result),
-                () -> assertEquals(artworkDto.id(), result.id()),
-                () -> assertEquals("updatedName", result.name()),
-                () -> assertEquals("updatedDescription", result.description())
+                () -> assertEquals(artworkDto.getId(), result.getId()),
+                () -> assertEquals("updatedName", result.getName()),
+                () -> assertEquals("updatedDescription", result.getDescription())
             );
 
             Mockito.verify(artworkRepository).save(updatedArtworkDto);
@@ -288,11 +288,11 @@ class ArtworkServiceImplTest {
         void whileArtworkDoesntExist_ShouldThrowBusinessException() {
             ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "category"));
 
-            when(artworkRepository.findById(artworkDto.id())).thenReturn(Optional.empty());
+            when(artworkRepository.findById(artworkDto.getId())).thenReturn(Optional.empty());
 
             assertThrows(BusinessException.class, () -> artworkService.update(artworkDto));
 
-            Mockito.verify(artworkRepository).findById(artworkDto.id());
+            Mockito.verify(artworkRepository).findById(artworkDto.getId());
             Mockito.verify(artworkRepository, never()).save(artworkDto);
         }
     }
@@ -312,11 +312,11 @@ class ArtworkServiceImplTest {
             
             assertAll(
                 () -> assertNotNull(artworkDto),
-                () -> assertEquals(artworkDto.id(), artworkDto.id()),
-                () -> assertDoesNotThrow(() -> artworkService.delete(artworkDto.id()))
+                () -> assertEquals(artworkDto.getId(), artworkDto.getId()),
+                () -> assertDoesNotThrow(() -> artworkService.delete(artworkDto.getId()))
             );
             
-            Mockito.verify(artworkRepository).delete(artworkDto.id());
+            Mockito.verify(artworkRepository).delete(artworkDto.getId());
         }
 
         @Test

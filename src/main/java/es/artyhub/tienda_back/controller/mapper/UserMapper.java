@@ -10,8 +10,8 @@ public class UserMapper {
             return null;
         }
         return new UserSummaryResponse(
-            userDto.id(),
-            userDto.name()
+            userDto.getId(),
+            userDto.getName()
         );
     }
 
@@ -20,14 +20,14 @@ public class UserMapper {
             return null;
         }
         return new UserDetailResponse(
-            userDto.id(),
-            userDto.name(),
-            userDto.email(),
-            userDto.nAccount(),
-            userDto.description(),
-            userDto.address(),
-            userDto.imageProfileUrl(),
-            userDto.artworks().stream().map(ArtworkMapper::fromArtworkDtoToArtworkSummaryResponse).toList()
+            userDto.getId(),
+            userDto.getName(),
+            userDto.getEmail(),
+            userDto.getnAccount(),
+            userDto.getDescription(),
+            userDto.getAddress(),
+            userDto.getImageProfileUrl(),
+            userDto.getArtworks().stream().map(ArtworkMapper::fromArtworkDtoToArtworkSummaryResponse).toList()
         );
     }
 }
