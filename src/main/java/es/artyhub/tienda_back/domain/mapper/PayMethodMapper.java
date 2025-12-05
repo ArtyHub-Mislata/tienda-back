@@ -21,10 +21,10 @@ public class PayMethodMapper {
             return null;
         }
         return new PayMethod(
-            payMethodDto.id(),
-            payMethodDto.nTarget(),
-            payMethodDto.dateExpiration(),
-            payMethodDto.cvv()
+            payMethodDto.getId(),
+            payMethodDto.getnTarget(),
+            payMethodDto.getDateExpiration(),
+            payMethodDto.getCvv()
         );
     }
 

@@ -21,12 +21,12 @@ public class ShoppingCartMapper {
             return null;
         }
         return new ShoppingCart(
-            shoppingCartDto.id(),
-            shoppingCartDto.findUserById(shoppingCartDto.userId()),
-            shoppingCartDto.details().stream().map(DetailMapper.getInstance()::fromDetailDtoToDetail).toList(),
-            PayMethodMapper.getInstance().fromPayMethodDtoToPayMethod(shoppingCartDto.payMethodDto()),
-            shoppingCartDto.total(),
-            shoppingCartDto.state()
+            shoppingCartDto.getId(),
+            shoppingCartDto.findUserById(shoppingCartDto.getUserId()),
+            shoppingCartDto.getDetails().stream().map(DetailMapper.getInstance()::fromDetailDtoToDetail).toList(),
+            PayMethodMapper.getInstance().fromPayMethodDtoToPayMethod(shoppingCartDto.getPayMethodDto()),
+            shoppingCartDto.getTotal(),
+            shoppingCartDto.getState()
         );
     }
 

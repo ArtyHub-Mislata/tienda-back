@@ -4,7 +4,7 @@ import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.model.Page;
 import java.util.Optional;
 
-public interface CategoryRepositoy {
+public interface CategoryRepository {
 
     Page<CategoryDto> findAll(int pageNumber, int pageSize);
 

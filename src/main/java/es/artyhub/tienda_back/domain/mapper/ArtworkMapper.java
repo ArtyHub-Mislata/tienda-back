@@ -36,13 +36,13 @@ public class ArtworkMapper {
             return null;
         }
         return new Artwork(
-                artworkDto.id(),
-                artworkDto.name(),
-                artworkDto.description(),
-                artworkDto.image(),
-                artworkDto.price(),
-                artworkDto.stock(),
-                artworkDto.categoryDto()
+                artworkDto.getId(),
+                artworkDto.getName(),
+                artworkDto.getDescription(),
+                artworkDto.getImage(),
+                artworkDto.getPrice(),
+                artworkDto.getStock(),
+                artworkDto.getCategoryDto()
         );
     }
 }

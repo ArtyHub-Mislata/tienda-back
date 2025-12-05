@@ -49,10 +49,12 @@ public class ArtworkController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ArtworkDetailResponse> getArtworkById(@PathVariable Long id) {
-        return artworkService.findById(id)
-            .map(ArtworkMapper::fromArtworkDtoToArtworkDetailResponse)
-            .map(artworkDetailResponse -> new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK))
-            .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        ArtworkDto artworkDto = artworkService.findById(id);
+        if (artworkDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(artworkDto);
+        return new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK);
     }
 
     @PostMapping
@@ -61,7 +63,7 @@ public class ArtworkController {
             DtoValidator.validate(artworkDto);
             ArtworkDto createArtworkDto = artworkService.insert(artworkDto);
             ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(createArtworkDto);
-            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -73,7 +75,7 @@ public class ArtworkController {
             DtoValidator.validate(artworkDto);
             ArtworkDto updateArtworkDto = artworkService.update(artworkDto);
             ArtworkDetailResponse artworkDetailResponse = ArtworkMapper.fromArtworkDtoToArtworkDetailResponse(updateArtworkDto);
-            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(artworkDetailResponse, HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
