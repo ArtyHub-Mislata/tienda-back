@@ -3,15 +3,15 @@ package es.artyhub.tienda_back.domain.service.impl;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
-import es.artyhub.tienda_back.domain.repository.CategoryRepositoy;
+import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.service.CategoryService;
 import java.util.Optional;
 
 public class CategoryServiceImpl implements CategoryService {
     
-    private final CategoryRepositoy categoryRepositoy;
+    private final CategoryRepository categoryRepositoy;
 
-    public CategoryServiceImpl(CategoryRepositoy categoryRepositoy) {
+    public CategoryServiceImpl(CategoryRepository categoryRepositoy) {
         this.categoryRepositoy = categoryRepositoy;
     }
 
