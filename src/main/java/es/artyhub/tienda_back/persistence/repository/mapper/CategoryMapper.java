@@ -1,7 +1,6 @@
 package es.artyhub.tienda_back.persistence.repository.mapper;
 
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
-import es.artyhub.tienda_back.persistence.dao.jpa.CategoryJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CategoryJpaEntity;
 
 public class CategoryMapper {
@@ -16,8 +15,9 @@ public class CategoryMapper {
         }
         return instance;
     }
-    public CategoryDto fromCategoryJpaEntityToCategoryDto(CategoryJpaEntity categoryJpaEntity){
-        if(categoryJpaEntity == null){
+
+    public CategoryDto fromCategoryJpaEntityToCategoryDto(CategoryJpaEntity categoryJpaEntity) {
+        if (categoryJpaEntity == null) {
             return null;
         }
         return new CategoryDto(
@@ -25,14 +25,15 @@ public class CategoryMapper {
                 categoryJpaEntity.getNombre()
         );
     }
-    public CategoryJpaEntity fromCategoryDtoToCategoryJpaEntity(CategoryDto categoryDto){
-        if(categoryDto == null){
+
+    public CategoryJpaEntity fromCategoryDtoToCategoryJpaEntity(CategoryDto categoryDto) {
+        if (categoryDto == null) {
             return null;
         }
 
         return new CategoryJpaEntity(
-                categoryDto.id(),
-                categoryDto.name()
+                categoryDto.getId(),
+                categoryDto.getName()
         );
     }
 }

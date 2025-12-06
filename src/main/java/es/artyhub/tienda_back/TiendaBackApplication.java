@@ -8,7 +8,6 @@ public class TiendaBackApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TiendaBackApplication.class, args);
-        //PROBANDO EL ISSUE
 	}
 
 }

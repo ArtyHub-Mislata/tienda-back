@@ -41,14 +41,14 @@ public class UserMapper {
         }
 
         return new UserJpaEntity(
-                userDto.id(),
-                userDto.name(),
-                userDto.email(),
-                userDto.password(),
-                userDto.nAccount(),
-                userDto.description(),
-                userDto.address(),
-                userDto.imageProfileUrl()
+                userDto.getId(),
+                userDto.getName(),
+                userDto.getEmail(),
+                userDto.getPassword(),
+                userDto.getnAccount(),
+                userDto.getDescription(),
+                userDto.getAddress(),
+                userDto.getImageProfileUrl()
         );
     }
 }

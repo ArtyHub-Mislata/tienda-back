@@ -95,9 +95,8 @@ public class ArtworkJpaEntity implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        ArtworkJpaEntity that = (ArtworkJpaEntity) o;
-        return Double.compare(price, that.price) == 0 && stock == that.stock && Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(category, that.category);
+        if (!(o instanceof ArtworkJpaEntity that)) return false;
+        return stock == that.stock && Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(price, that.price) && Objects.equals(category, that.category);
     }
 
     @Override

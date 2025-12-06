@@ -3,8 +3,6 @@ package es.artyhub.tienda_back.persistence.repository.mapper;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;
 
-import java.math.BigDecimal;
-
 public class ArtworkMapper {
     private static ArtworkMapper instance;
 
@@ -18,8 +16,8 @@ public class ArtworkMapper {
         return instance;
     }
 
-    public ArtworkDto fromArtworkJpaEntityToArtworkDto(ArtworkJpaEntity artworkJpaEntity){
-        if(artworkJpaEntity == null){
+    public ArtworkDto fromArtworkJpaEntityToArtworkDto(ArtworkJpaEntity artworkJpaEntity) {
+        if (artworkJpaEntity == null) {
             return null;
         }
 
@@ -35,20 +33,21 @@ public class ArtworkMapper {
                         .fromCategoryJpaEntityToCategoryDto(artworkJpaEntity.getCategory())
         );
     }
-    public ArtworkJpaEntity fromArtworkDtoToArtworkJpaEntity(ArtworkDto artworkDto){
-        if(artworkDto == null){
+
+    public ArtworkJpaEntity fromArtworkDtoToArtworkJpaEntity(ArtworkDto artworkDto) {
+        if (artworkDto == null) {
             return null;
         }
         return new ArtworkJpaEntity(
-                artworkDto.id(),
-                artworkDto.name(),
-                artworkDto.description(),
-                artworkDto.image(),
-                artworkDto.price(),
-                artworkDto.stock(),
+                artworkDto.getId(),
+                artworkDto.getName(),
+                artworkDto.getDescription(),
+                artworkDto.getImage(),
+                artworkDto.getPrice(),
+                artworkDto.getStock(),
                 CategoryMapper
                         .getInstance()
-                        .fromCategoryDtoToCategoryJpaEntity(artworkDto.categoryDto())
+                        .fromCategoryDtoToCategoryJpaEntity(artworkDto.getCategoryDto())
 
         );
     }

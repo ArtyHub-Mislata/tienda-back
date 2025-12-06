@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.persistence.dao.jpa;
 
-import es.artyhub.tienda_back.domain.model.Page;
 
 import java.util.List;
 import java.util.Optional;
