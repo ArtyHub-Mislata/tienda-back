@@ -6,6 +6,7 @@ import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.repository.UserRepository;
 import es.artyhub.tienda_back.domain.service.UserService;
+import jakarta.transaction.Transactional;
 
 public class UserServiceImpl implements UserService {
     
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto insert(UserDto userDto) {
         if (userRepository.findById(userDto.getId()).isPresent()) {
             throw new BusinessException("User with id " + userDto.getId() + " already exists");
@@ -49,6 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDto update(UserDto userDto) {
         if (userRepository.findById(userDto.getId()).isEmpty()) {
             throw new BusinessException("User with id " + userDto.getId() + " does not exist");
@@ -58,6 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new BusinessException("User with id " + id + " does not exist");

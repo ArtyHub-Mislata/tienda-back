@@ -43,7 +43,7 @@ public class UserJpaDaoImpl implements UserJpaDao {
 
     @Override
     public UserJpaEntity update(UserJpaEntity jpaEntity) {
-        UserJpaEntity userJpaEntity = entityManager.find(UserJpaEntity.class, jpaEntity);
+        UserJpaEntity userJpaEntity = entityManager.find(UserJpaEntity.class, jpaEntity.getId());
         if(userJpaEntity == null){
             throw new ResourceNotFoundException("User with id " + jpaEntity.getId() + " not found, error when updating");
         }

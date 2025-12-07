@@ -8,6 +8,7 @@ import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.repository.ArtworkRepository;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
+import jakarta.transaction.Transactional;
 
 public class ArtworkServiceImpl implements ArtworkService {
     
@@ -28,6 +29,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    @Transactional
     public ArtworkDto insert(ArtworkDto artworkDto) {
         if (artworkRepository.findById(artworkDto.getId()).isPresent()) {
             throw new BusinessException("Artwork with id " + artworkDto.getId() + " already exists");
@@ -53,6 +55,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    @Transactional
     public ArtworkDto update(ArtworkDto artworkDto) {
         if (artworkRepository.findById(artworkDto.getId()).isEmpty()) {
             throw new BusinessException("Artwork with id " + artworkDto.getId() + " not found");
@@ -61,6 +64,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (artworkRepository.findById(id).isEmpty()) {
             throw new BusinessException("Artwork with id " + id + " not found");

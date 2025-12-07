@@ -41,7 +41,7 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
 
     @Override
     public ArtworkJpaEntity update(ArtworkJpaEntity jpaEntity) {
-        ArtworkJpaEntity artworkJpaEntity = entityManager.find(ArtworkJpaEntity.class, jpaEntity);
+        ArtworkJpaEntity artworkJpaEntity = entityManager.find(ArtworkJpaEntity.class, jpaEntity.getId());
         if(artworkJpaEntity == null){
             throw new ResourceNotFoundException("Artwork with id " + jpaEntity.getId() + " not found, error when updating");
         }

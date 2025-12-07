@@ -45,7 +45,7 @@ public class CategoryJpaDaoImpl implements CategoryJpaDao {
 
     @Override
     public CategoryJpaEntity update(CategoryJpaEntity jpaEntity) {
-        CategoryJpaEntity categoryJpaEntity = entityManager.find(CategoryJpaEntity.class, jpaEntity);
+        CategoryJpaEntity categoryJpaEntity = entityManager.find(CategoryJpaEntity.class, jpaEntity.getId());
         if(categoryJpaEntity == null){
             throw new ResourceNotFoundException("Category with id " + jpaEntity.getId() + " not found, error when updating");
         }

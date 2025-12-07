@@ -6,6 +6,7 @@ import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.service.CategoryService;
+import jakarta.transaction.Transactional;
 
 public class CategoryServiceImpl implements CategoryService {
     
@@ -26,6 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDto insert(CategoryDto categoryDto) {
         if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
             throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
@@ -37,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDto update(CategoryDto categoryDto) {
         if (categoryRepositoy.findById(categoryDto.getId()).isEmpty()) {
             throw new BusinessException("Category with id " + categoryDto.getId() + " does not exist");
@@ -46,6 +49,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (categoryRepositoy.findById(id).isEmpty()) {
             throw new BusinessException("Category with id " + id + " does not exist");
