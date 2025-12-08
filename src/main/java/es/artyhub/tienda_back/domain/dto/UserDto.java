@@ -33,6 +33,7 @@ public class UserDto {
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
         private String imageProfileUrl;
 
+
         private List<ArtworkDto> artworks;
 
     public UserDto() {

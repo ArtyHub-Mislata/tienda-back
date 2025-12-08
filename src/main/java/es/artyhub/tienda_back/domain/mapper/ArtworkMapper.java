@@ -26,8 +26,8 @@ public class ArtworkMapper {
                 artwork.getDescription(),
                 artwork.getImageUrl(),
                 artwork.getPrice(),
-                artwork.getStock(),
-                artwork.getCategoryDto()
+                artwork.getCategoryDto(),
+                UserMapper.getInstance().fromUserToUserDto(artwork.getUser())
         );
     }
 
@@ -41,8 +41,8 @@ public class ArtworkMapper {
                 artworkDto.getDescription(),
                 artworkDto.getImage(),
                 artworkDto.getPrice(),
-                artworkDto.getStock(),
-                artworkDto.getCategoryDto()
+                artworkDto.getCategoryDto(),
+                UserMapper.getInstance().fromUserDtoToUser(artworkDto.getUserDto())
         );
     }
 }
