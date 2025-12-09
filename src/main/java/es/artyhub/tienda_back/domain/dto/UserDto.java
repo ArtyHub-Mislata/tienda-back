@@ -37,7 +37,7 @@ public class UserDto {
         @NotNull
         private List<ArtworkDto> artworks;
 
-        @NotBlank
+        @NotNull
         private UserRole role;
 
     public UserDto() {
@@ -129,11 +129,11 @@ public class UserDto {
         this.artworks = artworks;
     }
 
-    public UserRole getRol() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRol(UserRole role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 }

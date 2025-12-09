@@ -50,7 +50,7 @@ public class UserMapper {
                 userDto.getDescription(),
                 userDto.getAddress(),
                 userDto.getImageProfileUrl(),
-                userDto.getRol()
+                userDto.getRole()
         );
     }
 }

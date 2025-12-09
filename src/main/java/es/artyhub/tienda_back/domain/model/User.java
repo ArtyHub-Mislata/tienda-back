@@ -110,11 +110,11 @@ public class User {
         this.artworks = artworks;
     }
 
-    public UserRole getRol() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRol(UserRole role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 }

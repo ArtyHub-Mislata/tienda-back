@@ -29,25 +29,35 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto insert(UserDto userDto) {
-        if (userRepository.findById(userDto.getId()).isPresent()) {
-            throw new BusinessException("User with id " + userDto.getId() + " already exists");
-        } else if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
+        if (userDto.getName() == null || userDto.getName().trim().isEmpty()) {
             throw new ValidationException("User name is required");
-        } else if (userDto.getEmail() == null || userDto.getEmail().trim().isEmpty()) {
-            throw new ValidationException("User email is required");
-        } else if (userDto.getPassword() == null || userDto.getPassword().trim().isEmpty()) {
-            throw new ValidationException("User password is required");
-        } else if (userDto.getnAccount() == null || userDto.getnAccount().trim().isEmpty()) {
-            throw new ValidationException("User nAccount is required");
-        } else if (userDto.getnAccount().length() != 16) {
-            throw new ValidationException("User nAccount must have 16 characters");
-        } else if (userDto.getAddress() == null || userDto.getAddress().trim().isEmpty()) {
-            throw new ValidationException("User address is required");
-        } else if (userDto.getImageProfileUrl() == null) {
-            throw new ValidationException("User imageProfileUrl cannot be null");
-        } else {
-            return userRepository.save(userDto);
         }
+
+        if (userDto.getEmail() == null || userDto.getEmail().trim().isEmpty()) {
+            throw new ValidationException("User email is required");
+        }
+
+        if (userDto.getPassword() == null || userDto.getPassword().trim().isEmpty()) {
+            throw new ValidationException("User password is required");
+        }
+
+        if (userDto.getnAccount() == null || userDto.getnAccount().trim().isEmpty()) {
+            throw new ValidationException("User nAccount is required");
+        }
+
+        if (userDto.getnAccount().length() != 16) {
+            throw new ValidationException("User nAccount must have 16 characters");
+        }
+
+        if (userDto.getAddress() == null || userDto.getAddress().trim().isEmpty()) {
+            throw new ValidationException("User address is required");
+        }
+
+        if (userDto.getImageProfileUrl() == null) {
+            throw new ValidationException("User imageProfileUrl cannot be null");
+        }
+
+        return userRepository.save(userDto);
     }
 
     @Override

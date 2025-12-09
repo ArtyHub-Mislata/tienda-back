@@ -61,7 +61,8 @@ public class UserController {
             UserDto createUserDto = userService.insert(userDto);
             return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            //LLEGAA AQUI
+            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
         }
     }
 

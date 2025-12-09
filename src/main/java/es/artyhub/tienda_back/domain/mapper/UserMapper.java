@@ -27,7 +27,7 @@ public class UserMapper {
             userDto.getAddress(),
             userDto.getImageProfileUrl(),
             userDto.getArtworks().stream().map(ArtworkMapper.getInstance()::fromArtworkDtoToArtwork).toList(),
-            userDto.getRol()
+            userDto.getRole()
         );
 
     }
@@ -43,7 +43,7 @@ public class UserMapper {
             user.getAddress(),
             user.getImageProfileUrl(),
             user.getArtworks().stream().map(ArtworkMapper.getInstance()::fromArtworkToArtworkDto).toList(),
-            user.getRol()
+            user.getRole()
         );
     }
 }
