@@ -1,5 +1,6 @@
 package es.artyhub.tienda_back.domain.dto;
 
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -33,13 +34,17 @@ public class UserDto {
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
         private String imageProfileUrl;
 
-
+        @NotNull
         private List<ArtworkDto> artworks;
+
+        @NotNull
+        private UserRole role;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String name, String email, String password, String nAccount, String description, String address, String imageProfileUrl, List<ArtworkDto> artworks) {
+    public UserDto(Long id, String name, String email, String password, String nAccount,
+                   String description, String address, String imageProfileUrl, List<ArtworkDto> artworks, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -49,6 +54,7 @@ public class UserDto {
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
         this.artworks = artworks;
+        this.role = role;
     }
 
     public Long getId() {
@@ -123,4 +129,11 @@ public class UserDto {
         this.artworks = artworks;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
 }
