@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
+import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.service.CategoryService;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
-import es.artyhub.tienda_back.controller.webmodel.response.CategoryDetailResponse;
-import es.artyhub.tienda_back.controller.mapper.CategoryMapper;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,16 +30,15 @@ public class CategoryController {
     }
 
     @GetMapping 
-    public ResponseEntity<Page<CategoryDetailResponse>> getAllCategories(@RequestParam(required = false, defaultValue = "1") int pageNumber,
+    public ResponseEntity<Page<CategoryDto>> getAllCategories(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                           @RequestParam(required = false, defaultValue = "20") int pageSize) {
         
         Page<CategoryDto> categoryDtoPage = categoryService.findAll(pageNumber, pageSize);
 
-        List<CategoryDetailResponse> categoryDetails = categoryDtoPage.data().stream()
-            .map(CategoryMapper::fromCategoryDtoToCategoryDetailResponse)
+        List<CategoryDto> categoryDetails = categoryDtoPage.data().stream()
             .toList();
 
-        Page<CategoryDetailResponse> categoryDetailPage = new Page<>(
+        Page<CategoryDto> categoryDetailPage = new Page<>(
             categoryDetails,
             categoryDtoPage.pageNumber(),
             categoryDtoPage.pageSize(),
@@ -50,35 +48,35 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryDetailResponse> getCategoryById(@PathVariable Long id) {
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) {
         CategoryDto categoryDto = categoryService.findById(id);
         if (categoryDto == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(categoryDto);
-        return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
+        return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDetailResponse> createCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
         try {
             DtoValidator.validate(categoryDto);
             CategoryDto createCategoryDto = categoryService.insert(categoryDto);
-            CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(createCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(createCategoryDto, HttpStatus.CREATED);
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoryDetailResponse> updateCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
         try {
+            if (!id.equals(categoryDto.getId())) {
+                throw new ValidationException("ID in path and request body must match");
+            }
             DtoValidator.validate(categoryDto);
             CategoryDto updateCategoryDto = categoryService.update(categoryDto);
-            CategoryDetailResponse categoryDetailResponse = CategoryMapper.fromCategoryDtoToCategoryDetailResponse(updateCategoryDto);
-            return new ResponseEntity<>(categoryDetailResponse, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(updateCategoryDto, HttpStatus.OK);
+        } catch (ValidationException e) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
