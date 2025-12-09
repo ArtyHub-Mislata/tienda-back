@@ -7,8 +7,8 @@ public record ArtworkRequest(
     String description,
     String imageUrl,
     BigDecimal price,
-    int stock,
-    CategoryRequest categoryRequest
+    CategoryRequest categoryRequest,
+    UserRequest userRequest
 ) {
     
 }

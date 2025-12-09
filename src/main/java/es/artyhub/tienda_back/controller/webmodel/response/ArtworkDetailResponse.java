@@ -8,7 +8,6 @@ public record ArtworkDetailResponse(
     String description,
     String imageUrl,
     BigDecimal price,
-    int stock,
     CategoryDetailResponse categoryDetailResponse
 ) {
     

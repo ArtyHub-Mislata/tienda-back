@@ -18,20 +18,22 @@ public class ArtworkJpaEntity implements Serializable {
     @Column(name = "img_url")
     private String imageUrl;
     private BigDecimal price;
-    private int stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")  // Esto crea categoria_id en tabla producto
     private CategoryJpaEntity category;
 
-    public ArtworkJpaEntity(Long id, String name, String description, String imageUrl, BigDecimal price, int stock, CategoryJpaEntity category) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private UserJpaEntity userJpaEntity;
+    public ArtworkJpaEntity(Long id, String name, String description, String imageUrl, BigDecimal price, CategoryJpaEntity category, UserJpaEntity userJpaEntity) {
         Id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.stock = stock;
         this.category = category;
+        this.userJpaEntity = userJpaEntity;
     }
 
     public ArtworkJpaEntity() {
@@ -77,12 +79,12 @@ public class ArtworkJpaEntity implements Serializable {
         this.price = price;
     }
 
-    public int getStock() {
-        return stock;
+    public UserJpaEntity getUserJpaEntity() {
+        return userJpaEntity;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setUserJpaEntity(UserJpaEntity userJpaEntity) {
+        this.userJpaEntity = userJpaEntity;
     }
 
     public CategoryJpaEntity getCategory() {
@@ -95,12 +97,13 @@ public class ArtworkJpaEntity implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof ArtworkJpaEntity that)) return false;
-        return stock == that.stock && Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(price, that.price) && Objects.equals(category, that.category);
+        if (o == null || getClass() != o.getClass()) return false;
+        ArtworkJpaEntity that = (ArtworkJpaEntity) o;
+        return Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(price, that.price) && Objects.equals(category, that.category) && Objects.equals(userJpaEntity, that.userJpaEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, name, description, imageUrl, price, stock, category);
+        return Objects.hash(Id, name, description, imageUrl, price, category, userJpaEntity);
     }
 }

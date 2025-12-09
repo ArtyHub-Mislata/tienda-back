@@ -27,7 +27,6 @@ public class ArtworkMapper {
             artworkDto.getDescription(),
             artworkDto.getImage(),
             artworkDto.getPrice(),
-            artworkDto.getStock(),
             CategoryMapper.fromCategoryDtoToCategoryDetailResponse(artworkDto.getCategoryDto())
         );
     }
