@@ -29,9 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
-            throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
-        } else if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
+        if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
             throw new ValidationException("Category name is required");
         } else {
             return categoryRepositoy.save(categoryDto);

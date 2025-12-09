@@ -31,9 +31,7 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     @Transactional
     public ArtworkDto insert(ArtworkDto artworkDto) {
-        if (artworkRepository.findById(artworkDto.getId()).isPresent()) {
-            throw new BusinessException("Artwork with id " + artworkDto.getId() + " already exists");
-        } else if (artworkDto.getName() == null || artworkDto.getName().trim().isEmpty()) {
+        if (artworkDto.getName() == null || artworkDto.getName().trim().isEmpty()) {
             throw new ValidationException("Artwork name is required");
         } else if (artworkDto.getDescription() == null) {
             throw new ValidationException("Artwork description cannot be null");
