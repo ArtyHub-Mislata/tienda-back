@@ -44,10 +44,12 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public UserDto save(UserDto user) {
+
         UserJpaEntity userJpaEntity = UserMapper.getInstance().fromUserDtoToUserJpaEntity(user);
         if (user.getId() == null) {
             return UserMapper.getInstance().fromUserJpaEntityToUserDto(userJpaDao.insert(userJpaEntity));
         }
+
         return UserMapper.getInstance().fromUserJpaEntityToUserDto(userJpaDao.update(userJpaEntity));
 
     }

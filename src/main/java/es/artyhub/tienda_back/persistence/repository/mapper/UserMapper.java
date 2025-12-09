@@ -32,7 +32,8 @@ public class UserMapper {
                 userJpaEntity.getDescription(),
                 userJpaEntity.getAddress(),
                 userJpaEntity.getImageProfileUrl(),
-                List.of()
+                List.of(),
+                userJpaEntity.getRole()
         );
     }
     public UserJpaEntity fromUserDtoToUserJpaEntity(UserDto userDto){
@@ -48,7 +49,8 @@ public class UserMapper {
                 userDto.getnAccount(),
                 userDto.getDescription(),
                 userDto.getAddress(),
-                userDto.getImageProfileUrl()
+                userDto.getImageProfileUrl(),
+                userDto.getRole()
         );
     }
 }
