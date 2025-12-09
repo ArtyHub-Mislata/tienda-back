@@ -21,25 +21,24 @@ public class ArtworkDto {
         @NotNull(message = "El precio no puede ser nulo")
         @Positive(message = "El precio debe ser mayor a 0")
         private BigDecimal price;
-
-        @NotNull(message = "El stock no puede ser nulo")
-        @Positive(message = "El stock debe ser mayor a 0")
-        private Integer stock;
         
         @NotBlank(message = "La categoría no puede ser vacía")
         private CategoryDto categoryDto;
 
+        @NotNull
+        private UserDto userDto;
+
     public ArtworkDto() {
     }
 
-    public ArtworkDto(Long id, String name, String description, String image, BigDecimal price, Integer stock, CategoryDto categoryDto) {
+    public ArtworkDto(Long id, String name, String description, String image, BigDecimal price, CategoryDto categoryDto, UserDto userDto) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
-        this.stock = stock;
         this.categoryDto = categoryDto;
+        this.userDto = userDto;
     }
 
     public Long getId() {
@@ -82,19 +81,19 @@ public class ArtworkDto {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
     public CategoryDto getCategoryDto() {
         return categoryDto;
     }
 
     public void setCategoryDto(CategoryDto categoryDto) {
         this.categoryDto = categoryDto;
+    }
+
+    public UserDto getUserDto() {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 }

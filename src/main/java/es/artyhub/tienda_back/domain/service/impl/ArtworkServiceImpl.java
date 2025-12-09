@@ -43,10 +43,6 @@ public class ArtworkServiceImpl implements ArtworkService {
             throw new ValidationException("Artwork price cannot be null");
         } else if (artworkDto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new ValidationException("Artwork price cannot be negative");
-        } else if (artworkDto.getStock() == null) {
-            throw new ValidationException("Artwork stock cannot be null");
-        } else if (artworkDto.getStock() < 0) {
-            throw new ValidationException("Artwork stock cannot be negative");
         } else if (artworkDto.getCategoryDto() == null) {
             throw new ValidationException("Artwork category cannot be null");
         } else {

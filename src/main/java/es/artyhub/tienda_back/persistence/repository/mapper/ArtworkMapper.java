@@ -27,10 +27,12 @@ public class ArtworkMapper {
                 artworkJpaEntity.getDescription(),
                 artworkJpaEntity.getImageUrl(),
                 artworkJpaEntity.getPrice(),
-                artworkJpaEntity.getStock(),
                 CategoryMapper
                         .getInstance()
-                        .fromCategoryJpaEntityToCategoryDto(artworkJpaEntity.getCategory())
+                        .fromCategoryJpaEntityToCategoryDto(artworkJpaEntity.getCategory()),
+                UserMapper
+                        .getInstance()
+                        .fromUserJpaEntityToUserDto(artworkJpaEntity.getUserJpaEntity())
         );
     }
 
@@ -44,10 +46,12 @@ public class ArtworkMapper {
                 artworkDto.getDescription(),
                 artworkDto.getImage(),
                 artworkDto.getPrice(),
-                artworkDto.getStock(),
                 CategoryMapper
                         .getInstance()
-                        .fromCategoryDtoToCategoryJpaEntity(artworkDto.getCategoryDto())
+                        .fromCategoryDtoToCategoryJpaEntity(artworkDto.getCategoryDto()),
+                UserMapper
+                        .getInstance()
+                        .fromUserDtoToUserJpaEntity(artworkDto.getUserDto())
 
         );
     }

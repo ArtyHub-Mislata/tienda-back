@@ -10,21 +10,21 @@ public class Artwork {
     private String description;
     private String imageUrl;
     private BigDecimal price;
-    private Integer stock;
     private CategoryDto categoryDto;
+    private User user;
 
     public Artwork() {
     }
 
-    public Artwork(Long id, String name, String description, String imageUrl, BigDecimal price, Integer stock,
-            CategoryDto categoryDto) {
+    public Artwork(Long id, String name, String description, String imageUrl, BigDecimal price,
+            CategoryDto categoryDto, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.stock = stock;
         this.categoryDto = categoryDto;
+        this.user = user;
     }
 
     public Long getId() {
@@ -67,13 +67,6 @@ public class Artwork {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
 
     public CategoryDto getCategoryDto() {
         return categoryDto;
@@ -83,4 +76,11 @@ public class Artwork {
         this.categoryDto = categoryDto;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
