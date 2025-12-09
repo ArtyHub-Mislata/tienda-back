@@ -66,7 +66,7 @@ public class UserController {
         }
     }
 
-    @PutMapping()
+    @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
         try {
             if (!id.equals(userDto.getId())) {
