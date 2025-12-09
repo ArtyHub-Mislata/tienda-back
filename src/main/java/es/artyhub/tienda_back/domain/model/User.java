@@ -1,5 +1,7 @@
 package es.artyhub.tienda_back.domain.model;
 
+import es.artyhub.tienda_back.domain.enums.UserRole;
+
 import java.util.List;
 
 public class User {
@@ -13,6 +15,7 @@ public class User {
     private String address;
     private String imageProfileUrl;
     private List<Artwork> artworks;
+    private UserRole role;
 
     public User() {
     }
@@ -22,7 +25,7 @@ public class User {
     }
 
     public User(Long id, String name, String email, String password, String nAccount, String description,
-            String address, String imageProfileUrl, List<Artwork> artworks) {
+            String address, String imageProfileUrl, List<Artwork> artworks, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,6 +35,7 @@ public class User {
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
         this.artworks = artworks;
+        this.role = role;
     }
 
     public Long getId() {
@@ -106,4 +110,11 @@ public class User {
         this.artworks = artworks;
     }
 
+    public UserRole getRol() {
+        return role;
+    }
+
+    public void setRol(UserRole role) {
+        this.role = role;
+    }
 }
