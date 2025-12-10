@@ -2,9 +2,11 @@ package es.artyhub.tienda_back.spring.config;
 
 import es.artyhub.tienda_back.domain.repository.ArtworkRepository;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
+import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.repository.UserRepository;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
 import es.artyhub.tienda_back.domain.service.CategoryService;
+import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.service.impl.ArtworkServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.CategoryServiceImpl;
@@ -20,6 +22,7 @@ import es.artyhub.tienda_back.persistence.repository.impl.CategoryRepositoryImpl
 import es.artyhub.tienda_back.persistence.repository.impl.UserRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import es.artyhub.tienda_back.domain.service.impl.SesionServiceImpl;
 
 @Configuration
 public class SpringConfig {
@@ -62,5 +65,9 @@ public class SpringConfig {
     @Bean
     public CategoryService categoryService(CategoryRepository categoryRepository){
         return new CategoryServiceImpl(categoryRepository);
+    }
+    @Bean
+    public SesionService sesionService(SesionRepository sesionRepository){
+        return new SesionServiceImpl(sesionRepository);
     }
 }

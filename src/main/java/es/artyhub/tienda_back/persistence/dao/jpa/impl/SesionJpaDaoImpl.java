@@ -4,6 +4,7 @@ import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.SesionJpaEntity;
+import java.util.Optional;
 
 public class SesionJpaDaoImpl implements SesionJpaDao {
     
@@ -11,8 +12,8 @@ public class SesionJpaDaoImpl implements SesionJpaDao {
     private EntityManager entityManager;
 
     @Override
-    public SesionJpaEntity findByToken(String token) {
-        return entityManager.find(SesionJpaEntity.class, token);
+    public Optional<SesionJpaEntity> findByToken(String token) {
+        return Optional.ofNullable(entityManager.find(SesionJpaEntity.class, token));
     }
 
     @Override

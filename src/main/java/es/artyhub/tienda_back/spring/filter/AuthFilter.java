@@ -2,7 +2,7 @@ package es.artyhub.tienda_back.spring.filter;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Component;
 
 import es.artyhub.tienda_back.domain.service.SesionService;
@@ -17,8 +17,12 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class AuthFilter implements Filter {
     
-    @Autowired
-    private SesionService sesionService;
+    
+    private final SesionService sesionService;
+
+    public AuthFilter(SesionService sesionService) {
+        this.sesionService = sesionService;
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

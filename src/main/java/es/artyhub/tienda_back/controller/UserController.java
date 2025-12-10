@@ -10,22 +10,62 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
+import es.artyhub.tienda_back.domain.dto.SesionDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
+import es.artyhub.tienda_back.domain.enums.UserRole;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     
     private final UserService userService;
+    private final SesionService sesionService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SesionService sesionService) {
         this.userService = userService;
+        this.sesionService = sesionService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, String>> login(@RequestBody UserDto userDto) {
+        UserDto user = userService.findByEmail(userDto.getEmail());
+
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        if (!user.getPassword().equals(userDto.getPassword())) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        if (user.getRole() == UserRole.USER) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+        String token = UUID.randomUUID().toString();
+
+        sesionService.insertSesion(new SesionDto(token, user.getId(), new Date()));
+
+        return ResponseEntity.ok(Map.of("token", token));
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<Void> logout(@RequestParam String token) {
+        sesionService.deleteSesion(token);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping

@@ -1,8 +1,10 @@
 package es.artyhub.tienda_back.persistence.repository.impl;
 
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.SesionJpaEntity;
+import es.artyhub.tienda_back.domain.dto.SesionDto;
 import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;
+import es.artyhub.tienda_back.persistence.repository.mapper.SesionMapper;
+import java.util.Optional;
 
 public class SesionRepositoryImpl implements SesionRepository {
 
@@ -13,8 +15,8 @@ public class SesionRepositoryImpl implements SesionRepository {
     }
     
     @Override
-    public SesionJpaEntity findByToken(String token) {
-        return sesionJpaDao.findByToken(token);
+    public Optional<SesionDto> findByToken(String token) {
+        return sesionJpaDao.findByToken(token).map(SesionMapper.getInstance()::fromSesionJpaEntityToSesionDto);
     }
 
     @Override
@@ -23,8 +25,7 @@ public class SesionRepositoryImpl implements SesionRepository {
     }
 
     @Override
-    public void insertSesion(SesionJpaEntity sesion) {
-        sesionJpaDao.insertSesion(sesion);
-        
+    public void insertSesion(SesionDto sesion) {
+        sesionJpaDao.insertSesion(SesionMapper.getInstance().fromSesionDtoToSesionJpaEntity(sesion));
     }
 }

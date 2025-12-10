@@ -58,4 +58,9 @@ public class UserRepositoryImpl implements UserRepository {
     public void delete(Long id) {
         userJpaDao.deleteById(id);
     }
+
+    @Override
+    public UserDto findByEmail(String email) {
+        return UserMapper.getInstance().fromUserJpaEntityToUserDto(userJpaDao.findByEmail(email));
+    }
 }

@@ -14,6 +14,8 @@ public interface UserRepository {
     UserDto save(UserDto user);
 
     void delete(Long id);
+
+    UserDto findByEmail(String email);
     //TODO Metodo para obtener todas las obras de un user
     //Page<ArtworkDto> findAllArtworks(int pageNumber, int pageSize)
 }

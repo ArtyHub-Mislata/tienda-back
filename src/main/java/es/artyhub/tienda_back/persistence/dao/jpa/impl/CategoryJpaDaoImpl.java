@@ -1,10 +1,7 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import es.artyhub.tienda_back.domain.exception.ResourceNotFoundException;
-import es.artyhub.tienda_back.domain.model.Category;
-import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.persistence.dao.jpa.CategoryJpaDao;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CategoryJpaEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

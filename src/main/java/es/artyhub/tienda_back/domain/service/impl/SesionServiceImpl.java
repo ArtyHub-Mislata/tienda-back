@@ -1,8 +1,8 @@
 package es.artyhub.tienda_back.domain.service.impl;
 
 import es.artyhub.tienda_back.domain.service.SesionService;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.SesionJpaEntity;
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
+import es.artyhub.tienda_back.domain.dto.SesionDto;
 
 public class SesionServiceImpl implements SesionService {
     
@@ -13,8 +13,8 @@ public class SesionServiceImpl implements SesionService {
     }
 
     @Override
-    public void insertSesion(SesionJpaEntity sesionJpaEntity) {
-        sesionRepository.insertSesion(sesionJpaEntity);
+    public void insertSesion(SesionDto sesionDto) {
+        sesionRepository.insertSesion(sesionDto);
     }
 
     @Override
