@@ -35,16 +35,13 @@ public class UserDto {
         private String imageProfileUrl;
 
         @NotNull
-        private List<ArtworkDto> artworks;
-
-        @NotNull
         private UserRole role;
 
     public UserDto() {
     }
 
     public UserDto(Long id, String name, String email, String password, String nAccount,
-                   String description, String address, String imageProfileUrl, List<ArtworkDto> artworks, UserRole role) {
+                   String description, String address, String imageProfileUrl,UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -53,7 +50,6 @@ public class UserDto {
         this.description = description;
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
-        this.artworks = artworks;
         this.role = role;
     }
 
@@ -119,14 +115,6 @@ public class UserDto {
 
     public void setImageProfileUrl(String imageProfileUrl) {
         this.imageProfileUrl = imageProfileUrl;
-    }
-
-    public List<ArtworkDto> getArtworks() {
-        return artworks;
-    }
-
-    public void setArtworks(List<ArtworkDto> artworks) {
-        this.artworks = artworks;
     }
 
     public UserRole getRole() {

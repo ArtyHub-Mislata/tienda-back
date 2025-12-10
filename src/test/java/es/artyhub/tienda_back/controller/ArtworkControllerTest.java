@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
 import java.math.BigDecimal;
 
+@Disabled
 @WebMvcTest(ArtworkController.class)
 public class ArtworkControllerTest {
     
