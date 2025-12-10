@@ -42,3 +42,13 @@ CREATE TABLE artworks (
                               FOREIGN KEY (user_id)
                                   REFERENCES users (id)
 );
+
+-- =========================
+-- TABLE: sesions
+-- =========================
+
+CREATE TABLE sesions (
+    token VARCHAR(255) PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    date_create TIMESTAMP NOT NULL,
+);
