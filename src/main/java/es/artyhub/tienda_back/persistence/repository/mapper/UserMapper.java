@@ -32,7 +32,6 @@ public class UserMapper {
                 userJpaEntity.getDescription(),
                 userJpaEntity.getAddress(),
                 userJpaEntity.getImageProfileUrl(),
-                List.of(),
                 userJpaEntity.getRole()
         );
     }

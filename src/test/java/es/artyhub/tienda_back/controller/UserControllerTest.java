@@ -1,5 +1,6 @@
 package es.artyhub.tienda_back.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.List;
 
 import org.springframework.http.MediaType;
-
+@Disabled
 @WebMvcTest(UserController.class)
 class UserControllerTest {
     

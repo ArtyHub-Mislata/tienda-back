@@ -58,8 +58,8 @@ public class SpringConfig {
         return new UserRepositoryImpl(userJpaDao);
     }
     @Bean
-    public UserService userService(UserRepository userRepository){
-        return new UserServiceImpl(userRepository);
+    public UserService userService(UserRepository userRepository, ArtworkRepository artworkRepository){
+        return new UserServiceImpl(userRepository, artworkRepository);
     }
 
     //BEANS DE CATEGORY

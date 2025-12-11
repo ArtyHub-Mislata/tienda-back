@@ -1,6 +1,9 @@
 package es.artyhub.tienda_back.controller;
 
+import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.service.ArtworkService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -56,16 +60,7 @@ public class UserController {
                                                                    @RequestParam(required = false, defaultValue = "20") int size) {
         Page<UserDto> userDtoPage = userService.findAll(page, size);
 
-        List<UserDto> userDetailResponses = userDtoPage.data().stream()
-            .toList();
-
-        Page<UserDto> userDetailPage = new Page<>(
-            userDetailResponses,
-            userDtoPage.pageNumber(),
-            userDtoPage.pageSize(),
-            userDtoPage.totalElements()
-        );    
-        return new ResponseEntity<>(userDetailPage, HttpStatus.OK);
+        return new ResponseEntity<>(userDtoPage, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -75,6 +70,15 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/artworks")
+    public ResponseEntity<Page<ArtworkDto>> getArtworksOfUser(@RequestParam(required = false, defaultValue = "1") int page,
+                                                              @RequestParam(required = false, defaultValue = "20") int size,
+                                                              @PathVariable Long id){
+        Page<ArtworkDto> artworkDtoPage = userService.findAllArtworks(id, page, size);
+
+        return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
     @PostMapping

@@ -36,6 +36,24 @@ public class ArtworkRepositoryImpl implements ArtworkRepository {
     }
 
     @Override
+    public Page<ArtworkDto> findAllArtworksOfUser(Long id, int pageNumber, int pageSize) {
+        List<ArtworkDto> artworkDtoList = artworkJpaDao
+                .findAllArtworksOfUser(id, pageNumber, pageSize)
+                .stream()
+                .map(ArtworkMapper.getInstance()::fromArtworkJpaEntityToArtworkDto)
+                .toList();
+        long totalElements = artworkJpaDao.count();
+
+        return new Page<>(
+                artworkDtoList,
+                pageNumber,
+                pageSize,
+                totalElements
+        );
+
+    }
+
+    @Override
     public Optional<ArtworkDto> findById(Long id) {
         return artworkJpaDao
                 .findById(id)

@@ -10,7 +10,6 @@ import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
-//TODO MEGA IMPORTANTE PREGUNTAR ESTO MAÑANA
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/artworks")

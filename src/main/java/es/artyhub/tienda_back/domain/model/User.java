@@ -14,7 +14,6 @@ public class User {
     private String description;
     private String address;
     private String imageProfileUrl;
-    private List<Artwork> artworks;
     private UserRole role;
 
     public User() {
@@ -25,7 +24,7 @@ public class User {
     }
 
     public User(Long id, String name, String email, String password, String nAccount, String description,
-            String address, String imageProfileUrl, List<Artwork> artworks, UserRole role) {
+            String address, String imageProfileUrl, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -34,7 +33,6 @@ public class User {
         this.description = description;
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
-        this.artworks = artworks;
         this.role = role;
     }
 
@@ -102,14 +100,6 @@ public class User {
         this.imageProfileUrl = imageProfileUrl;
     }
 
-    public List<Artwork> getArtworks() {
-        return artworks;
-    }
-
-    public void setArtworks(List<Artwork> artworks) {
-        this.artworks = artworks;
-    }
-
     public UserRole getRole() {
         return role;
     }
@@ -117,4 +107,5 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
+
 }
