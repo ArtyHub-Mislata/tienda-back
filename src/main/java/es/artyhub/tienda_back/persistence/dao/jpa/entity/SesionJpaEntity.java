@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "sesions")
 public class SesionJpaEntity implements Serializable{
+    @Id
     private String token;
     private Long userId;
     private Date dateCreate;

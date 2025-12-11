@@ -2,23 +2,32 @@ package es.artyhub.tienda_back.spring.config;
 
 import es.artyhub.tienda_back.domain.repository.ArtworkRepository;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
+import es.artyhub.tienda_back.domain.repository.LoginRepository;
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.repository.UserRepository;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
 import es.artyhub.tienda_back.domain.service.CategoryService;
+import es.artyhub.tienda_back.domain.service.LoginService;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.service.impl.ArtworkServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.CategoryServiceImpl;
+import es.artyhub.tienda_back.domain.service.impl.LoginServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.UserServiceImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.ArtworkJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.CategoryJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.LoginJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.UserJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.ArtworkJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.CategoryJpaDaoImpl;
+import es.artyhub.tienda_back.persistence.dao.jpa.impl.LoginJpaDaoImpl;
+import es.artyhub.tienda_back.persistence.dao.jpa.impl.SesionJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.UserJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.ArtworkRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.CategoryRepositoryImpl;
+import es.artyhub.tienda_back.persistence.repository.impl.LoginRepositoryImpl;
+import es.artyhub.tienda_back.persistence.repository.impl.SesionRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.UserRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -66,8 +75,32 @@ public class SpringConfig {
     public CategoryService categoryService(CategoryRepository categoryRepository){
         return new CategoryServiceImpl(categoryRepository);
     }
+
+    //BEANS DE SESION
+    @Bean
+    public SesionJpaDao sesionJpaDao(){
+        return new SesionJpaDaoImpl();
+    }
+    @Bean
+    public SesionRepository sesionRepository(SesionJpaDao sesionJpaDao){
+        return new SesionRepositoryImpl(sesionJpaDao);
+    }
     @Bean
     public SesionService sesionService(SesionRepository sesionRepository){
         return new SesionServiceImpl(sesionRepository);
+    }
+
+    //BEANS DE LOGIN
+    @Bean
+    public LoginJpaDao loginJpaDao(){
+        return new LoginJpaDaoImpl(userJpaDao(), sesionJpaDao());
+    }
+    @Bean
+    public LoginRepository loginRepository(LoginJpaDao loginJpaDao){
+        return new LoginRepositoryImpl(loginJpaDao);
+    }
+    @Bean
+    public LoginService loginService(LoginRepository loginRepository){
+        return new LoginServiceImpl(loginRepository);
     }
 }

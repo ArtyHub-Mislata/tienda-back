@@ -50,5 +50,5 @@ CREATE TABLE artworks (
 CREATE TABLE sesions (
     token VARCHAR(255) PRIMARY KEY,
     user_id BIGINT NOT NULL,
-    date_create TIMESTAMP NOT NULL,
+    date_create TIMESTAMP NOT NULL
 );

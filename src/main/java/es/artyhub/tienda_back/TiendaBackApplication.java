@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TiendaBackApplication {
 
 	public static void main(String[] args) {
-		//A
+		//Arranque de la aplicacion
 		SpringApplication.run(TiendaBackApplication.class, args);
 	}
 
