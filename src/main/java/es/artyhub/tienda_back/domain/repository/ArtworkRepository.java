@@ -8,9 +8,12 @@ import java.util.Optional;
 public interface ArtworkRepository {
     Page<ArtworkDto> findAll(int pageNumber, int pageSize);
 
+    Page<ArtworkDto> findAllArtworksOfUser(Long id, int pageNumber, int pageSize);
+
     Optional<ArtworkDto> findById(Long id);
 
     ArtworkDto save(ArtworkDto artwork);
 
     void delete(Long id);
+
 }

@@ -1,5 +1,6 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
+import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.exception.ResourceNotFoundException;
 import es.artyhub.tienda_back.persistence.dao.jpa.ArtworkJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;
@@ -27,7 +28,21 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
                 .setMaxResults(size);
         return artworkJpaEntityPage.getResultList();
     }
+    @Override
+    public List<ArtworkJpaEntity> findAllArtworksOfUser(Long id, int page, int size) {
+        int indicePagina = Math.max(page - 1, 0);
+        String sql = "SELECT artwork FROM ArtworkJpaEntity artwork " +
+                "WHERE artwork.userJpaEntity.id = :userId " +
+                "ORDER BY artwork.id ASC";
 
+        TypedQuery<ArtworkJpaEntity> query = entityManager
+                .createQuery(sql, ArtworkJpaEntity.class)
+                .setParameter("userId", id)
+                .setFirstResult(indicePagina * size)
+                .setMaxResults(size);
+
+        return query.getResultList();
+    }
     @Override
     public Optional<ArtworkJpaEntity> findById(Long id) {
         return Optional.ofNullable(entityManager.find(ArtworkJpaEntity.class, id));
@@ -62,4 +77,6 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
                 .createQuery(jpql, Long.class)
                 .getSingleResult();
     }
+
+
 }
