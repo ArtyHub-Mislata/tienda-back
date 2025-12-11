@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.entity;
 
-import es.artyhub.tienda_back.domain.model.Category;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
