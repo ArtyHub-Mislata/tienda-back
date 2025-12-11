@@ -22,10 +22,10 @@ public class ArtworkDto {
         @Positive(message = "El precio debe ser mayor a 0")
         private BigDecimal price;
         
-        @NotNull(message = "La categoría no puede ser vacía")
+        @NotBlank(message = "La categoría no puede ser vacía")
         private CategoryDto categoryDto;
 
-        @NotNull
+        @NotBlank(message = "El usuario no puede ser vacío")
         private UserDto userDto;
 
     public ArtworkDto() {

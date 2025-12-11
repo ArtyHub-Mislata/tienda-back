@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import java.math.BigDecimal;
@@ -19,32 +20,32 @@ class UserDtoTest {
     @Test
     @DisplayName("Create UserDto with valid data should not throw ValidationException")
     void createUserDto_WithValidData_ShouldNotThrowValidationException() {
-        UserDto userDto = new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name"))));
+        UserDto userDto = new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", List.of(), UserRole.ADMIN);
 
         assertDoesNotThrow(() -> DtoValidator.validate(userDto));
     }
 
     static Stream<UserDto> invalidUsers() {
         return Stream.of(
-            new UserDto(1L, null, "email", "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "", "email", "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, " ", "email", "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", null, "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "", "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", " ", "password", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", null, "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "", "****************", "description", "", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", " ", "****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", null, "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", " ", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "*****************", "description", "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****************", null, "address", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****************", "description", null, "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****************", "description", "", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****************", "description", " ", "imageUrl", List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name")))),
-            new UserDto(1L, "name", "email", "password", "****************", "description", "address", null, List.of(new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), 1, new CategoryDto(1L, "name"))))
+            new UserDto(1L, null, "email", "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "", "email", "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, " ", "email", "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", null, "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "", "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", " ", "password", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", null, "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", " ", "****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", null, "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", " ", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "*****************", "description", "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****************", null, "address", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****************", "description", null, "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****************", "description", "", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****************", "description", " ", "imageUrl", List.of(), UserRole.ADMIN),
+            new UserDto(1L, "name", "email", "password", "****************", "description", "address", null, List.of(), UserRole.ADMIN)
         );
     }
 

@@ -11,21 +11,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import es.artyhub.tienda_back.domain.service.LoginService;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
-import es.artyhub.tienda_back.domain.dto.SesionDto;
+import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
-import es.artyhub.tienda_back.domain.enums.UserRole;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
@@ -33,32 +31,17 @@ public class UserController {
     
     private final UserService userService;
     private final SesionService sesionService;
+    private final LoginService loginService;
 
-    public UserController(UserService userService, SesionService sesionService) {
+    public UserController(UserService userService, SesionService sesionService, LoginService loginService) {
         this.userService = userService;
         this.sesionService = sesionService;
+        this.loginService = loginService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody UserDto userDto) {
-        UserDto user = userService.findByEmail(userDto.getEmail());
-
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        if (!user.getPassword().equals(userDto.getPassword())) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        if (user.getRole() == UserRole.USER) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-
-        String token = UUID.randomUUID().toString();
-
-        sesionService.insertSesion(new SesionDto(token, user.getId(), new Date()));
-
+    public ResponseEntity<Map<String, String>> login(@RequestBody CredentialsDto credentialsDto) {
+        String token = loginService.login(credentialsDto);
         return ResponseEntity.ok(Map.of("token", token));
     }
 

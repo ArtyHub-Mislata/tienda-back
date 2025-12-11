@@ -34,10 +34,10 @@ public class UserDto {
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
         private String imageProfileUrl;
 
-        @NotNull
+        @NotNull(message = "La lista de obras no puede ser nula")
         private List<ArtworkDto> artworks;
 
-        @NotNull
+        @NotBlank(message = "El rol no puede ser vacío")
         private UserRole role;
 
     public UserDto() {

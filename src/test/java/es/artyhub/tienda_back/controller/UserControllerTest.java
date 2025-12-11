@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.service.UserService;
 
@@ -35,8 +36,8 @@ class UserControllerTest {
     @Test
     @DisplayName("Test findAll Users")
     void findAllUsers() throws Exception {
-        UserDto userDto1 = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
-        UserDto userDto2 = new UserDto(2L, "name2", "email2", "password2", "nAccount2", "description2", "address2", "imageProfileUrl2", List.of());
+        UserDto userDto1 = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
+        UserDto userDto2 = new UserDto(2L, "name2", "email2", "password2", "nAccount2", "description2", "address2", "imageProfileUrl2", List.of(), UserRole.USER);
 
         List<UserDto> userDtoList = List.of(userDto1, userDto2);
 
@@ -58,7 +59,7 @@ class UserControllerTest {
     @Test
     @DisplayName("Test find User by id")
     void findUserById() throws Exception {
-        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
 
         when(userService.findById(userDto.getId())).thenReturn(userDto);
 
@@ -92,7 +93,7 @@ class UserControllerTest {
                 }
                 """;
 
-        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
 
         when(userService.insert(userDto)).thenReturn(userDto);
 
@@ -128,8 +129,8 @@ class UserControllerTest {
                 }
                 """;
                 
-        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
-        UserDto updatedUserDto = new UserDto(1L, "updatedName1", "updatedEmail1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
+        UserDto updatedUserDto = new UserDto(1L, "updatedName1", "updatedEmail1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
 
         when(userService.update(userDto)).thenReturn(updatedUserDto);
 
@@ -151,7 +152,7 @@ class UserControllerTest {
     @Test
     @DisplayName("Test delete user")
     void deleteUser() throws Exception {
-        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of());
+        UserDto userDto = new UserDto(1L, "name1", "email1", "password1", "nAccount1", "description1", "address1", "imageProfileUrl1", List.of(), UserRole.ADMIN);
 
         when(userService.findById(userDto.getId())).thenReturn(userDto);
 
