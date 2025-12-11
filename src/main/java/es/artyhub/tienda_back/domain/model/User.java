@@ -2,8 +2,6 @@ package es.artyhub.tienda_back.domain.model;
 
 import es.artyhub.tienda_back.domain.enums.UserRole;
 
-import java.util.List;
-
 public class User {
 
     private Long id;

@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.persistence.dao.jpa;
 
-import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;
 
 import java.util.List;

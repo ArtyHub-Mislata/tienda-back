@@ -3,7 +3,6 @@ package es.artyhub.tienda_back.domain.dto;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +27,7 @@ class ArtworkDtoTest {
             "image",
             new BigDecimal(1.0),
             new CategoryDto(1L, "name"),
-            new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)
+            new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)
         );
 
         assertDoesNotThrow(() -> DtoValidator.validate(artworkDto));
@@ -36,36 +35,36 @@ class ArtworkDtoTest {
 
     static Stream<ArtworkDto> invalidArtworks() {
         return Stream.of(
-            new ArtworkDto( 1L, null, "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, " ", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", null, "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", null, new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", " ", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", null, new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(-1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(0.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(null, null), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, ""), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, " "), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(null, null, null, null, null, null, null, null, null, null)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, " ", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", " ", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", " ", "nAccount", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", " ", "description", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", " ", "address", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", " ", "imageProfileUrl", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", " ", List.of(), UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", null, UserRole.ADMIN)),
-            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", List.of(), null))
+            new ArtworkDto( 1L, null, "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, " ", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", null, "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", null, new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", " ", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", null, new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(-1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(0.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(null, null), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, ""), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, " "), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(null, null, null, null, null, null, null, null, null)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, null, "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, " ", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", null, "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", " ", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", null, "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", " ", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", null, "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", " ", "description", "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", null, "address", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", null, "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", " ", "imageProfileUrl", UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", null, UserRole.ADMIN)),
+            new ArtworkDto( 1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "name"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", null))
         );
     }
 

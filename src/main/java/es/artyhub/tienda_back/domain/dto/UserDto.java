@@ -5,9 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.util.List;
-
-
 public class UserDto {
 
         private Long id;
@@ -34,7 +31,7 @@ public class UserDto {
         @NotNull(message = "La URL de la imagen del perfil no puede ser nula")
         private String imageProfileUrl;
 
-        @NotNull
+        @NotNull(message = "El rol no puede ser nulo")
         private UserRole role;
 
     public UserDto() {

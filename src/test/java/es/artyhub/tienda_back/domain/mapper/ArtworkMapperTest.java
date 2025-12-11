@@ -13,8 +13,11 @@ import org.junit.jupiter.api.Test;
 
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
+import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Artwork;
+import es.artyhub.tienda_back.domain.model.User;
 
 class ArtworkMapperTest {
     
@@ -25,15 +28,7 @@ class ArtworkMapperTest {
         @Test
         @DisplayName("Should return ArtworkDto")
         void shouldReturnArtworkDto() {
-            Artwork artwork = new Artwork(
-                1L,
-                "Artwork",
-                "Description",
-                "Image",
-                new BigDecimal(1.0),
-                1,
-                new CategoryDto(1L, "Category")
-            );
+            Artwork artwork = new Artwork(1L, "Artwork", "Description", "Image", new BigDecimal(1.0), new CategoryDto(1L, "Category"), new User(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", UserRole.ADMIN));
 
             ArtworkDto artworkDto = ArtworkMapper.getInstance().fromArtworkToArtworkDto(artwork);
 
@@ -44,8 +39,8 @@ class ArtworkMapperTest {
                 () -> assertEquals(artwork.getDescription(), artworkDto.getDescription()),
                 () -> assertEquals(artwork.getImageUrl(), artworkDto.getImage()),
                 () -> assertEquals(artwork.getPrice(), artworkDto.getPrice()),
-                () -> assertEquals(artwork.getStock(), artworkDto.getStock()),
-                () -> assertEquals(artwork.getCategoryDto(), artworkDto.getCategoryDto())
+                () -> assertEquals(artwork.getCategoryDto(), artworkDto.getCategoryDto()),
+                () -> assertEquals(artwork.getUser(), artworkDto.getUserDto())
             );
         }
     
@@ -71,8 +66,8 @@ class ArtworkMapperTest {
                 "Description",
                 "Image",
                 new BigDecimal(1.0),
-                1,
-                new CategoryDto(1L, "Category")
+                new CategoryDto(1L, "Category"),
+                new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", UserRole.ADMIN)
             );
 
             Artwork artwork = ArtworkMapper.getInstance().fromArtworkDtoToArtwork(artworkDto);
@@ -84,8 +79,8 @@ class ArtworkMapperTest {
                 () -> assertEquals(artworkDto.getDescription(), artwork.getDescription()),
                 () -> assertEquals(artworkDto.getImage(), artwork.getImageUrl()),
                 () -> assertEquals(artworkDto.getPrice(), artwork.getPrice()),
-                () -> assertEquals(artworkDto.getStock(), artwork.getStock()),
-                () -> assertEquals(artworkDto.getCategoryDto(), artwork.getCategoryDto())
+                () -> assertEquals(artworkDto.getCategoryDto(), artwork.getCategoryDto()),
+                () -> assertEquals(artworkDto.getUserDto(), artwork.getUser())
             );
         }
     

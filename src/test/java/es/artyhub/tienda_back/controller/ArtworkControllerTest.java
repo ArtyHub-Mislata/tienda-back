@@ -40,8 +40,8 @@ public class ArtworkControllerTest {
     @Test
     @DisplayName("Test findAll Artworks")
     void findAllArtworks() throws Exception {
-        ArtworkDto artworkDto1 = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));
-        ArtworkDto artworkDto2 = new ArtworkDto(2L, "name2", "description2", "url2", new BigDecimal(2.0), new CategoryDto(2L, "name2"), new UserDto(2L, "name2", "email2", "password2", "2222222222222222", "description2", "address2", "url2", List.of(), UserRole.USER));
+        ArtworkDto artworkDto1 = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));
+        ArtworkDto artworkDto2 = new ArtworkDto(2L, "name2", "description2", "url2", new BigDecimal(2.0), new CategoryDto(2L, "name2"), new UserDto(2L, "name2", "email2", "password2", "2222222222222222", "description2", "address2", "url2", UserRole.USER));
 
         List<ArtworkDto> artworkDtoList = List.of(artworkDto1, artworkDto2);
 
@@ -63,7 +63,7 @@ public class ArtworkControllerTest {
     @Test
     @DisplayName("Test find Artwork by id")
     void findArtworkById() throws Exception {
-        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));
+        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));
         when(artworkService.findById(1L)).thenReturn(artworkDto);
 
         mockMvc.perform(get("/api/artworks/" + artworkDto.getId()))
@@ -90,7 +90,7 @@ public class ArtworkControllerTest {
                 }
                 """;
 
-        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));
+        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));
         when(artworkService.insert(artworkDto)).thenReturn(artworkDto);
 
         mockMvc.perform(post("/api/artworks")
@@ -122,8 +122,8 @@ public class ArtworkControllerTest {
                 }
                 """;
 
-        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));        
-        ArtworkDto artworkDtoUpdated = new ArtworkDto(1L, "updatedName1", "updatedDescription1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));
+        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));        
+        ArtworkDto artworkDtoUpdated = new ArtworkDto(1L, "updatedName1", "updatedDescription1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));
 
         when(artworkService.update(artworkDto)).thenReturn(artworkDtoUpdated);
 
@@ -144,7 +144,7 @@ public class ArtworkControllerTest {
     @Test
     @DisplayName("Test delete Artwork")
     void deleteArtwork() throws Exception {
-        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", List.of(), UserRole.ADMIN));
+        ArtworkDto artworkDto = new ArtworkDto(1L, "name1", "description1", "url1", new BigDecimal(1.0), new CategoryDto(1L, "name1"), new UserDto(1L, "name1", "email1", "password1", "1111111111111111", "description1", "address1", "url1", UserRole.ADMIN));
         when(artworkService.findById(artworkDto.getId())).thenReturn(artworkDto);
 
         mockMvc.perform(delete("/api/artworks/" + artworkDto.getId()))

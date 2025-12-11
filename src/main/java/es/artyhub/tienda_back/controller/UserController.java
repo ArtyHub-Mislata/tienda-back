@@ -1,7 +1,6 @@
 package es.artyhub.tienda_back.controller;
 
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
-import es.artyhub.tienda_back.domain.service.ArtworkService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +20,7 @@ import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
-
-import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 

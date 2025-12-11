@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.User;
 
@@ -24,7 +23,7 @@ class UserMapperTest {
         @Test
         @DisplayName("Should return UserDto")
         void shouldReturnUserDto() {
-            User user = new User(1L, "User", "user@email.com", "password", "12345678901234567890", "Description", "Address", "Image", new ArrayList<>());
+            User user = new User(1L, "User", "user@email.com", "password", "1234567890123456", "Description", "Address", "Image", UserRole.ADMIN);
             
             UserDto userDto = UserMapper.getInstance().fromUserToUserDto(user);
             
@@ -38,7 +37,7 @@ class UserMapperTest {
                 () -> assertEquals(userDto.getDescription(), user.getDescription(), "UserDto description should be equal to User description"),
                 () -> assertEquals(userDto.getAddress(), user.getAddress(), "UserDto address should be equal to User address"),
                 () -> assertEquals(userDto.getImageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
-                () -> assertEquals(userDto.getArtworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
+                () -> assertEquals(userDto.getRole(), user.getRole(), "UserDto role should be equal to User role")
             );
         }
 
@@ -58,7 +57,7 @@ class UserMapperTest {
         @Test
         @DisplayName("Should return User")
         void shouldReturnUser() {
-            UserDto userDto = new UserDto(1L, "User", "user@email.com", "password", "12345678901234567890", "Description", "Address", "Image", new ArrayList<>());
+            UserDto userDto = new UserDto(1L, "User", "user@email.com", "password", "1234567890123456", "Description", "Address", "Image", UserRole.ADMIN);
             
             User user = UserMapper.getInstance().fromUserDtoToUser(userDto);
             
@@ -72,7 +71,7 @@ class UserMapperTest {
                 () -> assertEquals(userDto.getDescription(), user.getDescription(), "UserDto description should be equal to User description"),
                 () -> assertEquals(userDto.getAddress(), user.getAddress(), "UserDto address should be equal to User address"),
                 () -> assertEquals(userDto.getImageProfileUrl(), user.getImageProfileUrl(), "UserDto imageProfileUrl should be equal to User imageProfileUrl"),
-                () -> assertEquals(userDto.getArtworks(), user.getArtworks(), "UserDto artworks should be equal to User artworks")
+                () -> assertEquals(userDto.getRole(), user.getRole(), "UserDto role should be equal to User role")
             );
         }
 

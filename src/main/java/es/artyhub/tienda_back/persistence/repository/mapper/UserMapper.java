@@ -3,8 +3,6 @@ package es.artyhub.tienda_back.persistence.repository.mapper;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 
-import java.util.List;
-
 public class UserMapper {
     private static UserMapper instance;
 

@@ -66,6 +66,10 @@ public class UserServiceImpl implements UserService {
             throw new ValidationException("User imageProfileUrl cannot be null");
         }
 
+        if (userDto.getRole() == null) {
+            throw new ValidationException("User role cannot be null");
+        }
+
         return userRepository.save(userDto);
     }
 

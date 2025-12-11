@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
-import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.exception.ResourceNotFoundException;
 import es.artyhub.tienda_back.persistence.dao.jpa.ArtworkJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;

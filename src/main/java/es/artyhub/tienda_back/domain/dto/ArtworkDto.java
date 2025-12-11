@@ -25,7 +25,7 @@ public class ArtworkDto {
         @NotNull(message = "La categoría no puede ser vacía")
         private CategoryDto categoryDto;
 
-        @NotNull
+        @NotNull(message = "El usuario no puede ser nulo")
         private UserDto userDto;
 
     public ArtworkDto() {
