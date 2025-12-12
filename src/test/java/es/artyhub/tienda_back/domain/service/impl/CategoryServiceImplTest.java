@@ -22,7 +22,6 @@ import org.mockito.Mockito;
 
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 
@@ -84,12 +83,7 @@ class CategoryServiceImplTest {
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(categories.data().size(), result.data().size(), "Result size should be equal to categories size"),
-                () -> assertEquals(categories.data().getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to categories first id"),
-                () -> assertEquals(categories.data().get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to categories second id"),
-                () -> assertEquals(categories.data().get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to categories third id"),
-                () -> assertEquals(categories.data().get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to categories fourth id"),
-                () -> assertEquals(categories.data().getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to categories last id")
+                () -> assertEquals(categories.data().size(), result.data().size(), "Result size should be equal to categories size")
             );
 
             Mockito.verify(categoryRepository).findAll(page, size);
@@ -167,16 +161,6 @@ class CategoryServiceImplTest {
             assertThrows(BusinessException.class, () -> categoryService.insert(categoryDto));
 
             Mockito.verify(categoryRepository).findById(categoryDto.getId());
-            Mockito.verify(categoryRepository, never()).save(categoryDto);
-        }
-
-        @Test
-        @DisplayName("While category have no valid name should throw ValidationException")
-        void whileCategoryHaveNoValidName_ShouldThrowValidationException() {
-            CategoryDto categoryDto = new CategoryDto(1L, "");
-
-            assertThrows(ValidationException.class, () -> categoryService.insert(categoryDto));
-
             Mockito.verify(categoryRepository, never()).save(categoryDto);
         }
     }

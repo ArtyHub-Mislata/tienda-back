@@ -9,9 +9,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
+import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.model.Page;
+import es.artyhub.tienda_back.domain.service.LoginService;
+import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
 
 import static org.mockito.Mockito.when;
@@ -33,6 +36,42 @@ class UserControllerTest {
 
     @MockitoBean
     private UserService userService;
+
+    @MockitoBean
+    private LoginService loginService;
+
+    @MockitoBean
+    private SesionService sesionService;
+
+    @Test
+    @DisplayName("Test login User")
+    void login() throws Exception {
+        String userJson = """
+                {
+                    "email": "email",
+                    "password": "password"
+                }
+                """;
+
+        CredentialsDto credentialsDto = new CredentialsDto("email", "password");
+        String token = loginService.login(credentialsDto);
+
+        when(loginService.login(credentialsDto)).thenReturn(token);
+
+        mockMvc.perform(post("/api/users/login")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(userJson))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.token").value("token"));
+    }
+
+    @Test
+    @DisplayName("Test logout User")
+    void logout() throws Exception {
+        mockMvc.perform(post("/api/users/logout"))
+            .andExpect(status().isNoContent());
+    }
 
     @Test
     @DisplayName("Test findAll Users")

@@ -3,6 +3,7 @@ package es.artyhub.tienda_back.domain.service.impl;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.dto.SesionDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 
 public class SesionServiceImpl implements SesionService {
     
@@ -14,14 +15,18 @@ public class SesionServiceImpl implements SesionService {
 
     @Override
     public void insertSesion(SesionDto sesionDto) {
+        if (isValidToken(sesionDto.getToken())) {
+            throw new BusinessException("Sesion already exists");
+        }
         sesionRepository.insertSesion(sesionDto);
     }
 
     @Override
     public void deleteSesion(String token) {
-        if (isValidToken(token)) {
-            sesionRepository.deleteSesion(token);
+        if (!isValidToken(token)) {
+            throw new BusinessException("Sesion not found");
         }
+        sesionRepository.deleteSesion(token);
     }
 
     @Override

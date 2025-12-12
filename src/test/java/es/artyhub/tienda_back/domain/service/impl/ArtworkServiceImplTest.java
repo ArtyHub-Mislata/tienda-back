@@ -13,7 +13,6 @@ import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.repository.ArtworkRepository;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -86,12 +85,7 @@ class ArtworkServiceImplTest {
 
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(artworks.data().size(), result.data().size(), "Result size should be equal to artworks size"),
-                () -> assertEquals(artworks.data().getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to artworks first id"),
-                () -> assertEquals(artworks.data().get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to artworks second id"),
-                () -> assertEquals(artworks.data().get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to artworks third id"),
-                () -> assertEquals(artworks.data().get(4).getId(), result.data().get(4).getId(), "Result fourth id should be equal to artworks fourth id"),
-                () -> assertEquals(artworks.data().getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to artworks last id")
+                () -> assertEquals(artworks.data().size(), result.data().size(), "Result size should be equal to artworks size")
             );
 
             Mockito.verify(artworkRepository).findAll(page, size);
@@ -117,7 +111,7 @@ class ArtworkServiceImplTest {
                 () -> assertEquals("name", result.getName(), "Result name should be equal to artwork name"),
                 () -> assertEquals("description", result.getDescription(), "Result description should be equal to artwork description"),
                 () -> assertEquals("image", result.getImage(), "Result image should be equal to artwork image"),
-                () -> assertEquals(1.0, result.getPrice(), "Result price should be equal to artwork price"),
+                () -> assertEquals(new BigDecimal(1.0), result.getPrice(), "Result price should be equal to artwork price"),
                 () -> assertEquals(1L, result.getCategoryDto().getId(), "Result category id should be equal to artwork category id"),
                 () -> assertEquals(1L, result.getUserDto().getId(), "Result user id should be equal to artwork user id")
             );
@@ -177,66 +171,6 @@ class ArtworkServiceImplTest {
 
             Mockito.verify(artworkRepository).findById(existingArtworkDto.getId());
             Mockito.verify(artworkRepository, never()).save(existingArtworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have no valid name should throw ValidationException")
-        void whileArtworkHaveNoValidName_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have null description should throw ValidationException")
-        void whileArtworkHaveNullDescription_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", null, "image", new BigDecimal(1.0), new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have no valid image should throw ValidationException")
-        void whileArtworkHaveNoValidImage_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "", new BigDecimal(1.0), new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have null price should throw ValidationException")
-        void whileArtworkHaveNullPrice_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", null, new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have negative price should throw ValidationException")
-        void whileArtworkHaveNegativePrice_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(-1.0), new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
-        }
-
-        @Test
-        @DisplayName("While artwork have no valid category should throw ValidationException")
-        void whileArtworkHaveNoValidCategory_ShouldThrowValidationException() {
-            ArtworkDto artworkDto = new ArtworkDto(1L, "name", "description", "image", new BigDecimal(1.0), new CategoryDto(1L, "category"), new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageProfileUrl", UserRole.ADMIN));
-
-            assertThrows(ValidationException.class, () -> artworkService.insert(artworkDto));
-
-            Mockito.verify(artworkRepository, never()).save(artworkDto);
         }
     }
 

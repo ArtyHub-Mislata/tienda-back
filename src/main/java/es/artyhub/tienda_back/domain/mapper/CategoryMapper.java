@@ -2,6 +2,7 @@ package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.model.Category;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 
 public class CategoryMapper {
     private static CategoryMapper instance;
@@ -18,7 +19,7 @@ public class CategoryMapper {
 
     public Category fromCategoryDtoToCategory(CategoryDto categoryDto) {
         if (categoryDto == null) {
-            return null;
+            throw new BusinessException("CategoryDto cannot be null");
         }
         return new Category(
             categoryDto.getId(), 
@@ -28,7 +29,7 @@ public class CategoryMapper {
 
     public CategoryDto fromCategoryToCategoryDto(Category category) {
         if (category == null) {
-            return null;
+            throw new BusinessException("Category cannot be null");
         }
         return new CategoryDto(
             category.getId(),
