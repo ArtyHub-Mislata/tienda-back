@@ -14,8 +14,7 @@ public class CategoryJpaDaoImpl implements CategoryJpaDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-    /*TODO las categorías no deberían estar paginadas, ya que nunca va a haber un numero grande
-    de estas y es meterse en camisa de once varas */
+    
     @Override
     public List<CategoryJpaEntity> findAll(int page, int size) {
         int indicePagina = Math.max(page - 1, 0);

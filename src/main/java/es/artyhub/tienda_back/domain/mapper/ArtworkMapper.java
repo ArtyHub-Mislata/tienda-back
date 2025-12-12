@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Artwork;
 
 public class ArtworkMapper {
@@ -18,7 +19,7 @@ public class ArtworkMapper {
 
     public ArtworkDto fromArtworkToArtworkDto(Artwork artwork) {
         if (artwork == null) {
-            return null;
+            throw new BusinessException("Artwork cannot be null");
         }
         return new ArtworkDto(
                 artwork.getId(),
@@ -26,14 +27,14 @@ public class ArtworkMapper {
                 artwork.getDescription(),
                 artwork.getImageUrl(),
                 artwork.getPrice(),
-                artwork.getCategoryDto(),
+                CategoryMapper.getInstance().fromCategoryToCategoryDto(artwork.getCategory()),
                 UserMapper.getInstance().fromUserToUserDto(artwork.getUser())
         );
     }
 
     public Artwork fromArtworkDtoToArtwork(ArtworkDto artworkDto) {
         if (artworkDto == null) {
-            return null;
+            throw new BusinessException("ArtworkDto cannot be null");
         }
         return new Artwork(
                 artworkDto.getId(),
@@ -41,7 +42,7 @@ public class ArtworkMapper {
                 artworkDto.getDescription(),
                 artworkDto.getImage(),
                 artworkDto.getPrice(),
-                artworkDto.getCategoryDto(),
+                CategoryMapper.getInstance().fromCategoryDtoToCategory(artworkDto.getCategoryDto()),
                 UserMapper.getInstance().fromUserDtoToUser(artworkDto.getUserDto())
         );
     }

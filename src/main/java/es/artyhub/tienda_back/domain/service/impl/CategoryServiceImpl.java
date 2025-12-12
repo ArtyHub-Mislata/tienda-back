@@ -3,7 +3,6 @@ package es.artyhub.tienda_back.domain.service.impl;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.service.CategoryService;
 import jakarta.transaction.Transactional;
@@ -29,11 +28,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (categoryDto.getName() == null || categoryDto.getName().trim().isEmpty()) {
-            throw new ValidationException("Category name is required");
-        } else {
-            return categoryRepositoy.save(categoryDto);
+        if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
+            throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
         }
+        return categoryRepositoy.save(categoryDto);
     }
 
     @Override

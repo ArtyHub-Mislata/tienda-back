@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.domain.dto;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
@@ -8,11 +7,9 @@ public class DetailDto {
 
         private Long id;
 
-        @NotNull(message = "La cantidad no puede ser nula")
         @Positive(message = "La cantidad debe ser mayor a 0")
         private int quantity;
 
-        @NotNull(message = "El precio no puede ser nulo")
         @Positive(message = "El precio debe ser mayor a 0")
         private BigDecimal price;
 
