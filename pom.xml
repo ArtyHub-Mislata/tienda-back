@@ -30,6 +30,7 @@
 		<java.version>21</java.version>
 		<com.fasterxml.jackson.version>2.20.1</com.fasterxml.jackson.version>
 		<org.flywaydb.version>11.17.0</org.flywaydb.version>
+        <com.h2database.version>2.3.232</com.h2database.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -63,6 +64,13 @@
 			<artifactId>flyway-mysql</artifactId>
 			<version>${org.flywaydb.version}</version>
 		</dependency>
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${com.h2database.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
