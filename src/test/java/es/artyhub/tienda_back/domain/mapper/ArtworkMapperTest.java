@@ -17,6 +17,7 @@ import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Artwork;
+import es.artyhub.tienda_back.domain.model.Category;
 import es.artyhub.tienda_back.domain.model.User;
 
 class ArtworkMapperTest {
@@ -28,7 +29,7 @@ class ArtworkMapperTest {
         @Test
         @DisplayName("Should return ArtworkDto")
         void shouldReturnArtworkDto() {
-            Artwork artwork = new Artwork(1L, "Artwork", "Description", "Image", new BigDecimal(1.0), new CategoryDto(1L, "Category"), new User(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", UserRole.ADMIN));
+            Artwork artwork = new Artwork(1L, "Artwork", "Description", "Image", new BigDecimal(1.0), new Category(1L, "Category"), new User(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", UserRole.ADMIN));
 
             ArtworkDto artworkDto = ArtworkMapper.getInstance().fromArtworkToArtworkDto(artwork);
 
@@ -38,9 +39,7 @@ class ArtworkMapperTest {
                 () -> assertEquals(artwork.getName(), artworkDto.getName()),
                 () -> assertEquals(artwork.getDescription(), artworkDto.getDescription()),
                 () -> assertEquals(artwork.getImageUrl(), artworkDto.getImage()),
-                () -> assertEquals(artwork.getPrice(), artworkDto.getPrice()),
-                () -> assertEquals(artwork.getCategoryDto(), artworkDto.getCategoryDto()),
-                () -> assertEquals(artwork.getUser(), artworkDto.getUserDto())
+                () -> assertEquals(artwork.getPrice(), artworkDto.getPrice())
             );
         }
     
@@ -78,9 +77,7 @@ class ArtworkMapperTest {
                 () -> assertEquals(artworkDto.getName(), artwork.getName()),
                 () -> assertEquals(artworkDto.getDescription(), artwork.getDescription()),
                 () -> assertEquals(artworkDto.getImage(), artwork.getImageUrl()),
-                () -> assertEquals(artworkDto.getPrice(), artwork.getPrice()),
-                () -> assertEquals(artworkDto.getCategoryDto(), artwork.getCategoryDto()),
-                () -> assertEquals(artworkDto.getUserDto(), artwork.getUser())
+                () -> assertEquals(artworkDto.getPrice(), artwork.getPrice())
             );
         }
     

@@ -26,6 +26,7 @@ class CategoryDtotest {
     static Stream<CategoryDto> invalidCategories() {
         return Stream.of(
             new CategoryDto(null, null),
+            new CategoryDto(1L, null),
             new CategoryDto(1L, ""),
             new CategoryDto(1L, " ")
         );

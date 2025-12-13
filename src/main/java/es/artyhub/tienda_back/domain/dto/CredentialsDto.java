@@ -4,10 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 
 public class CredentialsDto {
 
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "El email no puede ser vacío")
     private String email;
     
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "La contraseña no puede ser vacía")
     private String password;
 
     public CredentialsDto() {

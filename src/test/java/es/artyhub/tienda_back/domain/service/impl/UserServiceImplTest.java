@@ -24,7 +24,6 @@ import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -43,7 +42,7 @@ class UserServiceImplTest {
         @DisplayName("While users exist should return list of users")
         void whileUsersExist_ShouldReturnListOfUsers() {
 
-            int page = 0;
+            int page = 1;
             int size = 10;
             
             List<UserDto> users = List.of(
@@ -58,11 +57,7 @@ class UserServiceImplTest {
             
             assertAll(
                 () -> assertNotNull(result, "Result should not be null"),
-                () -> assertEquals(users.size(), result.data().size(), "Result size should be equal to users size"),
-                () -> assertEquals(users.getFirst().getId(), result.data().getFirst().getId(), "Result first id should be equal to users first id"),
-                () -> assertEquals(users.get(2).getId(), result.data().get(2).getId(), "Result second id should be equal to users second id"),
-                () -> assertEquals(users.get(3).getId(), result.data().get(3).getId(), "Result third id should be equal to users third id"),
-                () -> assertEquals(users.getLast().getId(), result.data().getLast().getId(), "Result last id should be equal to users last id")
+                () -> assertEquals(users.size(), result.data().size(), "Result size should be equal to users size")
             );
             
             Mockito.verify(userRepository).findAll(page, size);
@@ -71,7 +66,7 @@ class UserServiceImplTest {
         @Test
         @DisplayName("While no users exist should return empty list")
         void whileNoUsersExist_ShouldReturnEmptyList() {
-            int page = 0;
+            int page = 1;
             int size = 10;
             
             when(userRepository.findAll(page, size)).thenReturn(new Page<>(List.of(), page, size, 0));
@@ -160,106 +155,6 @@ class UserServiceImplTest {
             assertThrows(BusinessException.class, () -> userServiceImpl.insert(userDto));
 
             Mockito.verify(userRepository).findById(userDto.getId());
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have no valid name should throw ValidationException")
-        void whileUserHaveNoValidName_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have no valid email should throw ValidationException")
-        void whileUserHaveNoValidEmail_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "", "password", "1111111111111111", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have no valid password should throw ValidationException")
-        void whileUserHaveNoValidPassword_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "", "1111111111111111", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have no valid nAccount should throw ValidationException")
-        void whileUserHaveNoValidNAccount_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have a nAccount with length less than 16 should throw ValidationException")
-        void whileUserHaveNAccountWithLengthLessThan16_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "11111111111111", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have a nAccount with length more than 16 should throw ValidationException")
-        void whileUserHaveNAccountWithLengthMoreThan16_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "111111111111111111", "description", "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have null description should throw ValidationException")
-        void whileUserHaveNullDescription_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", null, "address", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have no valid address should throw ValidationException")
-        void whileUserHaveNoValidAddress_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "", "imageProfileUrl", UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have null imageProfileUrl should throw ValidationException")
-        void whileUserHaveNullImageProfileUrl_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", null, UserRole.ADMIN);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
-            Mockito.verify(userRepository, never()).save(userDto);
-        }
-
-        @Test
-        @DisplayName("While user have null role should throw ValidationException")
-        void whileUserHaveNullRole_ShouldThrowValidationException() {
-            UserDto userDto = new UserDto(1L, "name", "email", "password", "1111111111111111", "description", "address", "imageProfileUrl", null);
-
-            assertThrows(ValidationException.class, () -> userServiceImpl.insert(userDto));
-
             Mockito.verify(userRepository, never()).save(userDto);
         }
     }

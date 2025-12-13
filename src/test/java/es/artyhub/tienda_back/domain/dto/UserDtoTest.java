@@ -18,7 +18,7 @@ class UserDtoTest {
     @Test
     @DisplayName("Create UserDto with valid data should not throw ValidationException")
     void createUserDto_WithValidData_ShouldNotThrowValidationException() {
-        UserDto userDto = new UserDto(1L, "name", "email", "password", "nAccount", "description", "address", "imageUrl", UserRole.ADMIN);
+        UserDto userDto = new UserDto(1L, "name", "email", "password", "****************", "description", "address", "imageUrl", UserRole.ADMIN);
 
         assertDoesNotThrow(() -> DtoValidator.validate(userDto));
     }

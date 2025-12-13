@@ -2,6 +2,7 @@ package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.model.User;
 import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 
 public class UserMapper {
     private static UserMapper instance;
@@ -17,6 +18,9 @@ public class UserMapper {
     }
 
     public User fromUserDtoToUser(UserDto userDto) {
+        if (userDto == null) {
+            throw new BusinessException("UserDto cannot be null");
+        }
         return new User(
             userDto.getId(),
             userDto.getName(),
@@ -32,6 +36,9 @@ public class UserMapper {
     }
 
     public UserDto fromUserToUserDto(User user) {
+        if (user == null) {
+            throw new BusinessException("User cannot be null");
+        }
         return new UserDto(
             user.getId(),
             user.getName(),

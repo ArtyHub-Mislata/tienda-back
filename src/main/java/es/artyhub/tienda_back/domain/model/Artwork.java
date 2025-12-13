@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.domain.model;
 
-import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import java.math.BigDecimal;
 
 public class Artwork {
@@ -10,20 +9,20 @@ public class Artwork {
     private String description;
     private String imageUrl;
     private BigDecimal price;
-    private CategoryDto categoryDto;
+    private Category category;
     private User user;
 
     public Artwork() {
     }
 
     public Artwork(Long id, String name, String description, String imageUrl, BigDecimal price,
-            CategoryDto categoryDto, User user) {
+            Category category, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.categoryDto = categoryDto;
+        this.category = category;
         this.user = user;
     }
 
@@ -68,12 +67,12 @@ public class Artwork {
     }
 
 
-    public CategoryDto getCategoryDto() {
-        return categoryDto;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryDto(CategoryDto categoryDto) {
-        this.categoryDto = categoryDto;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public User getUser() {
