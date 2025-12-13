@@ -37,9 +37,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto insert(UserDto userDto) {
-        if (userRepository.findById(userDto.getId()).isPresent()) {
-            throw new BusinessException("User with id " + userDto.getId() + " already exists");
-        }
         return userRepository.save(userDto);
     }
 

@@ -11,7 +11,6 @@ import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {

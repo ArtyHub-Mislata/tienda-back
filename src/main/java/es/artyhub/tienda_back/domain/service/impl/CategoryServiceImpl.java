@@ -28,9 +28,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public CategoryDto insert(CategoryDto categoryDto) {
-        if (categoryRepositoy.findById(categoryDto.getId()).isPresent()) {
-            throw new BusinessException("Category with id " + categoryDto.getId() + " already exists");
-        }
         return categoryRepositoy.save(categoryDto);
     }
 

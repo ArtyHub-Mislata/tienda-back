@@ -31,6 +31,6 @@ public class SesionServiceImpl implements SesionService {
 
     @Override
     public boolean isValidToken(String token) {
-        return sesionRepository.findByToken(token) != null;
+        return sesionRepository.findByToken(token).isPresent();
     }
 }

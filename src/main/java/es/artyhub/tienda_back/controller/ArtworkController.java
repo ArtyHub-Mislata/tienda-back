@@ -10,7 +10,7 @@ import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/artworks")
 public class ArtworkController {

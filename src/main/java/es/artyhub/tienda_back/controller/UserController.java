@@ -24,7 +24,7 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -41,6 +41,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody CredentialsDto credentialsDto) {
+        System.out.println("LLEGA AL CONTROLLER");
         String token = loginService.login(credentialsDto);
         return ResponseEntity.ok(Map.of("token", token));
     }

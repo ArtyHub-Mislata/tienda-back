@@ -65,6 +65,11 @@ public class UserJpaDaoImpl implements UserJpaDao {
 
     @Override
     public UserJpaEntity findByEmail(String email) {
-        return entityManager.find(UserJpaEntity.class, email);
+        return entityManager.createQuery(
+                        "SELECT u FROM UserJpaEntity u WHERE u.email = :email",
+                        UserJpaEntity.class
+                )
+                .setParameter("email", email)
+                .getSingleResult();
     }
 }

@@ -46,7 +46,7 @@ class ArtworkJpaDaoImplTest {
     @Test
     void findById() {
     }
-    @Nested
+
     @Test
     void insert() {
         // 1. Crear categoría REAL en la BD

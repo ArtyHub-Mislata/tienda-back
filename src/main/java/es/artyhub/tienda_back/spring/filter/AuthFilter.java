@@ -26,18 +26,27 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String path = req.getRequestURI();
-
-        if (path.startsWith("/login")) {
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
             chain.doFilter(request, response);
             return;
         }
 
-        String token = req.getHeader("Authorization");
+        String path = req.getRequestURI();
 
+        if (path.startsWith("/api/users/login") || path.startsWith("/api/users/logout")) {
+
+            chain.doFilter(request, response);
+            return;
+        }
+
+
+        String token = req.getHeader("authorization");
+        System.out.println("TOKEN: " + token);
         if (token == null || token.isEmpty()) {
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
