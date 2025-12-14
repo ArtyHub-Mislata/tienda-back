@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface ArtworkRepository {
     Page<ArtworkDto> findAll(int pageNumber, int pageSize);
 
+    Page<ArtworkDto> findAllArtworksByCategory(int pageNumber, int pageSize, Long id);
+
     Page<ArtworkDto> findAllArtworksOfUser(Long id, int pageNumber, int pageSize);
 
     Optional<ArtworkDto> findById(Long id);

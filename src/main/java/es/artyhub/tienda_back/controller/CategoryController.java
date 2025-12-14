@@ -1,5 +1,7 @@
 package es.artyhub.tienda_back.controller;
 
+import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.service.ArtworkService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,27 +18,18 @@ import org.springframework.http.HttpStatus;
 public class CategoryController {
     
     private final CategoryService categoryService;
-    
-    public CategoryController(CategoryService categoryService) {
+    private final ArtworkService artworkService;
+    public CategoryController(CategoryService categoryService, ArtworkService artworkService) {
         this.categoryService = categoryService;
+        this.artworkService = artworkService;
     }
 
     @GetMapping 
     public ResponseEntity<Page<CategoryDto>> getAllCategories(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                           @RequestParam(required = false, defaultValue = "20") int pageSize) {
-        
         Page<CategoryDto> categoryDtoPage = categoryService.findAll(pageNumber, pageSize);
 
-        List<CategoryDto> categoryDetails = categoryDtoPage.data().stream()
-            .toList();
-
-        Page<CategoryDto> categoryDetailPage = new Page<>(
-            categoryDetails,
-            categoryDtoPage.pageNumber(),
-            categoryDtoPage.pageSize(),
-            categoryDtoPage.totalElements()
-        );    
-        return new ResponseEntity<>(categoryDetailPage, HttpStatus.OK);
+        return new ResponseEntity<>(categoryDtoPage, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -46,6 +39,14 @@ public class CategoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
+    }
+    @GetMapping("/{id}/artworks")
+    public ResponseEntity<Page<ArtworkDto>> getArtworksByCategory(@RequestParam(required = false, defaultValue = "1") int pageNumber,
+                                                                  @RequestParam(required = false, defaultValue = "20") int pageSize,
+                                                                  @PathVariable Long id){
+        Page<ArtworkDto> artworkDtoPage = artworkService.findAllArtworksByCategoryId(pageNumber, pageSize,id);
+
+        return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
     @PostMapping

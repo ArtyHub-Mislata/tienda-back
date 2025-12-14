@@ -42,6 +42,23 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
 
         return query.getResultList();
     }
+
+    @Override
+    public List<ArtworkJpaEntity> findAllArtworksByCategory(Long id, int page, int size) {
+        int indicePagina = Math.max(page - 1, 0);
+        String sql = "SELECT artwork FROM ArtworkJpaEntity artwork " +
+                "WHERE artwork.category.id = :categoryId " +
+                "ORDER BY artwork.id ASC";
+
+        TypedQuery<ArtworkJpaEntity> query = entityManager
+                .createQuery(sql, ArtworkJpaEntity.class)
+                .setParameter("categoryId", id)
+                .setFirstResult(indicePagina * size)
+                .setMaxResults(size);
+
+        return query.getResultList();
+    }
+
     @Override
     public Optional<ArtworkJpaEntity> findById(Long id) {
         return Optional.ofNullable(entityManager.find(ArtworkJpaEntity.class, id));

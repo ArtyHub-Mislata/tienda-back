@@ -21,6 +21,11 @@ public class ArtworkServiceImpl implements ArtworkService {
     }
 
     @Override
+    public Page<ArtworkDto> findAllArtworksByCategoryId(int pageNumber, int pageSize, Long id) {
+        return artworkRepository.findAllArtworksByCategory(pageNumber, pageSize, id);
+    }
+
+    @Override
     public ArtworkDto findById(Long id) {
         return artworkRepository.findById(id).orElseThrow(() -> new BusinessException("Artwork with id " + id + " not found"));
     }
