@@ -105,7 +105,7 @@ public class SesionServiceImplTest {
 
             when(sesionRepository.findByToken(token)).thenReturn(Optional.of(sesionDto));
 
-            assertDoesNotThrow(() -> sesionService.isValidToken(token));
+            assertDoesNotThrow(() -> sesionService.findSesionByToken(token));
 
             Mockito.verify(sesionRepository).findByToken(token);
         }

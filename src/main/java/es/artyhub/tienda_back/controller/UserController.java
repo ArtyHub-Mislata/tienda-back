@@ -26,7 +26,7 @@ import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api")
 public class UserController {
     
     private final UserService userService;
@@ -52,7 +52,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping
+    @GetMapping("admin/users")
     public ResponseEntity<Page<UserDto>> getAllUsers(@RequestParam(required = false, defaultValue = "1") int page,
                                                                    @RequestParam(required = false, defaultValue = "20") int size) {
         Page<UserDto> userDtoPage = userService.findAll(page, size);
@@ -60,7 +60,7 @@ public class UserController {
         return new ResponseEntity<>(userDtoPage, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("admin/users/{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
         UserDto userDto = userService.findById(id);
         if (userDto == null) {
@@ -69,7 +69,7 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/artworks")
+    @GetMapping("/users/{id}/artworks")
     public ResponseEntity<Page<ArtworkDto>> getArtworksOfUser(@RequestParam(required = false, defaultValue = "1") int page,
                                                               @RequestParam(required = false, defaultValue = "20") int size,
                                                               @PathVariable Long id){
@@ -78,7 +78,7 @@ public class UserController {
         return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("admin/users")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         try {
             DtoValidator.validate(userDto);
@@ -90,7 +90,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("admin/users/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
         try {
             if (!id.equals(userDto.getId())) {
@@ -104,7 +104,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("admin/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

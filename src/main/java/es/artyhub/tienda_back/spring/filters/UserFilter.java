@@ -1,8 +1,12 @@
-package es.artyhub.tienda_back.spring.filter;
+package es.artyhub.tienda_back.spring.filters;
 
 import java.io.IOException;
 
 
+import es.artyhub.tienda_back.domain.dto.SesionDto;
+import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.service.UserService;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import es.artyhub.tienda_back.domain.service.SesionService;
@@ -15,47 +19,32 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class AuthFilter implements Filter {
+@Order(1)
+public class UserFilter implements Filter {
     
     
     private final SesionService sesionService;
+    private final UserService userService;
 
-    public AuthFilter(SesionService sesionService) {
+    public UserFilter(SesionService sesionService, UserService userService) {
         this.sesionService = sesionService;
+        this.userService = userService;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        String path = req.getRequestURI();
-
-        if (path.startsWith("/api/users/login") || path.startsWith("/api/users/logout")) {
-
-            chain.doFilter(request, response);
-            return;
-        }
-
-
         String token = req.getHeader("authorization");
-        System.out.println("TOKEN: " + token);
-        if (token == null || token.isEmpty()) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
+
+        SesionDto sesionDto = sesionService.findSesionByToken(token);
+        UserDto userDto = null;
+        if(sesionDto != null){
+            userDto = userService.findById(sesionDto.getUserId());
         }
 
-        if (!sesionService.isValidToken(token)) {
-            res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return;
-        }
+        req.setAttribute("USER_DTO", userDto);
 
         chain.doFilter(request, response);
     }

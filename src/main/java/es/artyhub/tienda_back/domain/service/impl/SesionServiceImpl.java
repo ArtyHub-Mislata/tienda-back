@@ -5,6 +5,8 @@ import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.dto.SesionDto;
 import es.artyhub.tienda_back.domain.exception.BusinessException;
 
+import java.util.Optional;
+
 public class SesionServiceImpl implements SesionService {
     
     private final SesionRepository sesionRepository;
@@ -14,23 +16,24 @@ public class SesionServiceImpl implements SesionService {
     }
 
     @Override
-    public void insertSesion(SesionDto sesionDto) {
-        if (isValidToken(sesionDto.getToken())) {
+    public SesionDto insertSesion(SesionDto sesionDto) {
+        if (findSesionByToken(sesionDto.getToken()) != null) {
             throw new BusinessException("Sesion already exists");
         }
-        sesionRepository.insertSesion(sesionDto);
+        return sesionRepository.insertSesion(sesionDto);
     }
 
     @Override
     public void deleteSesion(String token) {
-        if (!isValidToken(token)) {
+        if (findSesionByToken(token) == null) {
             throw new BusinessException("Sesion not found");
         }
         sesionRepository.deleteSesion(token);
     }
 
     @Override
-    public boolean isValidToken(String token) {
-        return sesionRepository.findByToken(token).isPresent();
+    public SesionDto findSesionByToken(String token) {
+        Optional<SesionDto> sesionDto = sesionRepository.findByToken(token);
+        return sesionDto.orElse(null);
     }
 }

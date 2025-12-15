@@ -14,7 +14,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api")
 public class CategoryController {
     
     private final CategoryService categoryService;
@@ -24,7 +24,7 @@ public class CategoryController {
         this.artworkService = artworkService;
     }
 
-    @GetMapping 
+    @GetMapping("/categories")
     public ResponseEntity<Page<CategoryDto>> getAllCategories(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                           @RequestParam(required = false, defaultValue = "20") int pageSize) {
         Page<CategoryDto> categoryDtoPage = categoryService.findAll(pageNumber, pageSize);
@@ -32,7 +32,7 @@ public class CategoryController {
         return new ResponseEntity<>(categoryDtoPage, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/categories/{id}")
     public ResponseEntity<CategoryDto> getCategoryById(@PathVariable Long id) {
         CategoryDto categoryDto = categoryService.findById(id);
         if (categoryDto == null) {
@@ -40,7 +40,7 @@ public class CategoryController {
         }
         return new ResponseEntity<>(categoryDto, HttpStatus.OK);
     }
-    @GetMapping("/{id}/artworks")
+    @GetMapping("/categories/{id}/artworks")
     public ResponseEntity<Page<ArtworkDto>> getArtworksByCategory(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                   @RequestParam(required = false, defaultValue = "20") int pageSize,
                                                                   @PathVariable Long id){
@@ -49,7 +49,7 @@ public class CategoryController {
         return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/admin/categories")
     public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
         try {
             DtoValidator.validate(categoryDto);
@@ -60,7 +60,7 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/categories/{id}")
     public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
         try {
             if (!id.equals(categoryDto.getId())) {
@@ -74,7 +74,7 @@ public class CategoryController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/categories/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

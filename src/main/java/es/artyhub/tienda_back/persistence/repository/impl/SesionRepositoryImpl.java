@@ -25,7 +25,7 @@ public class SesionRepositoryImpl implements SesionRepository {
     }
 
     @Override
-    public void insertSesion(SesionDto sesion) {
-        sesionJpaDao.insertSesion(SesionMapper.getInstance().fromSesionDtoToSesionJpaEntity(sesion));
+    public SesionDto insertSesion(SesionDto sesion) {
+        return sesionJpaDao.insertSesion(SesionMapper.getInstance().fromSesionDtoToSesionJpaEntity(sesion));
     }
 }

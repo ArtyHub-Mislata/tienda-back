@@ -25,7 +25,8 @@ public class SesionJpaDaoImpl implements SesionJpaDao {
 
     @Transactional
     @Override
-    public void insertSesion(SesionJpaEntity sesion) {
+    public SesionJpaEntity insertSesion(SesionJpaEntity sesion) {
         entityManager.persist(sesion);
+        return sesion;
     }
 }

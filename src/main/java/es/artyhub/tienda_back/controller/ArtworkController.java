@@ -21,7 +21,7 @@ public class ArtworkController {
         this.artworkService = artworkService;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<Page<ArtworkDto>> getAllArtworks(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                        @RequestParam(required = false, defaultValue = "20") int pageSize) {
         Page<ArtworkDto> artworkDtoPage = artworkService.findAll(pageNumber, pageSize);
@@ -47,34 +47,5 @@ public class ArtworkController {
         return new ResponseEntity<>(artworkDto, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<ArtworkDto> createArtwork(@RequestBody ArtworkDto artworkDto) {
-        try {
-            DtoValidator.validate(artworkDto);
-            ArtworkDto createArtworkDto = artworkService.insert(artworkDto);
-            return new ResponseEntity<>(createArtworkDto, HttpStatus.CREATED);
-        } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ArtworkDto> updateArtwork(@PathVariable("id") Long id, @RequestBody ArtworkDto artworkDto) {
-        try {
-            if (!id.equals(artworkDto.getId())) {
-                throw new ValidationException("ID in path and request body must match");
-            }
-            DtoValidator.validate(artworkDto);
-            ArtworkDto updateArtworkDto = artworkService.update(artworkDto);
-            return new ResponseEntity<>(updateArtworkDto, HttpStatus.OK);
-        } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArtwork(@PathVariable Long id) {
-        artworkService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }
