@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-@Order(3)
+@Order(2)
 public class LoginFilter implements Filter {
 
 
@@ -19,6 +19,7 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+
 
         List<String> loginProtectedUrls = List.of(
                 "/api/users/logout"

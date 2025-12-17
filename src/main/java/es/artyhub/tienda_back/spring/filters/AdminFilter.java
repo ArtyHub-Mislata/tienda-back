@@ -11,13 +11,17 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@Order(2)
+@Order(1)
 public class AdminFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         UserDto userDto = (UserDto) req.getAttribute("USER_DTO");
         String path = req.getRequestURI();
 

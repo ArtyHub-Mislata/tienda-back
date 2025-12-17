@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-@Order(1)
+@Order(0)
 public class UserFilter implements Filter {
     
     
@@ -36,9 +36,16 @@ public class UserFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String token = req.getHeader("authorization");
-        if(token != null) {
-            token = token.substring(7);
+
+        String header = req.getHeader("authorization");
+        String token = null;
+
+        if (header != null) {
+            if (header.startsWith("Bearer ")) {
+                token = header.substring(7);
+            } else {
+                token = header; // viene sin Bearer
+            }
         }
         UserDto userDto = sesionService.findUserByToken(token);
 
