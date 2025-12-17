@@ -16,7 +16,7 @@ public class ArtworkAdminController {
     public ArtworkAdminController(ArtworkService artworkService) {
         this.artworkService = artworkService;
     }
-    @PostMapping("/admin/artworks")
+    @PostMapping
     public ResponseEntity<ArtworkDto> createArtwork(@RequestBody ArtworkDto artworkDto) {
         try {
             DtoValidator.validate(artworkDto);
@@ -27,7 +27,7 @@ public class ArtworkAdminController {
         }
     }
 
-    @PutMapping("/admin/artworks/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ArtworkDto> updateArtwork(@PathVariable("id") Long id, @RequestBody ArtworkDto artworkDto) {
         try {
             if (!id.equals(artworkDto.getId())) {
@@ -41,7 +41,7 @@ public class ArtworkAdminController {
         }
     }
 
-    @DeleteMapping("/admin/artworks/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteArtwork(@PathVariable Long id) {
         artworkService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

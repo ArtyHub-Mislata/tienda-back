@@ -49,34 +49,7 @@ public class CategoryController {
         return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
-    @PostMapping("/admin/categories")
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
-        try {
-            DtoValidator.validate(categoryDto);
-            CategoryDto createCategoryDto = categoryService.insert(categoryDto);
-            return new ResponseEntity<>(createCategoryDto, HttpStatus.CREATED);
-        } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
 
-    @PutMapping("/admin/categories/{id}")
-    public ResponseEntity<CategoryDto> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
-        try {
-            if (!id.equals(categoryDto.getId())) {
-                throw new ValidationException("ID in path and request body must match");
-            }
-            DtoValidator.validate(categoryDto);
-            CategoryDto updateCategoryDto = categoryService.update(categoryDto);
-            return new ResponseEntity<>(updateCategoryDto, HttpStatus.OK);
-        } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-    }
 
-    @DeleteMapping("/admin/categories/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
-        categoryService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+
 }

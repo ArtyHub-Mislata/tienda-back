@@ -21,8 +21,11 @@ public class AdminFilter implements Filter {
         UserDto userDto = (UserDto) req.getAttribute("USER_DTO");
         String path = req.getRequestURI();
 
-        if (path.startsWith("/api/admin") && userDto.getRole() != UserRole.ADMIN) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        if (path.startsWith("/api/admin")) {
+            if(userDto == null || userDto.getRole() != UserRole.ADMIN) {
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
         }
 
         filterChain.doFilter(request, response);

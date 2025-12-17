@@ -21,7 +21,7 @@ public class ArtworkController {
         this.artworkService = artworkService;
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Page<ArtworkDto>> getAllArtworks(@RequestParam(required = false, defaultValue = "1") int pageNumber,
                                                                        @RequestParam(required = false, defaultValue = "20") int pageSize) {
         Page<ArtworkDto> artworkDtoPage = artworkService.findAll(pageNumber, pageSize);

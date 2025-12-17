@@ -37,12 +37,10 @@ public class UserFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String token = req.getHeader("authorization");
-
-        SesionDto sesionDto = sesionService.findSesionByToken(token);
-        UserDto userDto = null;
-        if(sesionDto != null){
-            userDto = userService.findById(sesionDto.getUserId());
+        if(token != null) {
+            token = token.substring(7);
         }
+        UserDto userDto = sesionService.findUserByToken(token);
 
         req.setAttribute("USER_DTO", userDto);
 

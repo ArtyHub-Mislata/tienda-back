@@ -1,5 +1,6 @@
 package es.artyhub.tienda_back.domain.service.impl;
 
+import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.dto.SesionDto;
@@ -35,5 +36,10 @@ public class SesionServiceImpl implements SesionService {
     public SesionDto findSesionByToken(String token) {
         Optional<SesionDto> sesionDto = sesionRepository.findByToken(token);
         return sesionDto.orElse(null);
+    }
+
+    @Override
+    public UserDto findUserByToken(String token) {
+        return sesionRepository.findUserByToken(token);
     }
 }
