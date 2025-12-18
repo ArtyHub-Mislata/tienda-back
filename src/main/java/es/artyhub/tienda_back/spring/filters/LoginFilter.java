@@ -21,6 +21,10 @@ public class LoginFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
 
+        if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         List<String> loginProtectedUrls = List.of(
                 "/api/users/logout"
         );

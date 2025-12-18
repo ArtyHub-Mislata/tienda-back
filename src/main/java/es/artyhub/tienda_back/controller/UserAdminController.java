@@ -1,5 +1,7 @@
 package es.artyhub.tienda_back.controller;
 
+import es.artyhub.tienda_back.controller.mapper.UserMapper;
+import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
@@ -11,6 +13,8 @@ import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -26,32 +30,47 @@ public class UserAdminController {
         this.loginService = loginService;
     }
     @GetMapping("/users")
-    public ResponseEntity<Page<UserDto>> getAllUsers(@RequestParam(required = false, defaultValue = "1") int page,
+    public ResponseEntity<Page<UserSummaryResponse>> getAllUsers(@RequestParam(required = false, defaultValue = "1") int page,
                                                      @RequestParam(required = false, defaultValue = "20") int size) {
         Page<UserDto> userDtoPage = userService.findAll(page, size);
-
-        return new ResponseEntity<>(userDtoPage, HttpStatus.OK);
+        List<UserSummaryResponse> list = userDtoPage
+                .data()
+                .stream()
+                .map(UserMapper.getInstance()::fromUserDtoToUserSummaryResponse)
+                .toList();
+        Page<UserSummaryResponse> userSummaryResponsePage = new Page<UserSummaryResponse>(
+                list,
+                userDtoPage.pageNumber(),
+                userDtoPage.pageSize(),
+                userDtoPage.totalElements()
+        );
+        return new ResponseEntity<>(userSummaryResponsePage, HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserSummaryResponse> getUserById(@PathVariable Long id) {
         UserDto userDto = userService.findById(id);
         if (userDto == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
+        return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }
     @PutMapping("/users/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserSummaryResponse> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
         try {
             if (!id.equals(userDto.getId())) {
                 throw new ValidationException("ID in path and request body must match");
             }
+            UserDto userDtoWithDetails = userService.findById(id);
+            userDto.setPassword(userDtoWithDetails.getPassword());
+            userDto.setnAccount(userDtoWithDetails.getnAccount());
             DtoValidator.validate(userDto);
             UserDto updateUserDto = userService.update(userDto);
-            return new ResponseEntity<>(updateUserDto, HttpStatus.OK);
+
+            return new ResponseEntity<>(UserMapper.getInstance().fromUserDtoToUserSummaryResponse(updateUserDto), HttpStatus.OK);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
