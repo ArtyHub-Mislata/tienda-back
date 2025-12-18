@@ -2,6 +2,7 @@ package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
@@ -22,6 +23,9 @@ public class LoginJpaDaoImpl implements LoginJpaDao {
     private final UserJpaDao userJpaDao;
     private final SesionJpaDao sesionJpaDao;
 
+    private static final Pattern EMAIL_PATTERN = 
+        Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
+
     public LoginJpaDaoImpl(UserJpaDao userJpaDao, SesionJpaDao sesionJpaDao) {
         this.userJpaDao = userJpaDao;
         this.sesionJpaDao = sesionJpaDao;
@@ -29,18 +33,35 @@ public class LoginJpaDaoImpl implements LoginJpaDao {
 
     @Override
     public String login(CredentialsDto credentialsDto) {
-        UserJpaEntity userJpaEntity = userJpaDao.findByEmail(credentialsDto.getEmail());
 
-        if (userJpaEntity == null) {
-            throw new ValidationException("User not found");
+        String email = credentialsDto.getEmail();
+
+        if (email == null || email.trim().isEmpty()) {
+            throw new ValidationException("EMAIL_CANNOT_BE_EMPTY");
         }
 
-        if (!userJpaEntity.getPassword().equals(credentialsDto.getPassword())) {
-            throw new ValidationException("Invalid password");
+        if (!EMAIL_PATTERN.matcher(email).matches()) {
+            throw new ValidationException("INVALID_EMAIL");
+        }
+
+        UserJpaEntity userJpaEntity = userJpaDao.findByEmail(email);
+
+        if (userJpaEntity == null) {
+            throw new ValidationException("USER_NOT_FOUND");
+        }
+
+        String password = credentialsDto.getPassword();
+
+        if (password == null || password.trim().isEmpty()) {
+            throw new ValidationException("PASSWORD_CANNOT_BE_EMPTY");
+        }
+
+        if (!userJpaEntity.getPassword().equals(password) || password == null) {
+            throw new ValidationException("INVALID_PASSWORD");
         }
 
         if (userJpaEntity.getRole() == UserRole.USER) {
-            throw new ValidationException("Invalid role");
+            throw new ValidationException("INVALID_ROLE");
         }
 
         String token = UUID.randomUUID().toString();
