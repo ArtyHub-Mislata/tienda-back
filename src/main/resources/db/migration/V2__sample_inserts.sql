@@ -16,7 +16,7 @@ INSERT INTO users (
     description, address, image_profile_url, role
 ) VALUES
       ('Admin Root', 'admin@artyhub.com', 'admin123', '9999999999999999',
-       'Administrador del sistema', 'Madrid', 'https://images.unsplash.com/photo-1603415526960-f84b6e7e2766?crop=faces&fit=crop&w=200&h=200', 'ADMIN'),
+       'Administrador del sistema', 'Madrid', 'https://www.flaticon.es/icono-gratis/administrador-de-sistema_5322033', 'ADMIN'),
 
       ('Ana Torres', 'ana@artyhub.com', 'password123', '1234567890123456',
        'Artista contemporánea', 'Madrid', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=faces&fit=crop&w=200&h=200', 'USER'),
@@ -36,7 +36,7 @@ INSERT INTO users (
 INSERT INTO artworks (
     name, description, img_url, price, categoria_id, user_id
 ) VALUES
-      ('Atardecer Rojo', 'Pintura acrílica sobre lienzo', 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?fit=crop&w=400&h=300', 150.00, 1, 2),
+      ('Atardecer Rojo', 'Pintura acrílica sobre lienzo', 'https://services.meteored.com/img/article/perche-sole-e-luna-si-tingono-di-rosso-all-alba-e-al-tramonto-1723049784862_1280.png', 150.00, 1, 2),
       ('Reflejos Urbanos', 'Escena nocturna de ciudad', 'https://images.unsplash.com/photo-1494526585095-c41746248156?fit=crop&w=400&h=300', 220.50, 1, 2),
 
       ('Figura en Mármol', 'Escultura clásica en mármol', 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?fit=crop&w=400&h=300', 950.00, 2, 3),
@@ -45,8 +45,8 @@ INSERT INTO artworks (
       ('Luces de Calle', 'Fotografía nocturna urbana', 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?fit=crop&w=400&h=300', 120.00, 3, 4),
       ('Sombras y Contrastes', 'Fotografía en blanco y negro', 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?fit=crop&w=400&h=300', 140.00, 3, 4),
 
-      ('Mundo Pixelado', 'Ilustración digital futurista', 'https://images.unsplash.com/photo-1517430816045-df4b7de165e9?fit=crop&w=400&h=300', 200.00, 4, 5),
-      ('Geometría Viva', 'Arte digital geométrico', 'https://images.unsplash.com/photo-1552083375-144ef23c4f27?fit=crop&w=400&h=300', 180.00, 4, 5),
+      ('Mundo Pixelado', 'Ilustración digital futurista', 'https://www.freepik.es/vector-premium/pixel-tierra-miniatura-8-bits-mundo-ilustraciones-vectoriales-globo-terraqueo-arte-pixeles_24430109.htm', 200.00, 4, 5),
+      ('Geometría Viva', 'Arte digital geométrico', 'https://www.freepik.es/vectores/geometria-viva/2', 180.00, 4, 5),
 
-      ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://images.unsplash.com/photo-1604079626721-20d5f5e3f6e8?fit=crop&w=400&h=300', 95.00, 5, 2),
-      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1581091870620-2b0ed81f7ffb?fit=crop&w=400&h=300', 110.00, 5, 5);
+      ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://www.xataka.com/n/mejores-desconocidas-obras-fantasia-epica-contemporanea', 95.00, 5, 2),
+      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://pixers.es/fotomurales/naturaleza-abstracta-27992187', 110.00, 5, 5);
