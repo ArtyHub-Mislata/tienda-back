@@ -15,20 +15,11 @@ INSERT INTO users (
     name, email, password, n_account,
     description, address, image_profile_url, role
 ) VALUES
-      ('Admin Root', 'admin@artyhub.com', 'admin123', '9999999999999999',
-       'Administrador del sistema', 'Madrid', 'https://www.flaticon.es/icono-gratis/administrador-de-sistema_5322033', 'ADMIN'),
-
-      ('Ana Torres', 'ana@artyhub.com', 'password123', '1234567890123456',
-       'Artista contemporánea', 'Madrid', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=faces&fit=crop&w=200&h=200', 'USER'),
-
-      ('Luis Gómez', 'luis@artyhub.com', 'password123', '2234567890123456',
-       'Escultor profesional', 'Barcelona', 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?crop=faces&fit=crop&w=200&h=200', 'USER'),
-
-      ('María López', 'maria@artyhub.com', 'password123', '3234567890123456',
-       'Fotógrafa urbana', 'Valencia', 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?crop=faces&fit=crop&w=200&h=200', 'USER'),
-
-      ('Carlos Ruiz', 'carlos@artyhub.com', 'password123', '4234567890123456',
-       'Diseñador digital', 'Sevilla', 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?crop=faces&fit=crop&w=200&h=200', 'USER');
+      ('Admin Root', 'admin@artyhub.com', 'admin123', '9999999999999999', 'Administrador del sistema', 'Madrid', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?fit=crop&w=200&h=200', 'ADMIN'),
+      ('Ana Torres', 'ana@artyhub.com', 'password123', '1234567890123456', 'Artista contemporánea', 'Madrid', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('Luis Gómez', 'luis@artyhub.com', 'password123', '2234567890123456', 'Escultor profesional', 'Barcelona', 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('María López', 'maria@artyhub.com', 'password123', '3234567890123456', 'Fotógrafa urbana', 'Valencia', 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('Carlos Ruiz', 'carlos@artyhub.com', 'password123', '4234567890123456', 'Diseñador digital', 'Sevilla', 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?crop=faces&fit=crop&w=200&h=200', 'USER');
 
 -- =========================
 -- INSERT ARTWORKS
@@ -45,8 +36,8 @@ INSERT INTO artworks (
       ('Luces de Calle', 'Fotografía nocturna urbana', 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?fit=crop&w=400&h=300', 120.00, 3, 4),
       ('Sombras y Contrastes', 'Fotografía en blanco y negro', 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?fit=crop&w=400&h=300', 140.00, 3, 4),
 
-      ('Mundo Pixelado', 'Ilustración digital futurista', 'https://unsplash.com/es/fotos/un-juguete-de-vaca-marron-de-minecraft-sobre-un-fondo-negro-oYnzLuCRCsM', 200.00, 4, 5),
-      ('Geometría Viva', 'Arte digital geométrico', 'https://unsplash.com/es/fotos/fotografia-de-angulo-bajo-de-un-edificio-de-hormigon-durante-el-dia-IsAq-hI1HAo', 180.00, 4, 5),
+      ('Mundo Pixelado', 'Ilustración digital futurista', 'https://images.unsplash.com/photo-1518770660439-4636190af475?fit=crop&w=400&h=300', 200.00, 4, 5),
+      ('Geometría Viva', 'Arte digital geométrico', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fit=crop&w=400&h=300', 180.00, 4, 5),
 
-      ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://unsplash.com/es/fotos/UzS3sGcLK2w', 95.00, 5, 2),
-      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://unsplash.com/es/fotos/formacion-rocosa-marron-bajo-nubes-blancas-durante-el-dia-RYtiT3b7XW4', 110.00, 5, 5);
+      ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://images.unsplash.com/photo-1520975916090-3105956dac38?fit=crop&w=400&h=300', 95.00, 5, 2),
+      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=400&h=300', 110.00, 5, 5);
