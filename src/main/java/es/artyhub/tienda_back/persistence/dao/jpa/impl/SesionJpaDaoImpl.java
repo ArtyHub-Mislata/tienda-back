@@ -1,0 +1,53 @@
+package es.artyhub.tienda_back.persistence.dao.jpa.impl;
+
+import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.SesionJpaEntity;
+import jakarta.transaction.Transactional;
+
+import java.util.Optional;
+
+public class SesionJpaDaoImpl implements SesionJpaDao {
+    
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public Optional<SesionJpaEntity> findByToken(String token) {
+        return Optional.ofNullable(entityManager.find(SesionJpaEntity.class, token));
+    }
+    @Transactional
+    @Override
+    public void deleteSesion(String token) {
+        entityManager.remove(entityManager.find(SesionJpaEntity.class, token));
+    }
+
+    @Transactional
+    @Override
+    public SesionJpaEntity insertSesion(SesionJpaEntity sesion) {
+        entityManager.persist(sesion);
+        return sesion;
+    }
+
+    @Override
+    public UserJpaEntity findUserByToken(String token) {
+        String jpql = """
+        SELECT u
+        FROM SesionJpaEntity s
+        JOIN UserJpaEntity u ON u.id = s.userId
+        WHERE s.token = :token
+        """;
+
+        return entityManager
+                .createQuery(jpql, UserJpaEntity.class)
+                .setParameter("token", token)
+                .setMaxResults(1)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+    }
+
+}
