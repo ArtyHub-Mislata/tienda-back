@@ -2,24 +2,36 @@
 
 [*] --> Home
 
-Home --> Login : link "Login"
-Home --> Register : link "Register"
-Home --> Search : link "Search"
 Home --> Categories : link "Categories"
+Home --> Login : link "Login"
+Home --> Signup : link "Signup"
 Home --> About : link "About"
+Home --> Product : link "Product"
+Home --> ChatBot : link "ChatBot"
+
+Categories --> Home("Category") : link "Category"\n(if not logged in)
+Categories --> Store("Category") : link "Category"\n(if logged in)
+
 
 Login --> Store : button "Login"\n(correct credentials)
-Login --> Login : button "Login"\n(incorrect credentials)
-Login --> Register : link "Register"
-Login --> Home : link "Exit"
+Login --> Signup : button "Signup"
 
-Register --> Store : button "Register"
+Signup --> Store : button "Signup"
+Signup --> Login : button "Login"
 
-Store --> Profile : link "Profile"
-Store --> Search : link "Search"
 Store --> Categories : link "Categories"
+Store --> Search : link "Search"
+Store --> Profile : link "Profile"
 Store --> About : link "About"
+Store --> ShoppingCart : link "ShoppingCart"
+Store --> Product : link "Product"
+Store --> ChatBot : link "ChatBot"
 
-Profile --> Store : link "Store"
+Profile --> Store : button "Back"
+Profile --> Logout : button "Logout"
+
+Product --> Home : button "Back"\n(if not logged in)
+Product --> Store : button "Back"\n(if logged in)
+Product --> Store : button "Add to Cart"
 
 @enduml

@@ -11,6 +11,12 @@ class User {
     - description : String
     - address : String
     - imageProfileUrl : String
+    - role : UserRole
+}
+
+enum UserRole {
+    ADMIN
+    USER
 }
 
 class Artwork {
@@ -18,9 +24,9 @@ class Artwork {
     - name : String
     - description : String
     - imageUrl : String
-    - price : double
-    - stock : int
+    - price : BigDecimal
     - category : Category
+    - user : User
 }
 
 class Category {
@@ -31,12 +37,16 @@ class Category {
 class Detail {
     - id : Long
     - quantity : int
-    - price : double
+    - price : BigDecimal
 }
 
 class ShoppingCart {
     - id : Long
+    - user : User
+    - details : List<Detail>
     - payMethod : PayMethod
+    - total : BigDecimal
+    - state : String
 }
 
 class PayMethod {
@@ -48,10 +58,15 @@ class PayMethod {
 
 User -- "*" Artwork
 User -- "0...1" ShoppingCart
-ShoppingCart -- "*" Detail
-Detail -- "*" Artwork
-ShoppingCart -- PayMethod
 User -- "*" PayMethod
+User -- UserRole
+
 Artwork "*" -- Category
+
+ShoppingCart -- "*" Detail
+ShoppingCart -- PayMethod
+
+Detail -- "*" Artwork
+
 
 @enduml
