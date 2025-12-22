@@ -59,7 +59,6 @@ class PayMethod {
 User -- "*" Artwork
 User -- "0...1" ShoppingCart
 User -- "*" PayMethod
-User -- UserRole
 
 Artwork "*" -- Category
 
