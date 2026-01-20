@@ -2,7 +2,6 @@ package es.artyhub.tienda_back.controller;
 
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
-import es.artyhub.tienda_back.domain.service.ArtworkService;
 import es.artyhub.tienda_back.domain.service.CategoryService;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import org.springframework.http.HttpStatus;
@@ -13,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/admin/categories")
 public class CategoryAdminController {
     private final CategoryService categoryService;
-    private final ArtworkService artworkService;
-    public CategoryAdminController(CategoryService categoryService, ArtworkService artworkService) {
+    public CategoryAdminController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.artworkService = artworkService;
     }
 
     @PostMapping

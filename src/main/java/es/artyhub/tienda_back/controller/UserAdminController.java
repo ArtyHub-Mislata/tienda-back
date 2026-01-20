@@ -6,8 +6,6 @@ import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
-import es.artyhub.tienda_back.domain.service.LoginService;
-import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import org.springframework.http.HttpStatus;
@@ -21,13 +19,9 @@ import java.util.List;
 public class UserAdminController {
 
     private final UserService userService;
-    private final SesionService sesionService;
-    private final LoginService loginService;
 
-    public UserAdminController(UserService userService, SesionService sesionService, LoginService loginService) {
+    public UserAdminController(UserService userService) {
         this.userService = userService;
-        this.sesionService = sesionService;
-        this.loginService = loginService;
     }
     @GetMapping("/users")
     public ResponseEntity<Page<UserSummaryResponse>> getAllUsers(@RequestParam(required = false, defaultValue = "1") int page,

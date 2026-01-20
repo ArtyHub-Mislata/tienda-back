@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import es.artyhub.tienda_back.domain.service.LoginService;
 import es.artyhub.tienda_back.domain.service.SesionService;
-import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
-
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 
@@ -25,12 +23,10 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("/api/users")
 public class UserController {
     
-    private final UserService userService;
     private final SesionService sesionService;
     private final LoginService loginService;
 
-    public UserController(UserService userService, SesionService sesionService, LoginService loginService) {
-        this.userService = userService;
+    public UserController(SesionService sesionService, LoginService loginService) {
         this.sesionService = sesionService;
         this.loginService = loginService;
     }
@@ -54,5 +50,4 @@ public class UserController {
         UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }
-
 }

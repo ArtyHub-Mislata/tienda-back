@@ -1,6 +1,5 @@
 package es.artyhub.tienda_back.persistence.dao.jpa;
 
-import es.artyhub.tienda_back.domain.dto.SesionDto;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.SesionJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 

@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
-import es.artyhub.tienda_back.domain.validation.DtoValidator;
 
 
 @RestController
