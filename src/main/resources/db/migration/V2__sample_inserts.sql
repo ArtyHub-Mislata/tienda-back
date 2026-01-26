@@ -40,4 +40,16 @@ INSERT INTO artworks (
       ('Geometría Viva', 'Arte digital geométrico', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fit=crop&w=400&h=300', 180.00, 4, 5),
 
       ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://images.unsplash.com/photo-1520975916090-3105956dac38?fit=crop&w=400&h=300', 95.00, 5, 2),
-      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=400&h=300', 110.00, 5, 5);
+      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=400&h=300', 110.00, 5, 5)
+
+      ('Nebulosa Profunda', 'Exploración de color espacial', 'https://picsum.photos/id/209/400/300', 310.00, 4, 5),
+      ('Arquitectura Minimalista', 'Estudio de líneas y luz', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=400&h=300', 250.00, 3, 4),
+
+      ('Océano Infinito', 'Óleo sobre madera', 'https://picsum.photos/id/247/400/300', 420.00, 1, 2),
+      ('Estructura de Hierro', 'Escultura industrial pesada', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?fit=crop&w=400&h=300', 1200.00, 2, 3),
+
+      ('Retrato de Humo', 'Arte conceptual digital', 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?fit=crop&w=400&h=300', 175.00, 4, 2),
+      ('Bosque de Cristal', 'Ilustración detallada de naturaleza', 'https://images.unsplash.com/photo-1448375240586-882707db888b?fit=crop&w=400&h=300', 85.00, 5, 5),
+
+      ('Mirada Urbana', 'Fotografía callejera espontánea', 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?fit=crop&w=400&h=300', 190.00, 3, 4),
+      ('Esferas de Neón', 'Composición 3D abstracta', 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?fit=crop&w=400&h=300', 290.00, 4, 3);

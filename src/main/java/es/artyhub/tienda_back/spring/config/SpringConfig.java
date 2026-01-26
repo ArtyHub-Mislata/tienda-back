@@ -3,30 +3,36 @@ package es.artyhub.tienda_back.spring.config;
 import es.artyhub.tienda_back.domain.repository.ArtworkRepository;
 import es.artyhub.tienda_back.domain.repository.CategoryRepository;
 import es.artyhub.tienda_back.domain.repository.LoginRepository;
+import es.artyhub.tienda_back.domain.repository.RegisterRepository;
 import es.artyhub.tienda_back.domain.repository.SesionRepository;
 import es.artyhub.tienda_back.domain.repository.UserRepository;
 import es.artyhub.tienda_back.domain.service.ArtworkService;
 import es.artyhub.tienda_back.domain.service.CategoryService;
 import es.artyhub.tienda_back.domain.service.LoginService;
+import es.artyhub.tienda_back.domain.service.RegisterService;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.service.impl.ArtworkServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.CategoryServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.LoginServiceImpl;
+import es.artyhub.tienda_back.domain.service.impl.RegisterServiceImpl;
 import es.artyhub.tienda_back.domain.service.impl.UserServiceImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.ArtworkJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.CategoryJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.LoginJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.RegisterJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.UserJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.ArtworkJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.CategoryJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.LoginJpaDaoImpl;
+import es.artyhub.tienda_back.persistence.dao.jpa.impl.RegisterJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.SesionJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.dao.jpa.impl.UserJpaDaoImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.ArtworkRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.CategoryRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.LoginRepositoryImpl;
+import es.artyhub.tienda_back.persistence.repository.impl.RegisterRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.SesionRepositoryImpl;
 import es.artyhub.tienda_back.persistence.repository.impl.UserRepositoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -102,5 +108,19 @@ public class SpringConfig {
     @Bean
     public LoginService loginService(LoginRepository loginRepository){
         return new LoginServiceImpl(loginRepository);
+    }
+
+    //BEANS DE REGISTER
+    @Bean
+    public RegisterJpaDao registerJpaDao(){
+        return new RegisterJpaDaoImpl();
+    }
+    @Bean
+    public RegisterRepository registerRepository(RegisterJpaDao registerJpaDao){
+        return new RegisterRepositoryImpl(registerJpaDao);
+    }
+    @Bean
+    public RegisterService registerService(RegisterRepository registerRepository){
+        return new RegisterServiceImpl(registerRepository);
     }
 }

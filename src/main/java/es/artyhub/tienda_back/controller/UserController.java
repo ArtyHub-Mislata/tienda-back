@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import es.artyhub.tienda_back.domain.service.LoginService;
+import es.artyhub.tienda_back.domain.service.RegisterService;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
+import es.artyhub.tienda_back.domain.dto.RegisterDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
@@ -25,10 +27,12 @@ public class UserController {
     
     private final SesionService sesionService;
     private final LoginService loginService;
+    private final RegisterService registerService;
 
-    public UserController(SesionService sesionService, LoginService loginService) {
+    public UserController(SesionService sesionService, LoginService loginService, RegisterService registerService) {
         this.sesionService = sesionService;
         this.loginService = loginService;
+        this.registerService = registerService;
     }
 
     @PostMapping("/login")
@@ -44,6 +48,13 @@ public class UserController {
         sesionService.deleteSesion(token);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserSummaryResponse> register(@RequestBody RegisterDto registerDto) {
+        registerService.register(registerDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @GetMapping("/islogged")
     public ResponseEntity<UserSummaryResponse> isLogged(HttpServletRequest request){
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
