@@ -40,7 +40,7 @@ INSERT INTO artworks (
       ('Geometría Viva', 'Arte digital geométrico', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?fit=crop&w=400&h=300', 180.00, 4, 5),
 
       ('Personaje Fantástico', 'Ilustración de fantasía épica', 'https://images.unsplash.com/photo-1520975916090-3105956dac38?fit=crop&w=400&h=300', 95.00, 5, 2),
-      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=400&h=300', 110.00, 5, 5)
+      ('Naturaleza Abstracta', 'Composición ilustrada moderna', 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?fit=crop&w=400&h=300', 110.00, 5, 5),
 
       ('Nebulosa Profunda', 'Exploración de color espacial', 'https://picsum.photos/id/209/400/300', 310.00, 4, 5),
       ('Arquitectura Minimalista', 'Estudio de líneas y luz', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fit=crop&w=400&h=300', 250.00, 3, 4),
