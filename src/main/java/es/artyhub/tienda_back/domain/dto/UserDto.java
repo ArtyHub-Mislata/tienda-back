@@ -18,10 +18,6 @@ public class UserDto {
         @NotBlank(message = "La contraseña no puede ser vacía")
         private String password;
 
-        @NotBlank(message = "El número de cuenta no puede ser vacío")
-        @Size(min = 16, max = 16, message = "El número de cuenta debe tener 16 caracteres")
-        private String nAccount;
-
         @NotNull(message = "La descripción no puede ser nula")
         private String description;
 
@@ -37,13 +33,12 @@ public class UserDto {
     public UserDto() {
     }
 
-    public UserDto(Long id, String name, String email, String password, String nAccount,
+    public UserDto(Long id, String name, String email, String password,
                    String description, String address, String imageProfileUrl,UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.nAccount = nAccount;
         this.description = description;
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
@@ -80,14 +75,6 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getnAccount() {
-        return nAccount;
-    }
-
-    public void setnAccount(String nAccount) {
-        this.nAccount = nAccount;
     }
 
     public String getDescription() {
