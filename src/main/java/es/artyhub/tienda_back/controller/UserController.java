@@ -2,14 +2,12 @@ package es.artyhub.tienda_back.controller;
 
 import es.artyhub.tienda_back.controller.mapper.UserMapper;
 import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
+import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.model.Page;
+import es.artyhub.tienda_back.domain.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import es.artyhub.tienda_back.domain.service.LoginService;
 import es.artyhub.tienda_back.domain.service.RegisterService;
@@ -28,11 +26,22 @@ public class UserController {
     private final SesionService sesionService;
     private final LoginService loginService;
     private final RegisterService registerService;
+    private final UserService userService;
 
-    public UserController(SesionService sesionService, LoginService loginService, RegisterService registerService) {
+    public UserController(SesionService sesionService, LoginService loginService, RegisterService registerService, UserService userService) {
         this.sesionService = sesionService;
         this.loginService = loginService;
         this.registerService = registerService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/{id}/artworks")
+    public ResponseEntity<Page<ArtworkDto>> getArtworksOfUser(@RequestParam(required = false, defaultValue = "1") int page,
+                                                              @RequestParam(required = false, defaultValue = "20") int size,
+                                                              @PathVariable Long id){
+        Page<ArtworkDto> artworkDtoPage = userService.findAllArtworks(id, page, size);
+
+        return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
     }
 
     @PostMapping("/login")
@@ -56,8 +65,26 @@ public class UserController {
     }
 
     @GetMapping("/islogged")
-    public ResponseEntity<UserSummaryResponse> isLogged(HttpServletRequest request){
+    public ResponseEntity<Boolean> isLogged(HttpServletRequest request){
+        Boolean isLogged = false;
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
+        if(userDto != null){
+            isLogged = true;
+        }
+        return new ResponseEntity<>(isLogged, HttpStatus.OK);
+    }
+    @GetMapping("/logged")
+    public ResponseEntity<UserSummaryResponse> getLoggedUser(HttpServletRequest request){
+        UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
+        UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
+        return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserSummaryResponse> getUserById(@PathVariable Long id) {
+        UserDto userDto = userService.findById(id);
+        if (userDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }

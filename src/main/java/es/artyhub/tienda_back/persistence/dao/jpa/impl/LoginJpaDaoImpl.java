@@ -56,12 +56,8 @@ public class LoginJpaDaoImpl implements LoginJpaDao {
             throw new ValidationException("PASSWORD_CANNOT_BE_EMPTY");
         }
 
-        if (!userJpaEntity.getPassword().equals(password) || password == null) {
+        if (!userJpaEntity.getPassword().equals(password)) {
             throw new ValidationException("INVALID_PASSWORD");
-        }
-
-        if (userJpaEntity.getRole() == UserRole.USER) {
-            throw new ValidationException("INVALID_ROLE");
         }
 
         String token = UUID.randomUUID().toString();

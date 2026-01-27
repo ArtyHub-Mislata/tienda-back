@@ -41,15 +41,7 @@ public class UserAdminController {
         return new ResponseEntity<>(userSummaryResponsePage, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserSummaryResponse> getUserById(@PathVariable Long id) {
-        UserDto userDto = userService.findById(id);
-        if (userDto == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
-        return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
-    }
+
     @PutMapping("/users/{id}")
     public ResponseEntity<UserSummaryResponse> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
         try {
@@ -73,14 +65,7 @@ public class UserAdminController {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/users/{id}/artworks")
-    public ResponseEntity<Page<ArtworkDto>> getArtworksOfUser(@RequestParam(required = false, defaultValue = "1") int page,
-                                                              @RequestParam(required = false, defaultValue = "20") int size,
-                                                              @PathVariable Long id){
-        Page<ArtworkDto> artworkDtoPage = userService.findAllArtworks(id, page, size);
 
-        return new ResponseEntity<>(artworkDtoPage, HttpStatus.OK);
-    }
 
     @PostMapping("/users")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
