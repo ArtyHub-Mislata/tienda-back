@@ -3,9 +3,7 @@ package es.artyhub.tienda_back.spring.filters;
 import java.io.IOException;
 
 
-import es.artyhub.tienda_back.domain.dto.SesionDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
-import es.artyhub.tienda_back.domain.service.UserService;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -24,11 +22,9 @@ public class UserFilter implements Filter {
     
     
     private final SesionService sesionService;
-    private final UserService userService;
 
-    public UserFilter(SesionService sesionService, UserService userService) {
+    public UserFilter(SesionService sesionService) {
         this.sesionService = sesionService;
-        this.userService = userService;
     }
 
     @Override

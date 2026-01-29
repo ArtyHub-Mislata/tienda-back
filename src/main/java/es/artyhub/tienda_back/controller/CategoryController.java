@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
-import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.service.CategoryService;
-import es.artyhub.tienda_back.domain.validation.DtoValidator;
-import java.util.List;
 import org.springframework.http.HttpStatus;
 
 @RestController
