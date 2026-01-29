@@ -14,8 +14,6 @@ public class UserJpaEntity {
     private String name;
     private String email;
     private String password;
-    @Column(name = "n_account")
-    private String nAccount;
     private String description;
     private String address;
     @Column(name = "image_profile_url")
@@ -24,13 +22,12 @@ public class UserJpaEntity {
     @Column(nullable = false)
     private UserRole role;
 
-    public UserJpaEntity(Long id, String name, String email, String password, String nAccount, String description,
+    public UserJpaEntity(Long id, String name, String email, String password, String description,
                          String address, String imageProfileUrl, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.nAccount = nAccount;
         this.description = description;
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
@@ -72,14 +69,6 @@ public class UserJpaEntity {
         this.password = password;
     }
 
-    public String getnAccount() {
-        return nAccount;
-    }
-
-    public void setnAccount(String nAccount) {
-        this.nAccount = nAccount;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -115,11 +104,11 @@ public class UserJpaEntity {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof UserJpaEntity that)) return false;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(nAccount, that.nAccount) && Objects.equals(description, that.description) && Objects.equals(address, that.address) && Objects.equals(imageProfileUrl, that.imageProfileUrl) && role == that.role;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(password, that.password) && Objects.equals(description, that.description) && Objects.equals(address, that.address) && Objects.equals(imageProfileUrl, that.imageProfileUrl) && role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, nAccount, description, address, imageProfileUrl, role);
+        return Objects.hash(id, name, email, password, description, address, imageProfileUrl, role);
     }
 }

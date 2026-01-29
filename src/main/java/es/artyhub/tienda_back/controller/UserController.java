@@ -3,17 +3,18 @@ package es.artyhub.tienda_back.controller;
 import es.artyhub.tienda_back.controller.mapper.UserMapper;
 import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.service.UserService;
+import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import es.artyhub.tienda_back.domain.service.LoginService;
-import es.artyhub.tienda_back.domain.service.RegisterService;
 import es.artyhub.tienda_back.domain.service.SesionService;
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
-import es.artyhub.tienda_back.domain.dto.RegisterDto;
+import es.artyhub.tienda_back.controller.webmodel.request.RegisterRequest;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,12 @@ public class UserController {
     
     private final SesionService sesionService;
     private final LoginService loginService;
-    private final RegisterService registerService;
+
     private final UserService userService;
 
-    public UserController(SesionService sesionService, LoginService loginService, RegisterService registerService, UserService userService) {
+    public UserController(SesionService sesionService, LoginService loginService, UserService userService) {
         this.sesionService = sesionService;
         this.loginService = loginService;
-        this.registerService = registerService;
         this.userService = userService;
     }
 
@@ -59,8 +59,17 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserSummaryResponse> register(@RequestBody RegisterDto registerDto) {
-        registerService.register(registerDto);
+    public ResponseEntity<UserSummaryResponse> register(@RequestBody RegisterRequest registerRequest) {
+        UserDto newUser = new UserDto();
+        newUser.setPassword(registerRequest.getPassword());
+        newUser.setAddress(registerRequest.getAddress());
+        newUser.setDescription(registerRequest.getDescription());
+        newUser.setEmail(registerRequest.getEmail());
+        newUser.setName(registerRequest.getName());
+        newUser.setImageProfileUrl(registerRequest.getImageProfileUrl());
+        newUser.setRole(UserRole.USER);
+        DtoValidator.validate(newUser);
+        userService.insert(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -8,7 +8,6 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String nAccount;
     private String description;
     private String address;
     private String imageProfileUrl;
@@ -21,13 +20,12 @@ public class User {
         this.id = id;
     }
 
-    public User(Long id, String name, String email, String password, String nAccount, String description,
+    public User(Long id, String name, String email, String password, String description,
             String address, String imageProfileUrl, UserRole role) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.nAccount = nAccount;
         this.description = description;
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
@@ -66,13 +64,6 @@ public class User {
         this.password = password;
     }
 
-    public String getnAccount() {
-        return nAccount;
-    }
-
-    public void setnAccount(String nAccount) {
-        this.nAccount = nAccount;
-    }
 
     public String getDescription() {
         return description;

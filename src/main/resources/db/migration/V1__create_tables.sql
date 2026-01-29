@@ -14,7 +14,6 @@ CREATE TABLE users (
                        name VARCHAR(255) NOT NULL,
                        email VARCHAR(255) NOT NULL,
                        password VARCHAR(255) NOT NULL,
-                       n_account VARCHAR(255) NOT NULL,
                        description VARCHAR(255),
                        address VARCHAR(255),
                        image_profile_url VARCHAR(255),

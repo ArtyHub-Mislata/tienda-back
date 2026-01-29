@@ -50,7 +50,7 @@ public class UserAdminController {
             }
             UserDto userDtoWithDetails = userService.findById(id);
             userDto.setPassword(userDtoWithDetails.getPassword());
-            userDto.setnAccount(userDtoWithDetails.getnAccount());
+
             DtoValidator.validate(userDto);
             UserDto updateUserDto = userService.update(userDto);
 

@@ -1,8 +1,8 @@
-package es.artyhub.tienda_back.domain.dto;
+package es.artyhub.tienda_back.controller.webmodel.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class RegisterDto {
+public class RegisterRequest {
     
     @NotBlank(message = "El email no puede ser vacío")
     private String email;
@@ -15,14 +15,19 @@ public class RegisterDto {
 
     private String description;
 
-    public RegisterDto() {
+    private String imageProfileUrl;
+
+    private String address;
+    public RegisterRequest() {
     }
 
-    public RegisterDto(String email, String password, String name, String description) {
+    public RegisterRequest(String email, String password, String name, String description, String imageProfileUrl, String address) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.description = description;
+        this.imageProfileUrl = imageProfileUrl;
+        this.address = address;
     }
 
     public String getEmail() {
@@ -55,5 +60,21 @@ public class RegisterDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImageProfileUrl() {
+        return imageProfileUrl;
+    }
+
+    public void setImageProfileUrl(String imageProfileUrl) {
+        this.imageProfileUrl = imageProfileUrl;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
