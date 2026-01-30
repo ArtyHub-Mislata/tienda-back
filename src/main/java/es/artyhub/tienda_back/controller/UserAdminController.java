@@ -2,7 +2,6 @@ package es.artyhub.tienda_back.controller;
 
 import es.artyhub.tienda_back.controller.mapper.UserMapper;
 import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
-import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.model.Page;
