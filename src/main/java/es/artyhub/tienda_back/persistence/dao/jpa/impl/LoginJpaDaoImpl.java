@@ -5,7 +5,6 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
-import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.persistence.dao.jpa.LoginJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.SesionJpaDao;

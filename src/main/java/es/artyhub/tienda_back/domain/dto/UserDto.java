@@ -3,7 +3,6 @@ package es.artyhub.tienda_back.domain.dto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public class UserDto {
 
