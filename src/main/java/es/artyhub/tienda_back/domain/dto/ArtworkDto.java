@@ -28,10 +28,14 @@ public class ArtworkDto {
         @NotNull(message = "El usuario no puede ser nulo")
         private UserDto userDto;
 
+        @Positive
+        private Long stock;
+
     public ArtworkDto() {
     }
 
-    public ArtworkDto(Long id, String name, String description, String image, BigDecimal price, CategoryDto categoryDto, UserDto userDto) {
+    public ArtworkDto(Long id, String name, String description, String image, BigDecimal price,
+                      CategoryDto categoryDto, UserDto userDto, Long stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -39,6 +43,7 @@ public class ArtworkDto {
         this.price = price;
         this.categoryDto = categoryDto;
         this.userDto = userDto;
+        this.stock = stock;
     }
 
     public Long getId() {
@@ -95,5 +100,13 @@ public class ArtworkDto {
 
     public void setUserDto(UserDto userDto) {
         this.userDto = userDto;
+    }
+
+    public Long getStock() {
+        return stock;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
     }
 }

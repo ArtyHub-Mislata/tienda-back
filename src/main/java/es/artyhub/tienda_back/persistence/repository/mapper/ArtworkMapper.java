@@ -32,7 +32,8 @@ public class ArtworkMapper {
                         .fromCategoryJpaEntityToCategoryDto(artworkJpaEntity.getCategory()),
                 UserMapper
                         .getInstance()
-                        .fromUserJpaEntityToUserDto(artworkJpaEntity.getUserJpaEntity())
+                        .fromUserJpaEntityToUserDto(artworkJpaEntity.getUserJpaEntity()),
+                artworkJpaEntity.getStock()
         );
     }
 
@@ -51,7 +52,8 @@ public class ArtworkMapper {
                         .fromCategoryDtoToCategoryJpaEntity(artworkDto.getCategoryDto()),
                 UserMapper
                         .getInstance()
-                        .fromUserDtoToUserJpaEntity(artworkDto.getUserDto())
+                        .fromUserDtoToUserJpaEntity(artworkDto.getUserDto()),
+                artworkDto.getStock()
 
         );
     }

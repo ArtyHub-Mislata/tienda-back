@@ -1,7 +1,9 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import es.artyhub.tienda_back.domain.exception.ResourceNotFoundException;
+import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.UserJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -35,6 +37,8 @@ public class UserJpaDaoImpl implements UserJpaDao {
 
     @Override
     public UserJpaEntity insert(UserJpaEntity jpaEntity) {
+        CartJpaEntity cart = new CartJpaEntity();
+        jpaEntity.setCart(cart);
         entityManager.persist(jpaEntity);
         return jpaEntity;
     }

@@ -22,11 +22,7 @@ public class ShoppingCartMapper {
         }
         return new ShoppingCart(
             shoppingCartDto.getId(),
-            shoppingCartDto.findUserById(shoppingCartDto.getUserId()),
-            shoppingCartDto.getDetails().stream().map(DetailMapper.getInstance()::fromDetailDtoToDetail).toList(),
-            PayMethodMapper.getInstance().fromPayMethodDtoToPayMethod(shoppingCartDto.getPayMethodDto()),
-            shoppingCartDto.getTotal(),
-            shoppingCartDto.getState()
+            shoppingCartDto.getDetails().stream().map(CartItemMapper.getInstance()::fromDetailDtoToDetail).toList()
         );
     }
 
@@ -36,11 +32,8 @@ public class ShoppingCartMapper {
         }
         return new ShoppingCartDto(
             shoppingCart.getId(),
-            shoppingCart.getUser().getId(),
-            shoppingCart.getDetails().stream().map(DetailMapper.getInstance()::fromDetailToDetailDto).toList(),
-            PayMethodMapper.getInstance().fromPayMethodToPayMethodDto(shoppingCart.getPayMethod()),
-            shoppingCart.getTotal(),
-            shoppingCart.getState()
+            shoppingCart.getDetails().stream().map(CartItemMapper.getInstance()::fromDetailToDetailDto).toList()
+
         );
     }
 }

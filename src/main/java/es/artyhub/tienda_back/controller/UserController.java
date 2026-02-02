@@ -3,8 +3,10 @@ package es.artyhub.tienda_back.controller;
 import es.artyhub.tienda_back.controller.mapper.UserMapper;
 import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
+import es.artyhub.tienda_back.domain.dto.ShoppingCartDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.model.Page;
+import es.artyhub.tienda_back.domain.service.CartService;
 import es.artyhub.tienda_back.domain.service.UserService;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,12 +28,13 @@ public class UserController {
     
     private final SesionService sesionService;
     private final LoginService loginService;
-
+    private final CartService cartService;
     private final UserService userService;
 
-    public UserController(SesionService sesionService, LoginService loginService, UserService userService) {
+    public UserController(SesionService sesionService, LoginService loginService, CartService cartService, UserService userService) {
         this.sesionService = sesionService;
         this.loginService = loginService;
+        this.cartService = cartService;
         this.userService = userService;
     }
 
@@ -68,6 +71,7 @@ public class UserController {
         newUser.setName(registerRequest.getName());
         newUser.setImageProfileUrl(registerRequest.getImageProfileUrl());
         newUser.setRole(UserRole.USER);
+
         DtoValidator.validate(newUser);
         userService.insert(newUser);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -96,5 +100,11 @@ public class UserController {
         }
         UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
+    }
+    @GetMapping("/cart")
+    public ResponseEntity<ShoppingCartDto> getCartOfUser(HttpServletRequest request){
+        UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
+        ShoppingCartDto cart = cartService.getCartOfUser(userDto);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 }

@@ -22,8 +22,11 @@ public class UserJpaEntity {
     @Column(nullable = false)
     private UserRole role;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CartJpaEntity cart;
+
     public UserJpaEntity(Long id, String name, String email, String password, String description,
-                         String address, String imageProfileUrl, UserRole role) {
+                         String address, String imageProfileUrl, UserRole role, CartJpaEntity cart) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,6 +35,7 @@ public class UserJpaEntity {
         this.address = address;
         this.imageProfileUrl = imageProfileUrl;
         this.role = role;
+        this.cart = cart;
     }
 
     public UserJpaEntity() {
@@ -99,6 +103,17 @@ public class UserJpaEntity {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public CartJpaEntity getCart() {
+        return cart;
+    }
+
+    public void setCart(CartJpaEntity cart) {
+        this.cart = cart;
+        if(cart.getUserJpaEntity() != this){
+            cart.setUserJpaEntity(this);
+        }
     }
 
     @Override

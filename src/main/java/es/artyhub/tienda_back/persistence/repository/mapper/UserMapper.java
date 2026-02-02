@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.persistence.repository.mapper;
 
 import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.mapper.ShoppingCartMapper;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 
 public class UserMapper {
@@ -45,7 +46,8 @@ public class UserMapper {
                 userDto.getDescription(),
                 userDto.getAddress(),
                 userDto.getImageProfileUrl(),
-                userDto.getRole()
+                userDto.getRole(),
+                ShoppingCartMapper.getInstance().
         );
     }
 }
