@@ -8,18 +8,18 @@ public class ShoppingCart {
     private Long id;
     private User user;
     private List<Detail> details;
-    private PayMethod payMethod;
+    private Card card;
     private BigDecimal total;
     private String state;
 
     public ShoppingCart() {
     }
 
-    public ShoppingCart(Long id, User user, List<Detail> details, PayMethod payMethod, BigDecimal total, String state) {
+    public ShoppingCart(Long id, User user, List<Detail> details, Card card, BigDecimal total, String state) {
         this.id = id;
         this.user = user;
         this.details = details;
-        this.payMethod = payMethod;
+        this.card = card;
         this.total = total;
         this.state = state;
     }
@@ -48,12 +48,12 @@ public class ShoppingCart {
         this.details = details;
     }
 
-    public PayMethod getPayMethod() {
-        return payMethod;
+    public Card getCard() {
+        return card;
     }
 
-    public void setPayMethod(PayMethod payMethod) {
-        this.payMethod = payMethod;
+    public void setCard(Card card) {
+        this.card = card;
     }
 
     public BigDecimal getTotal() {

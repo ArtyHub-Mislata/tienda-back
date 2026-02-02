@@ -18,7 +18,7 @@ public class ShoppingCartDto {
         private List<DetailDto> details;
 
         @NotBlank(message = "El método de pago no puede ser vacío")
-        private PayMethodDto payMethodDto;
+        private CardDto cardDto;
 
         @NotBlank(message = "El total no puede ser vacío")
         @Positive(message = "El total debe ser mayor a 0")
@@ -30,11 +30,11 @@ public class ShoppingCartDto {
     public ShoppingCartDto() {
     }
 
-    public ShoppingCartDto(Long id, Long userId, List<DetailDto> details, PayMethodDto payMethodDto, BigDecimal total, String state) {
+    public ShoppingCartDto(Long id, Long userId, List<DetailDto> details, CardDto cardDto, BigDecimal total, String state) {
         this.id = id;
         this.userId = userId;
         this.details = details;
-        this.payMethodDto = payMethodDto;
+        this.cardDto = cardDto;
         this.total = total;
         this.state = state;
     }
@@ -63,12 +63,12 @@ public class ShoppingCartDto {
         this.details = details;
     }
 
-    public PayMethodDto getPayMethodDto() {
-        return payMethodDto;
+    public CardDto getCardDto() {
+        return cardDto;
     }
 
-    public void setPayMethodDto(PayMethodDto payMethodDto) {
-        this.payMethodDto = payMethodDto;
+    public void setCardDto(CardDto cardDto) {
+        this.cardDto = cardDto;
     }
 
     public BigDecimal getTotal() {

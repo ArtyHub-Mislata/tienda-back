@@ -24,7 +24,7 @@ public class ShoppingCartMapper {
             shoppingCartDto.getId(),
             shoppingCartDto.findUserById(shoppingCartDto.getUserId()),
             shoppingCartDto.getDetails().stream().map(DetailMapper.getInstance()::fromDetailDtoToDetail).toList(),
-            PayMethodMapper.getInstance().fromPayMethodDtoToPayMethod(shoppingCartDto.getPayMethodDto()),
+            CardMapper.getInstance().fromCardDtoToCard(shoppingCartDto.getCardDto()),
             shoppingCartDto.getTotal(),
             shoppingCartDto.getState()
         );
@@ -38,7 +38,7 @@ public class ShoppingCartMapper {
             shoppingCart.getId(),
             shoppingCart.getUser().getId(),
             shoppingCart.getDetails().stream().map(DetailMapper.getInstance()::fromDetailToDetailDto).toList(),
-            PayMethodMapper.getInstance().fromPayMethodToPayMethodDto(shoppingCart.getPayMethod()),
+            CardMapper.getInstance().fromCardToCardDto(shoppingCart.getCard()),
             shoppingCart.getTotal(),
             shoppingCart.getState()
         );
