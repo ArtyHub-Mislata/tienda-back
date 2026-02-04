@@ -1,16 +1,17 @@
 package es.artyhub.tienda_back.domain.model;
 
-public class PayMethod {
+public class Card {
 
     private Long id;
     private String nTarget;
     private String dateExpiration;
     private String cvv;
+    private String holderName;
 
-    public PayMethod() {
+    public Card() {
     }
 
-    public PayMethod(Long id, String nTarget, String dateExpiration, String cvv) {
+    public Card(Long id, String nTarget, String dateExpiration, String cvv, String holderName) {
         this.id = id;
         this.nTarget = nTarget;
         this.dateExpiration = dateExpiration;
@@ -47,5 +48,13 @@ public class PayMethod {
 
     public void setCvv(String cvv) {
         this.cvv = cvv;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
     }
 }

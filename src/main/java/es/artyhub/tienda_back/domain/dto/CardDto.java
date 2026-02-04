@@ -1,13 +1,16 @@
 package es.artyhub.tienda_back.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
-public class PayMethodDto {
+public class CardDto {
 
         private Long id;
 
+        @JsonProperty("nTarget")
         @NotBlank(message = "El número de la tarjeta no puede ser vacío")
         @Size(min = 16, max = 16, message = "El número de la tarjeta debe tener 16 dígitos")
         private String nTarget;
@@ -20,14 +23,18 @@ public class PayMethodDto {
         @Positive(message = "El CVV debe ser mayor a 0")
         private String cvv;
 
-    public PayMethodDto() {
+        @NotBlank(message = "El nombre del titular no puede ser vacío")
+        private String holderName;
+
+    public CardDto() {
     }
 
-    public PayMethodDto(Long id, String nTarget, String dateExpiration, String cvv) {
+    public CardDto(Long id, String nTarget, String dateExpiration, String cvv, String holderName) {
         this.id = id;
         this.nTarget = nTarget;
         this.dateExpiration = dateExpiration;
         this.cvv = cvv;
+        this.holderName = holderName;
     }
 
     public Long getId() {
@@ -60,5 +67,13 @@ public class PayMethodDto {
 
     public void setCvv(String cvv) {
         this.cvv = cvv;
+    }
+
+    public String getHolderName() {
+        return holderName;
+    }
+
+    public void setHolderName(String holderName) {
+        this.holderName = holderName;
     }
 }

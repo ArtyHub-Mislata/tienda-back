@@ -8,6 +8,9 @@ import es.artyhub.tienda_back.persistence.dao.jpa.impl.*;
 import es.artyhub.tienda_back.persistence.repository.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+import es.artyhub.tienda_back.domain.service.impl.SesionServiceImpl;
 
 @Configuration
 public class SpringConfig {
@@ -93,5 +96,10 @@ public class SpringConfig {
     @Bean
     public CartService cartService(CartRepository cartRepository){
         return new CartServiceImpl(cartRepository);
+    }
+    //BEANS DE PAYMENT
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }
