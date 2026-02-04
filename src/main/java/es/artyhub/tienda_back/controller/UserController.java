@@ -3,7 +3,7 @@ package es.artyhub.tienda_back.controller;
 import es.artyhub.tienda_back.controller.mapper.UserMapper;
 import es.artyhub.tienda_back.controller.webmodel.response.UserSummaryResponse;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
-import es.artyhub.tienda_back.domain.dto.ShoppingCartDto;
+import es.artyhub.tienda_back.domain.dto.CartDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
 import es.artyhub.tienda_back.domain.model.Page;
 import es.artyhub.tienda_back.domain.service.CartService;
@@ -102,9 +102,9 @@ public class UserController {
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }
     @GetMapping("/cart")
-    public ResponseEntity<ShoppingCartDto> getCartOfUser(HttpServletRequest request){
+    public ResponseEntity<CartDto> getCartOfUser(HttpServletRequest request){
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
-        ShoppingCartDto cart = cartService.getCartOfUser(userDto);
+        CartDto cart = cartService.getCartOfUser(userDto.getId());
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 }

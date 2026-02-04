@@ -2,10 +2,33 @@ package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartItemJpaEntity;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 public class CartJpaDaoImpl implements CartJpaDao {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
-    public CartItemJpaEntity getCartOfUser(Long idUser) {
-        return null;
+    public CartJpaEntity getCartOfUser(Long idUser) {
+        String jpql = """
+                SELECT cart
+                FROM CartJpaEntity cart
+                WHERE cart.user.id = :idUser
+                
+                """;
+        return entityManager
+                .createQuery(jpql, CartJpaEntity.class)
+                .setParameter("idUser", idUser)
+                .setMaxResults(1)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+
     }
 }

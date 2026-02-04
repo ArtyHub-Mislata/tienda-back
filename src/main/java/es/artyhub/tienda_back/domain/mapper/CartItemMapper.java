@@ -17,7 +17,7 @@ public class CartItemMapper {
         return instance;
     }
 
-    public CartItem fromDetailDtoToDetail(CartItemDto cartItemDto) {
+    public CartItem fromCartItemDtoToCartItem(CartItemDto cartItemDto) {
         if (cartItemDto == null) {
             return null;
         }
@@ -29,7 +29,7 @@ public class CartItemMapper {
         );
     }
 
-    public CartItemDto fromDetailToDetailDto(CartItem cartItem) {
+    public CartItemDto fromCartItemToCartItemDto(CartItem cartItem) {
         if (cartItem == null) {
             return null;
         }

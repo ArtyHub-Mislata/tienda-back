@@ -7,6 +7,7 @@ public class CartItem {
     private Long id;
     private Long quantity;
     private Artwork artwork;
+
     public CartItem() {
     }
 

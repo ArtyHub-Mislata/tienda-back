@@ -1,7 +1,6 @@
 package es.artyhub.tienda_back.domain.service.impl;
 
-import es.artyhub.tienda_back.domain.dto.ShoppingCartDto;
-import es.artyhub.tienda_back.domain.dto.UserDto;
+import es.artyhub.tienda_back.domain.dto.CartDto;
 import es.artyhub.tienda_back.domain.repository.CartRepository;
 import es.artyhub.tienda_back.domain.service.CartService;
 
@@ -13,7 +12,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public ShoppingCartDto getCartOfUser(UserDto userDto) {
-        return cartRepository.getCartOfUser(userDto);
+    public CartDto getCartOfUser(Long id) {
+        return cartRepository.getCartOfUser(id);
     }
 }

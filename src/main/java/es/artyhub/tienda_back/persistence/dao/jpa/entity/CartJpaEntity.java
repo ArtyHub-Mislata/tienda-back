@@ -2,6 +2,7 @@ package es.artyhub.tienda_back.persistence.dao.jpa.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -11,30 +12,33 @@ public class CartJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", unique = true, nullable = false)
-    private UserJpaEntity userJpaEntity;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItemJpaEntity> cartItems;
+    private List<CartItemJpaEntity> cartItems = new ArrayList<>();
 
-    public UserJpaEntity getUserJpaEntity() {
-        return userJpaEntity;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true, nullable = false)
+    private UserJpaEntity user;
+
+
+    public UserJpaEntity getUser() {
+        return user;
     }
 
     public CartJpaEntity() {
     }
 
-    public CartJpaEntity(Long id, UserJpaEntity userJpaEntity, List<CartItemJpaEntity> cartItems) {
+    public CartJpaEntity(Long id, List<CartItemJpaEntity> cartItems, UserJpaEntity userJpaEntity) {
         this.id = id;
-        this.userJpaEntity = userJpaEntity;
         this.cartItems = cartItems;
+        this.user = userJpaEntity;
+
     }
 
-    public void setUserJpaEntity(UserJpaEntity userJpaEntity) {
-        this.userJpaEntity = userJpaEntity;
-        if(userJpaEntity.getCart() != this){
-            userJpaEntity.setCart(this);
+    public void setUser(UserJpaEntity user) {
+        this.user = user;
+        if(user.getCart() != this){
+            user.setCart(this);
         }
     }
 
@@ -42,8 +46,12 @@ public class CartJpaEntity {
         return cartItems;
     }
 
+    //Helper
     public void setCartItems(List<CartItemJpaEntity> cartItems) {
         this.cartItems = cartItems;
+        for (CartItemJpaEntity cartItem : cartItems) {
+            cartItem.setCart(this);
+        }
     }
     public void addItem(CartItemJpaEntity item) {
         cartItems.add(item);

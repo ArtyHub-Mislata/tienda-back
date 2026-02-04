@@ -9,6 +9,8 @@ public class CartItemJpaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long quantity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     private CartJpaEntity cart;
@@ -16,6 +18,15 @@ public class CartItemJpaEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "artwork_id", nullable = false)
     private ArtworkJpaEntity artworkJpaEntity ;
+
+    public CartItemJpaEntity(Long id, Long quantity, ArtworkJpaEntity artworkJpaEntity) {
+        this.id = id;
+        this.quantity = quantity;
+        this.artworkJpaEntity = artworkJpaEntity;
+    }
+
+    public CartItemJpaEntity() {
+    }
 
     public CartJpaEntity getCart() {
         return cart;
@@ -35,5 +46,17 @@ public class CartItemJpaEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
     }
 }
