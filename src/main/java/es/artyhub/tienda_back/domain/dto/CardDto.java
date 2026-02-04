@@ -1,5 +1,7 @@
 package es.artyhub.tienda_back.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -8,6 +10,7 @@ public class CardDto {
 
         private Long id;
 
+        @JsonProperty("nTarget")
         @NotBlank(message = "El número de la tarjeta no puede ser vacío")
         @Size(min = 16, max = 16, message = "El número de la tarjeta debe tener 16 dígitos")
         private String nTarget;

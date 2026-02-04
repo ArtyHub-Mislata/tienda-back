@@ -21,9 +21,9 @@ public class BankCustomer {
 
     private final String BANCO_URL = "http://localhost:8081/api/pagos/pago_tarjeta"; 
 
-    private final String MI_TIENDA_IBAN = "ES12345678901234567890";
+    private final String MI_TIENDA_IBAN = "ES5521000418450200051339";
     private final String MI_TIENDA_LOGIN = "artyhub";
-    private final String MI_API_TOKEN = "token-secreto-tienda";
+    private final String MI_API_TOKEN = "token_artyhub_123";
 
     public boolean callBank(PaymentDto paymentDto) {
         try {
@@ -47,6 +47,8 @@ public class BankCustomer {
             return true;
 
         } catch (Exception e) {
+            System.err.println("ERROR LLAMANDO AL BANCO: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
