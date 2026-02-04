@@ -11,7 +11,7 @@ import java.util.Objects;
 public class ArtworkJpaEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String name;
     private String description;
     @Column(name = "img_url")
@@ -25,25 +25,30 @@ public class ArtworkJpaEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserJpaEntity userJpaEntity;
-    public ArtworkJpaEntity(Long id, String name, String description, String imageUrl, BigDecimal price, CategoryJpaEntity category, UserJpaEntity userJpaEntity) {
-        Id = id;
+
+    private Long stock;
+
+    public ArtworkJpaEntity(Long id, String name, String description, String imageUrl, BigDecimal price,
+                            CategoryJpaEntity category, UserJpaEntity userJpaEntity, Long stock) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
         this.category = category;
         this.userJpaEntity = userJpaEntity;
+        this.stock = stock;
     }
 
     public ArtworkJpaEntity() {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -94,15 +99,23 @@ public class ArtworkJpaEntity implements Serializable {
         this.category = category;
     }
 
+    public Long getStock() {
+        return stock;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ArtworkJpaEntity that = (ArtworkJpaEntity) o;
-        return Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(price, that.price) && Objects.equals(category, that.category) && Objects.equals(userJpaEntity, that.userJpaEntity);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(imageUrl, that.imageUrl) && Objects.equals(price, that.price) && Objects.equals(category, that.category) && Objects.equals(userJpaEntity, that.userJpaEntity) && Objects.equals(stock, that.stock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, name, description, imageUrl, price, category, userJpaEntity);
+        return Objects.hash(id, name, description, imageUrl, price, category, userJpaEntity, stock);
     }
 }

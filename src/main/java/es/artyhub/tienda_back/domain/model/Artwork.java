@@ -11,12 +11,13 @@ public class Artwork {
     private BigDecimal price;
     private Category category;
     private User user;
+    private Long stock;
 
     public Artwork() {
     }
 
     public Artwork(Long id, String name, String description, String imageUrl, BigDecimal price,
-            Category category, User user) {
+                   Category category, User user, Long stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -24,6 +25,7 @@ public class Artwork {
         this.price = price;
         this.category = category;
         this.user = user;
+        this.stock = stock;
     }
 
     public Long getId() {
@@ -81,5 +83,13 @@ public class Artwork {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Long getStock() {
+        return stock;
+    }
+
+    public void setStock(Long stock) {
+        this.stock = stock;
     }
 }
