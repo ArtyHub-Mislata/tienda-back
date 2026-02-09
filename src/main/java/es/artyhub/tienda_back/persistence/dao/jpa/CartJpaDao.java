@@ -5,5 +5,9 @@ import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 
 public interface CartJpaDao {
-    public CartJpaEntity getCartOfUser(Long idUser);
+    CartJpaEntity getCartOfUser(Long idUser);
+    CartJpaEntity updateCart(CartJpaEntity cartJpaEntity);
+    void clearCart(Long idCart);
+    CartItemJpaEntity addItemToCart(CartJpaEntity cartJpaEntity, Long idArtwork);
+
 }

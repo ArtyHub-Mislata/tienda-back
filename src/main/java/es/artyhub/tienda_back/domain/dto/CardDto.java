@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 
 public class CardDto {
 
-        private Long id;
+
 
         @JsonProperty("nTarget")
         @NotBlank(message = "El número de la tarjeta no puede ser vacío")
@@ -29,21 +29,17 @@ public class CardDto {
     public CardDto() {
     }
 
-    public CardDto(Long id, String nTarget, String dateExpiration, String cvv, String holderName) {
-        this.id = id;
+    public CardDto( String nTarget, String dateExpiration, String cvv, String holderName) {
+
         this.nTarget = nTarget;
         this.dateExpiration = dateExpiration;
         this.cvv = cvv;
         this.holderName = holderName;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
+
 
     public String getnTarget() {
         return nTarget;

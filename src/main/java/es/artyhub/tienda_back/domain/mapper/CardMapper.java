@@ -21,7 +21,6 @@ public class CardMapper {
             return null;
         }
         return new Card(
-            cardDto.getId(),
             cardDto.getnTarget(),
             cardDto.getDateExpiration(),
             cardDto.getCvv(),
@@ -34,7 +33,6 @@ public class CardMapper {
             return null;
         }
         return new CardDto(
-            card.getId(),
             card.getnTarget(),
             card.getDateExpiration(),
             card.getCvv(),

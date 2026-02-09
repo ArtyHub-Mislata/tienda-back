@@ -34,6 +34,7 @@ public class CartItemJpaEntity {
 
     public void setCart(CartJpaEntity cart) {
         this.cart = cart;
+
     }
 
     public ArtworkJpaEntity getArtworkJpaEntity() {

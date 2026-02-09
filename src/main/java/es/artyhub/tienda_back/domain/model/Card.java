@@ -2,7 +2,7 @@ package es.artyhub.tienda_back.domain.model;
 
 public class Card {
 
-    private Long id;
+
     private String nTarget;
     private String dateExpiration;
     private String cvv;
@@ -11,20 +11,13 @@ public class Card {
     public Card() {
     }
 
-    public Card(Long id, String nTarget, String dateExpiration, String cvv, String holderName) {
-        this.id = id;
+    public Card( String nTarget, String dateExpiration, String cvv, String holderName) {
         this.nTarget = nTarget;
         this.dateExpiration = dateExpiration;
         this.cvv = cvv;
+        this.holderName = holderName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getnTarget() {
         return nTarget;
