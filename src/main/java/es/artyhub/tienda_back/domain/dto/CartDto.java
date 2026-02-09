@@ -12,15 +12,15 @@ public class CartDto {
     private List<CartItemDto> cartItems;
 
     @NotNull(message = "El carrito tiene que tener usuario")
-    private UserDto userDto;
+    private UserDto user;
 
     public CartDto() {
     }
 
-    public CartDto(Long id, List<CartItemDto> details, UserDto userDto) {
+    public CartDto(Long id, List<CartItemDto> details, UserDto user) {
         this.id = id;
         this.cartItems = details;
-        this.userDto = userDto;
+        this.user = user;
     }
 
     public Long getId() {
@@ -40,11 +40,11 @@ public class CartDto {
         this.cartItems = cartItems;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 }

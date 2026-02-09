@@ -1,7 +1,6 @@
 package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.dto.CartItemDto;
-import es.artyhub.tienda_back.domain.model.Artwork;
 import es.artyhub.tienda_back.domain.model.CartItem;
 
 public class CartItemMapper {
@@ -24,7 +23,7 @@ public class CartItemMapper {
         return new CartItem(
                 cartItemDto.getId(),
                 cartItemDto.getQuantity(),
-                ArtworkMapper.getInstance().fromArtworkDtoToArtwork(cartItemDto.getArtworkDto())
+                ArtworkMapper.getInstance().fromArtworkDtoToArtwork(cartItemDto.getArtwork())
 
         );
     }

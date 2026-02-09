@@ -1,8 +1,6 @@
 package es.artyhub.tienda_back.domain.dto;
 
-import es.artyhub.tienda_back.domain.model.Artwork;
 import jakarta.validation.constraints.Positive;
-import java.math.BigDecimal;
 
 public class CartItemDto {
 
@@ -11,15 +9,15 @@ public class CartItemDto {
         @Positive(message = "La cantidad debe ser mayor a 0")
         private Long quantity;
 
-        private ArtworkDto artworkDto;
+        private ArtworkDto artwork;
 
     public CartItemDto() {
     }
 
-    public CartItemDto(Long id, Long quantity, ArtworkDto artworkDto) {
+    public CartItemDto(Long id, Long quantity, ArtworkDto artwork) {
         this.id = id;
         this.quantity = quantity;
-        this.artworkDto = artworkDto;
+        this.artwork = artwork;
     }
 
     public CartItemDto(Long id, Long quantity) {
@@ -44,11 +42,11 @@ public class CartItemDto {
         this.quantity = quantity;
     }
 
-    public ArtworkDto getArtworkDto() {
-        return artworkDto;
+    public ArtworkDto getArtwork() {
+        return artwork;
     }
 
-    public void setArtworkDto(ArtworkDto artworkDto) {
-        this.artworkDto = artworkDto;
+    public void setArtwork(ArtworkDto artwork) {
+        this.artwork = artwork;
     }
 }

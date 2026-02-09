@@ -51,7 +51,7 @@ public class CartMapper {
                 cartDto.getId(),
                 cartItemJpaEntityList,
                 UserMapper.getInstance()
-                        .fromUserDtoToUserJpaEntity(cartDto.getUserDto())
+                        .fromUserDtoToUserJpaEntity(cartDto.getUser())
                 );
 
         cartJpaEntity

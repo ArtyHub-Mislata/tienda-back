@@ -26,7 +26,7 @@ public class CartMapper {
                         .stream()
                         .map(CartItemMapper.getInstance()::fromCartItemDtoToCartItem)
                         .toList(),
-                UserMapper.getInstance().fromUserDtoToUser(cartDto.getUserDto())
+                UserMapper.getInstance().fromUserDtoToUser(cartDto.getUser())
         );
     }
 
