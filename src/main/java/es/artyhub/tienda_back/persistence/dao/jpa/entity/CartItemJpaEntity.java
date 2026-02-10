@@ -17,11 +17,12 @@ public class CartItemJpaEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "artwork_id", nullable = false)
-    private ArtworkJpaEntity artworkJpaEntity ;
+    private ArtworkJpaEntity artworkJpaEntity;
 
-    public CartItemJpaEntity(Long id, Long quantity, ArtworkJpaEntity artworkJpaEntity) {
+    public CartItemJpaEntity(Long id, Long quantity, CartJpaEntity cartJpaEntity, ArtworkJpaEntity artworkJpaEntity) {
         this.id = id;
         this.quantity = quantity;
+        this.cart = cartJpaEntity;
         this.artworkJpaEntity = artworkJpaEntity;
     }
 

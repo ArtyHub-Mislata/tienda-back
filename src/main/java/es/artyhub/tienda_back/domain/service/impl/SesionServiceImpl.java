@@ -18,7 +18,7 @@ public class SesionServiceImpl implements SesionService {
 
     @Override
     public SesionDto insertSesion(SesionDto sesionDto) {
-        if (findSesionByToken(sesionDto.getToken()) != null) {
+        if (findSesionByToken(sesionDto.getToken()).isPresent()) {
             throw new BusinessException("Sesion already exists");
         }
         return sesionRepository.insertSesion(sesionDto);
@@ -26,16 +26,16 @@ public class SesionServiceImpl implements SesionService {
 
     @Override
     public void deleteSesion(String token) {
-        if (findSesionByToken(token) == null) {
+        if (findSesionByToken(token).isEmpty()) {
             throw new BusinessException("Sesion not found");
         }
         sesionRepository.deleteSesion(token);
     }
 
     @Override
-    public SesionDto findSesionByToken(String token) {
+    public Optional<SesionDto> findSesionByToken(String token) {
         Optional<SesionDto> sesionDto = sesionRepository.findByToken(token);
-        return sesionDto.orElse(null);
+        return sesionDto;
     }
 
     @Override

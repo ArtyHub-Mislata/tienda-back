@@ -16,6 +16,7 @@ public class Card {
         this.nTarget = nTarget;
         this.dateExpiration = dateExpiration;
         this.cvv = cvv;
+        this.holderName = holderName;
     }
 
     public Long getId() {

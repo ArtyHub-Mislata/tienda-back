@@ -19,7 +19,7 @@ public class ArtworkJpaEntity implements Serializable {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id")  // Esto crea categoria_id en tabla producto
+    @JoinColumn(name = "categoria_id")
     private CategoryJpaEntity category;
 
     @ManyToOne(fetch = FetchType.LAZY)

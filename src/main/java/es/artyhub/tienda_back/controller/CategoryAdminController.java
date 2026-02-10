@@ -23,7 +23,7 @@ public class CategoryAdminController {
             CategoryDto createCategoryDto = categoryService.insert(categoryDto);
             return new ResponseEntity<>(createCategoryDto, HttpStatus.CREATED);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -37,7 +37,7 @@ public class CategoryAdminController {
             CategoryDto updateCategoryDto = categoryService.update(categoryDto);
             return new ResponseEntity<>(updateCategoryDto, HttpStatus.OK);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -1,12 +1,9 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartItemJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
 public class CartJpaDaoImpl implements CartJpaDao {
 

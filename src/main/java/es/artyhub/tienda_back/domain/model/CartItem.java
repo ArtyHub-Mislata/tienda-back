@@ -1,19 +1,19 @@
 package es.artyhub.tienda_back.domain.model;
 
-import java.math.BigDecimal;
-
 public class CartItem {
 
     private Long id;
     private Long quantity;
+    private Cart cart;
     private Artwork artwork;
 
     public CartItem() {
     }
 
-    public CartItem(Long id, Long quantity, Artwork artwork) {
+    public CartItem(Long id, Long quantity, Cart cart, Artwork artwork) {
         this.id = id;
         this.quantity = quantity;
+        this.cart = cart;
         this.artwork = artwork;
     }
 
@@ -39,5 +39,13 @@ public class CartItem {
 
     public void setArtwork(Artwork artwork) {
         this.artwork = artwork;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

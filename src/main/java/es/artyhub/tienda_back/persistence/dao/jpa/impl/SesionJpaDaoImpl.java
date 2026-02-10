@@ -18,6 +18,7 @@ public class SesionJpaDaoImpl implements SesionJpaDao {
     public Optional<SesionJpaEntity> findByToken(String token) {
         return Optional.ofNullable(entityManager.find(SesionJpaEntity.class, token));
     }
+
     @Transactional
     @Override
     public void deleteSesion(String token) {

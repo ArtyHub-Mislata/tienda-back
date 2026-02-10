@@ -49,7 +49,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody CredentialsDto credentialsDto) {
-        System.out.println("LLEGA AL CONTROLLER");
         String token = loginService.login(credentialsDto);
         return ResponseEntity.ok(Map.of("token", token));
     }
@@ -63,18 +62,22 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserSummaryResponse> register(@RequestBody RegisterRequest registerRequest) {
-        UserDto newUser = new UserDto();
-        newUser.setPassword(registerRequest.getPassword());
-        newUser.setAddress(registerRequest.getAddress());
-        newUser.setDescription(registerRequest.getDescription());
-        newUser.setEmail(registerRequest.getEmail());
-        newUser.setName(registerRequest.getName());
-        newUser.setImageProfileUrl(registerRequest.getImageProfileUrl());
-        newUser.setRole(UserRole.USER);
+        try {
+            UserDto newUser = new UserDto();
+            newUser.setPassword(registerRequest.getPassword());
+            newUser.setAddress(registerRequest.getAddress());
+            newUser.setDescription(registerRequest.getDescription());
+            newUser.setEmail(registerRequest.getEmail());
+            newUser.setName(registerRequest.getName());
+            newUser.setImageProfileUrl(registerRequest.getImageProfileUrl());
+            newUser.setRole(UserRole.USER);
 
-        DtoValidator.validate(newUser);
-        userService.insert(newUser);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+            DtoValidator.validate(newUser);
+            userService.insert(newUser);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/islogged")
@@ -83,15 +86,23 @@ public class UserController {
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
         if(userDto != null){
             isLogged = true;
+        } else {
+            isLogged = false;
+            return new ResponseEntity<>(isLogged, HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(isLogged, HttpStatus.OK);
     }
+
     @GetMapping("/logged")
     public ResponseEntity<UserSummaryResponse> getLoggedUser(HttpServletRequest request){
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
+        if(userDto == null){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<UserSummaryResponse> getUserById(@PathVariable Long id) {
         UserDto userDto = userService.findById(id);
@@ -101,10 +112,14 @@ public class UserController {
         UserSummaryResponse userSummaryResponse = UserMapper.getInstance().fromUserDtoToUserSummaryResponse(userDto);
         return new ResponseEntity<>(userSummaryResponse, HttpStatus.OK);
     }
+
     @GetMapping("/cart")
     public ResponseEntity<CartDto> getCartOfUser(HttpServletRequest request){
+        if(request.getAttribute("USER_DTO") == null){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         UserDto userDto = (UserDto) request.getAttribute("USER_DTO");
-        CartDto cart = cartService.getCartOfUser(userDto.getId());
-        return new ResponseEntity<>(cart, HttpStatus.OK);
+        CartDto cartDto = cartService.getCartOfUser(userDto.getId());
+        return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }
 }

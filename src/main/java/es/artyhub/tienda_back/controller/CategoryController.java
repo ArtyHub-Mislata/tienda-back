@@ -26,6 +26,10 @@ public class CategoryController {
                                                                           @RequestParam(required = false, defaultValue = "20") int pageSize) {
         Page<CategoryDto> categoryDtoPage = categoryService.findAll(pageNumber, pageSize);
 
+        if (categoryDtoPage.totalElements() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(categoryDtoPage, HttpStatus.OK);
     }
 

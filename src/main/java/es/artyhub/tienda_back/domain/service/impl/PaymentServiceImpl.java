@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import es.artyhub.tienda_back.domain.dto.PaymentDto;
 import es.artyhub.tienda_back.domain.enums.Status;
 import es.artyhub.tienda_back.domain.service.PaymentService;
-import es.artyhub.tienda_back.microservices.payment.BankCustomer;
+import es.artyhub.tienda_back.infraestructura.payment.BankCustomer;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {

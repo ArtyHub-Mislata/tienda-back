@@ -19,7 +19,7 @@ public class CartMapper {
         return instance;
     }
 
-    public CartDto fromCartEntityToShoppingCartDto(CartJpaEntity cartJpaEntity) {
+    public CartDto fromCartJpaEntityToCartDto(CartJpaEntity cartJpaEntity) {
         if (cartJpaEntity == null) {
             return null;
         }

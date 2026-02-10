@@ -1,7 +1,6 @@
 package es.artyhub.tienda_back.persistence.dao.jpa.impl;
 
 import es.artyhub.tienda_back.domain.exception.ResourceNotFoundException;
-import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.UserJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;

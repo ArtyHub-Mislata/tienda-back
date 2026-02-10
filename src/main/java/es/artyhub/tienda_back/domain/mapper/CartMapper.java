@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.dto.CartDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Cart;
 
 public class CartMapper {
@@ -16,9 +17,9 @@ public class CartMapper {
         return instance;
     }
 
-    public Cart fromCartDtoToShoppingCart(CartDto cartDto) {
+    public Cart fromCartDtoToCart(CartDto cartDto) {
         if (cartDto == null) {
-            return null;
+            throw new BusinessException("CartDto cannot be null");
         }
         return new Cart(
                 cartDto.getId(),
@@ -30,9 +31,9 @@ public class CartMapper {
         );
     }
 
-    public CartDto fromCartToShoppingCartDto(Cart cart) {
+    public CartDto fromCartToCartDto(Cart cart) {
         if (cart == null) {
-            return null;
+            throw new BusinessException("Cart cannot be null");
         }
         return new CartDto(
                 cart.getId(),
