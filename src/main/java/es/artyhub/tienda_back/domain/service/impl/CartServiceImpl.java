@@ -30,6 +30,7 @@ public class CartServiceImpl implements CartService {
         cartRepository.vaciarCarrito(id);
     }
 
+    @Transactional
     @Override
     public CartItemDto addItemToCart(CartDto cart ,Long artworkId) {
         return cartRepository.addItemToCart(cart, artworkId);

@@ -5,6 +5,8 @@ import es.artyhub.tienda_back.domain.dto.CartItemDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.repository.CartRepository;
 import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
+import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
+import es.artyhub.tienda_back.persistence.repository.mapper.CartItemMapper;
 import es.artyhub.tienda_back.persistence.repository.mapper.CartMapper;
 
 
@@ -36,6 +38,10 @@ public class CartRepositoryImpl implements CartRepository {
 
     @Override
     public CartItemDto addItemToCart(CartDto cartDto,Long idArtwork) {
-        return cartJpaDao;
+        return CartItemMapper.getInstance().fromCartItemJpaEntityToCartItemDto(
+                cartJpaDao.addItemToCart(
+                        CartMapper.getInstance().fromCartDtoToCartJpaEntity(cartDto), idArtwork
+                )
+        );
     }
 }

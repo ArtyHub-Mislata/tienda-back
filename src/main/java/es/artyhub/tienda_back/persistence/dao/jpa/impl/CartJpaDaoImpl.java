@@ -77,13 +77,16 @@ public class CartJpaDaoImpl implements CartJpaDao {
             if(artworkJpa.getStock() > itemExistente.getQuantity()) {
                 itemExistente.setQuantity(itemExistente.getQuantity() + 1);
             }
+            return itemExistente;
         } else {
             CartItemJpaEntity cartItemJpaEntity = new CartItemJpaEntity();
             cartItemJpaEntity.setQuantity(1L);
             cartItemJpaEntity.setCart(cartJpaEntity);
             cartItemJpaEntity.setArtworkJpaEntity(artworkJpa);
             entityManager.persist(cartItemJpaEntity);
+            return cartItemJpaEntity;
         }
+
     }
     private CartItemJpaEntity findCartItem(Long cartId, Long artworkId) {
         try {
