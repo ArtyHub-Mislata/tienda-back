@@ -27,6 +27,7 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
                 .setMaxResults(size);
         return artworkJpaEntityPage.getResultList();
     }
+
     @Override
     public List<ArtworkJpaEntity> findAllArtworksOfUser(Long id, int page, int size) {
         int indicePagina = Math.max(page - 1, 0);
@@ -76,7 +77,6 @@ public class ArtworkJpaDaoImpl implements ArtworkJpaDao {
         if(artworkJpaEntity == null){
             throw new ResourceNotFoundException("Artwork with id " + jpaEntity.getId() + " not found, error when updating");
         }
-        //hacemos la comprobación de si existe ya que si no existe en vez de hacer un update hará in insert
         return entityManager.merge(jpaEntity);
 
     }

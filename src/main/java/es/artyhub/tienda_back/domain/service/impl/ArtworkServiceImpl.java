@@ -33,17 +33,12 @@ public class ArtworkServiceImpl implements ArtworkService {
     @Override
     @Transactional
     public ArtworkDto insert(ArtworkDto artworkDto) {
-        //No lo borro por si acaso, pero no tiene sentido comprobar el id si estamos insertando
-//        if (artworkRepository.findById(artworkDto.getId()).isPresent()) {
-//            throw new BusinessException("Artwork with id " + artworkDto.getId() + " already exists");
-//        }
         return artworkRepository.save(artworkDto);
     }
 
     @Override
     @Transactional
     public ArtworkDto update(ArtworkDto artworkDto) {
-        //Aqui por ejemplo si que tiene sentido, porque estas modificando algo que existe en bd y por tanto tiene id asignado
         if (artworkRepository.findById(artworkDto.getId()).isEmpty()) {
             throw new BusinessException("Artwork with id " + artworkDto.getId() + " not found");
         }

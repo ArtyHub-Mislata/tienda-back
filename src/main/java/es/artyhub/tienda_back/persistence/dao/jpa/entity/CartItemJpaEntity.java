@@ -17,7 +17,7 @@ public class CartItemJpaEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "artwork_id", nullable = false)
-    private ArtworkJpaEntity artworkJpaEntity ;
+    private ArtworkJpaEntity artworkJpaEntity;
 
     public CartItemJpaEntity(Long id, Long quantity, ArtworkJpaEntity artworkJpaEntity) {
         this.id = id;

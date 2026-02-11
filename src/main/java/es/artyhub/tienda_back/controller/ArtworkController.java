@@ -33,6 +33,9 @@ public class ArtworkController {
             artworkDtoPage.pageSize(),
             artworkDtoPage.totalElements()
         );    
+        if (artworkDtoPage.totalElements() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(artworkDetailPage, HttpStatus.OK);
     }
 

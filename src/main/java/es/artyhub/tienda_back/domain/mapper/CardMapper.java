@@ -1,6 +1,7 @@
 package es.artyhub.tienda_back.domain.mapper;
 
 import es.artyhub.tienda_back.domain.dto.CardDto;
+import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Card;
 
 public class CardMapper {
@@ -18,7 +19,7 @@ public class CardMapper {
 
     public Card fromCardDtoToCard(CardDto cardDto) {
         if (cardDto == null) {
-            return null;
+            throw new BusinessException("CardDto cannot be null");
         }
         return new Card(
             cardDto.getnTarget(),
@@ -30,7 +31,7 @@ public class CardMapper {
 
     public CardDto fromCardToCardDto(Card card) {
         if (card == null) {
-            return null;
+            throw new BusinessException("Card cannot be null");
         }
         return new CardDto(
             card.getnTarget(),

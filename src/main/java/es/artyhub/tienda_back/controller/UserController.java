@@ -49,7 +49,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody CredentialsDto credentialsDto) {
-        System.out.println("LLEGA AL CONTROLLER");
         String token = loginService.login(credentialsDto);
         return ResponseEntity.ok(Map.of("token", token));
     }

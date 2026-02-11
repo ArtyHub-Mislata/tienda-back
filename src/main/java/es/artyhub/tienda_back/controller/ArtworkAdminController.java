@@ -16,6 +16,7 @@ public class ArtworkAdminController {
     public ArtworkAdminController(ArtworkService artworkService) {
         this.artworkService = artworkService;
     }
+
     @PostMapping
     public ResponseEntity<ArtworkDto> createArtwork(@RequestBody ArtworkDto artworkDto) {
         try {
@@ -23,7 +24,7 @@ public class ArtworkAdminController {
             ArtworkDto createArtworkDto = artworkService.insert(artworkDto);
             return new ResponseEntity<>(createArtworkDto, HttpStatus.CREATED);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -37,7 +38,7 @@ public class ArtworkAdminController {
             ArtworkDto updateArtworkDto = artworkService.update(artworkDto);
             return new ResponseEntity<>(updateArtworkDto, HttpStatus.OK);
         } catch (ValidationException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -46,6 +47,4 @@ public class ArtworkAdminController {
         artworkService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 }

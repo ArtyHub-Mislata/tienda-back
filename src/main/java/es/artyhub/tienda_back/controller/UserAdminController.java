@@ -37,6 +37,11 @@ public class UserAdminController {
                 userDtoPage.pageSize(),
                 userDtoPage.totalElements()
         );
+
+        if (userSummaryResponsePage.totalElements() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         return new ResponseEntity<>(userSummaryResponsePage, HttpStatus.OK);
     }
 
@@ -73,8 +78,7 @@ public class UserAdminController {
             UserDto createUserDto = userService.insert(userDto);
             return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
         } catch (ValidationException e) {
-            //LLEGAA AQUI
-            return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }
