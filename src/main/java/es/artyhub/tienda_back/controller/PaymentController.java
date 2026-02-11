@@ -23,9 +23,10 @@ public class PaymentController {
     }
 
     @PostMapping("/pay")
-    public ResponseEntity<Status> pay(@RequestBody PaymentDto paymentDto) {
+    public ResponseEntity<Boolean> pay(@RequestBody PaymentDto paymentDto) {
         Status status = paymentService.pay(paymentDto);
 
-        return new ResponseEntity<>(status, HttpStatus.OK);
+        boolean pagoCorrecto = status.equals(Status.COMPLETED);
+        return new ResponseEntity<>(pagoCorrecto, HttpStatus.OK);
     }
 }
