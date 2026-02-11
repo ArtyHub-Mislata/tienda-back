@@ -16,6 +16,7 @@ public class CategoryController {
     
     private final CategoryService categoryService;
     private final ArtworkService artworkService;
+
     public CategoryController(CategoryService categoryService, ArtworkService artworkService) {
         this.categoryService = categoryService;
         this.artworkService = artworkService;
