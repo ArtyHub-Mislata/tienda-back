@@ -59,6 +59,31 @@ CREATE TABLE cart_items (
     FOREIGN KEY (artwork_id) REFERENCES artworks(id),
     UNIQUE KEY unique_cart_artwork (cart_id, artwork_id)
 );
+-- Tabla de órdenes/pedidos (SIN status)
+CREATE TABLE orders (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    INDEX idx_orders_user_id (user_id),
+    INDEX idx_orders_order_date (order_date)
+);
+-- Tabla de items de la orden
+CREATE TABLE order_items (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    order_id BIGINT NOT NULL,
+    artwork_id BIGINT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL, -- Precio en el momento de la compra
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (artwork_id) REFERENCES artworks(id),
+    INDEX idx_order_items_order_id (order_id),
+    INDEX idx_order_items_artwork_id (artwork_id)
+);
 
 -- Tabla de sesiones
 CREATE TABLE sesions (

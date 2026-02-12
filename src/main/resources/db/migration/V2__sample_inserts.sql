@@ -16,11 +16,11 @@ INSERT INTO users (
     name, email, password,
     description, address, image_profile_url, role
 ) VALUES
-      ('Admin Root', 'admin@artyhub.com', '$2a$10$YourEncryptedPasswordHere', 'Administrador del sistema', 'Madrid', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?fit=crop&w=200&h=200', 'ADMIN'),
-      ('Ana Torres', 'ana@artyhub.com', '$2a$10$YourEncryptedPasswordHere', 'Artista contemporánea', 'Madrid', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=faces&fit=crop&w=200&h=200', 'USER'),
-      ('Luis Gómez', 'luis@artyhub.com', '$2a$10$YourEncryptedPasswordHere', 'Escultor profesional', 'Barcelona', 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?crop=faces&fit=crop&w=200&h=200', 'USER'),
-      ('María López', 'maria@artyhub.com', '$2a$10$YourEncryptedPasswordHere', 'Fotógrafa urbana', 'Valencia', 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?crop=faces&fit=crop&w=200&h=200', 'USER'),
-      ('Carlos Ruiz', 'carlos@artyhub.com', '$2a$10$YourEncryptedPasswordHere', 'Diseñador digital', 'Sevilla', 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?crop=faces&fit=crop&w=200&h=200', 'USER');
+      ('Admin Root', 'admin@artyhub.com', 'root', 'Administrador del sistema', 'Madrid', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?fit=crop&w=200&h=200', 'ADMIN'),
+      ('Ana Torres', 'ana@artyhub.com', 'root', 'Artista contemporánea', 'Madrid', 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('Luis Gómez', 'luis@artyhub.com', 'root', 'Escultor profesional', 'Barcelona', 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('María López', 'maria@artyhub.com', 'root', 'Fotógrafa urbana', 'Valencia', 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?crop=faces&fit=crop&w=200&h=200', 'USER'),
+      ('Carlos Ruiz', 'carlos@artyhub.com', 'root', 'Diseñador digital', 'Sevilla', 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?crop=faces&fit=crop&w=200&h=200', 'USER');
 
 -- =========================
 -- INSERT ARTWORKS
