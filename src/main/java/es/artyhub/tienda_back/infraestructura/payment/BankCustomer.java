@@ -19,7 +19,7 @@ public class BankCustomer {
         this.restTemplate = restTemplate;
     }
 
-    private final String BANCO_URL = "http://localhost:8081/api/pagos/pago_tarjeta"; 
+    private final String BANCO_URL = "http://bank-back-artyhub.preproducciondaw.cip.fpmislata.com:8081/api/pagos/pago_tarjeta"; 
 
     private final String MI_TIENDA_IBAN = "ES5521000418450200051339";
     private final String MI_TIENDA_LOGIN = "artyhub";
