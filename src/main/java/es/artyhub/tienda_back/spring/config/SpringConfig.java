@@ -103,16 +103,5 @@ public class SpringConfig {
         return new RestTemplate();
     }
 
-    @Bean
-    public OrderJpaDao orderJpaDao(){
-        return new OrderJpaDaoImpl();
-    }
-    @Bean
-    public OrderRepository orderRepository(OrderJpaDao orderJpaDao){
-        return new OrderRepositoryImpl(orderJpaDao);
-    }
-    @Bean
-    public OrderService orderService(OrderRepository orderRepository){
-        return new OrderServiceImpl(orderRepository);
-    }
+
 }
