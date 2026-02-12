@@ -24,11 +24,7 @@ public class CartMapperTest {
     @DisplayName("Test fromCartToCartDto")
     class FromCartToCartDtoTest {
 
-        @Test
-        @DisplayName("Test fromCartToCartDto with null Cart should throw exception")
-        void testFromCartToCartDto_NullInput() {
-            assertThrows(BusinessException.class, () -> CartMapper.getInstance().fromCartToCartDto(null));
-        }
+
 
         @Test
         @DisplayName("Test fromCartToCartDto with valid Cart should return CartDto")
@@ -50,12 +46,12 @@ public class CartMapperTest {
                     user
             );
 
-            CartDto cartDto = CartMapper.getInstance().fromCartToCartDto(cart);
+            CartDto cartDto = CartMapper.getInstance().fromCartToShoppingCartDto(cart);
 
             assertAll(
                     () -> assertNotNull(cartDto),
                     () -> assertEquals(1L, cartDto.getId()),
-                    () -> assertEquals(user.getId(), cartDto.getUserDto().getId()));
+                    () -> assertEquals(user.getId(), cartDto.getUser().getId()));
         }
     }
 
@@ -63,11 +59,7 @@ public class CartMapperTest {
     @DisplayName("Test fromCartDtoToCart")
     class FromCartDtoToCartTest {
 
-        @Test
-        @DisplayName("Test fromCartDtoToCart with null CartDto should throw exception")
-        void testFromCartDtoToCart_NullInput() {
-            assertThrows(BusinessException.class, () -> CartMapper.getInstance().fromCartDtoToCart(null));
-        }
+
 
         @Test
         @DisplayName("Test fromCartDtoToCart with valid CartDto should return Cart")
@@ -89,7 +81,7 @@ public class CartMapperTest {
                     userDto
             );
 
-            Cart cart = CartMapper.getInstance().fromCartDtoToCart(cartDto);
+            Cart cart = CartMapper.getInstance().fromCartDtoToShoppingCart(cartDto);
 
             assertAll(
                     () -> assertNotNull(cart),

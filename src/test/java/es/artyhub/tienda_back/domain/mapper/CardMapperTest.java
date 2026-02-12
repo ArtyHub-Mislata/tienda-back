@@ -29,7 +29,6 @@ public class CardMapperTest {
         @DisplayName("Test fromCardToCardDto with valid Card should return CardDto")
         void testFromCardToCardDto_ValidInput() {
             Card card = new Card(
-                    1L,
                     "1234567890123456",
                     "12/25",
                     "123",
@@ -40,7 +39,6 @@ public class CardMapperTest {
 
             assertAll(
                     () -> assertNotNull(cardDto),
-                    () -> assertEquals(1L, cardDto.getId()),
                     () -> assertEquals("1234567890123456", cardDto.getnTarget()),
                     () -> assertEquals("12/25", cardDto.getDateExpiration()),
                     () -> assertEquals("123", cardDto.getCvv()),
@@ -62,7 +60,6 @@ public class CardMapperTest {
         @DisplayName("Test fromCardDtoToCard with valid CardDto should return Card")
         void testFromCardDtoToCard_ValidInput() {
             CardDto cardDto = new CardDto(
-                    1L,
                     "1234567890123456",
                     "12/25",
                     "123",
@@ -73,7 +70,6 @@ public class CardMapperTest {
 
             assertAll(
                     () -> assertNotNull(card),
-                    () -> assertEquals(1L, card.getId()),
                     () -> assertEquals("1234567890123456", card.getnTarget()),
                     () -> assertEquals("12/25", card.getDateExpiration()),
                     () -> assertEquals("123", card.getCvv()),

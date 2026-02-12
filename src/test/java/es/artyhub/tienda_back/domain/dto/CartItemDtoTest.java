@@ -24,7 +24,6 @@ public class CartItemDtoTest {
         CartItemDto cartItemDto = new CartItemDto(
             1L,
             10L,
-            new CartDto(1L, List.of(), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN)),
             new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L)
         );
 
@@ -33,9 +32,9 @@ public class CartItemDtoTest {
 
     static Stream<CartItemDto> invalidValues() {
         return Stream.of(
-            new CartItemDto(1L, 0L, new CartDto(1L, List.of(), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN)), new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L)),
-            new CartItemDto(1L, -10L, new CartDto(1L, List.of(), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN)), new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L)),
-            new CartItemDto(1L, 0L, new CartDto(1L, List.of(), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN)), new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L))
+            new CartItemDto(1L, 0L,  new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L)),
+            new CartItemDto(1L, -10L, new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L)),
+            new CartItemDto(1L, 0L, new ArtworkDto(1L, "Name", "Description", "Image", new BigDecimal(10), new CategoryDto(1L, "Name"), new UserDto(1L, "Name", "Email", "Password", "Description", "Address", "ImageProfile", UserRole.ADMIN), 10L))
         );
     }
 

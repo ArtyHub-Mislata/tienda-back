@@ -34,7 +34,7 @@ public class PaymentMapperTest {
         @DisplayName("Test fromPaymentToPaymentDto with valid Payment should return PaymentDto")
         void testFromPaymentToPaymentDto_ValidInput() {
             Card card = new Card(
-                    1L,
+
                     "1234567890123456",
                     "2025-12",
                     "123",
@@ -54,8 +54,8 @@ public class PaymentMapperTest {
                     () -> assertNotNull(paymentDto),
                     () -> assertEquals(1L, paymentDto.getId()),
                     () -> assertEquals(BigDecimal.valueOf(10.0), paymentDto.getAmount()),
-                    () -> assertEquals(Status.PENDING, paymentDto.getStatus()),
-                    () -> assertEquals(card.getId(), paymentDto.getCardDto().getId()));
+                    () -> assertEquals(Status.PENDING, paymentDto.getStatus())
+            );
         }
     }
 
@@ -73,7 +73,7 @@ public class PaymentMapperTest {
         @DisplayName("Test fromPaymentDtoToPayment with valid PaymentDto should return Payment")
         void testFromPaymentDtoToPayment_ValidInput() {
             CardDto cardDto = new CardDto(
-                    1L,
+
                     "1234567890123456",
                     "2025-12",
                     "123",
@@ -93,8 +93,8 @@ public class PaymentMapperTest {
                     () -> assertNotNull(payment),
                     () -> assertEquals(1L, payment.getId()),
                     () -> assertEquals(BigDecimal.valueOf(10.0), payment.getAmount()),
-                    () -> assertEquals(Status.PENDING, payment.getStatus()),
-                    () -> assertEquals(cardDto.getId(), payment.getCard().getId()));
+                    () -> assertEquals(Status.PENDING, payment.getStatus())
+            );
         }
     }
 }

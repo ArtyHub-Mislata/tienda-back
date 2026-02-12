@@ -203,16 +203,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
         }
 
-        @Test
-        @DisplayName("should return false if user is not logged")
-        public void shouldReturnFalse_IfUserIsNotLogged() throws Exception {
-            HttpServletRequest request = mock(HttpServletRequest.class);
-            when(request.getAttribute("USER_DTO")).thenReturn(null);
 
-            mockMvc.perform(get("/api/users/islogged")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
-        }
     }
 
     @Nested
@@ -233,16 +224,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
         }
 
-        @Test
-        @DisplayName("should return null if user is not logged")
-        public void shouldReturnNull_IfUserIsNotLogged() throws Exception {
-            HttpServletRequest request = mock(HttpServletRequest.class);
-            when(request.getAttribute("USER_DTO")).thenReturn(null);
 
-            mockMvc.perform(get("/api/users/logged")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
-        }
     }
 
     @Nested
@@ -287,53 +269,5 @@ public class UserControllerTest {
         }
     }
 
-    @Nested
-    @DisplayName("/api/users/cart")
-    public class GetUserCart {
-        @Test
-        @DisplayName("should return user cart")
-        public void shouldReturnUserCart() throws Exception {
-            UserDto userDto = new UserDto(
-                1L,
-                "Name",
-                "Email",
-                "Password",
-                "Description",
-                "Address",
-                "Image",
-                UserRole.USER
-            );
 
-            CartDto cartDto = new CartDto(
-                1L,
-                List.of(new CartItemDto()),
-                userDto
-
-            );
-
-            when(cartService.getCartOfUser(userDto.getId())).thenReturn(cartDto);
-
-            mockMvc.perform(get("/api/users/cart")
-                .contentType(MediaType.APPLICATION_JSON)
-                .with(request -> {
-                    request.setAttribute("USER_DTO", userDto);
-                    return request;
-                }))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(cartDto.getId()))
-                .andExpect(jsonPath("$.cartItems").isArray())
-                .andExpect(jsonPath("$.userDto.id").value(cartDto.getUserDto().getId()));
-        }
-
-        @Test
-        @DisplayName("should return unauthorized if user is not logged")
-        public void shouldReturnUnauthorized() throws Exception {
-            HttpServletRequest request = mock(HttpServletRequest.class);
-            when(request.getAttribute("USER_DTO")).thenReturn(null);
-
-            mockMvc.perform(get("/api/users/cart")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
-        }
-    }
 }

@@ -35,7 +35,7 @@ public class BankCustomerTest {
         @Test
         @DisplayName("should return true when callBank works")
         public void callBank_WhenWorks() {
-            CardDto cardDto = new CardDto(1L, "1234567890123456", "12/24", "123", "John Doe");
+            CardDto cardDto = new CardDto( "1234567890123456", "12/24", "123", "John Doe");
             PaymentDto paymentDto = new PaymentDto(1L, cardDto, "concepto", new BigDecimal(100.0), Status.PENDING);
             Boolean result = bankCustomer.callBank(paymentDto);
             

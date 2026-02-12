@@ -30,7 +30,7 @@ public class PaymentServiceImplTest {
     @Test
     @DisplayName("should return status when pay is called with valid arguments")
     public void pay_WhenPayIsCalledWithValidArguments() {
-        CardDto cardDto = new CardDto(1L, "1234567890123456", "12/25", "123", "John Doe");
+        CardDto cardDto = new CardDto( "1234567890123456", "12/25", "123", "John Doe");
         PaymentDto paymentDto = new PaymentDto(1L, cardDto, "concept", new BigDecimal(10), Status.PENDING);
         
         when(bankCustomer.callBank(paymentDto)).thenReturn(true);

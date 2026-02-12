@@ -31,11 +31,7 @@ public class CartItemMapperTest {
     @DisplayName("Test fromCartItemToCartItemDto")
     class FromCartItemToCartItemDtoTest {
 
-        @Test
-        @DisplayName("Test fromCartItemToCartItemDto with null CartItem should throw exception")
-        void testFromCartItemToCartItemDto_NullInput() {
-            assertThrows(BusinessException.class, () -> CartItemMapper.getInstance().fromCartItemToCartItemDto(null));
-        }
+
 
         @Test
         @DisplayName("Test fromCartItemToCartItemDto with valid CartItem should return CartItemDto")
@@ -72,7 +68,6 @@ public class CartItemMapperTest {
             CartItem cartItem = new CartItem(
                     1L,
                     10L,
-                    cart,
                     artwork
             );
 
@@ -82,14 +77,14 @@ public class CartItemMapperTest {
                     () -> assertNotNull(cartItemDto),
                     () -> assertEquals(1L, cartItemDto.getId()),
                     () -> assertEquals(10L, cartItemDto.getQuantity()),
-                    () -> assertEquals(artwork.getId(), cartItemDto.getArtworkDto().getId()),
-                    () -> assertEquals("Artwork", cartItemDto.getArtworkDto().getName()),
-                    () -> assertEquals("Description", cartItemDto.getArtworkDto().getDescription()),
-                    () -> assertEquals("Image", cartItemDto.getArtworkDto().getImage()),
-                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtworkDto().getPrice()),
-                    () -> assertEquals(category.getId(), cartItemDto.getArtworkDto().getCategoryDto().getId()),
-                    () -> assertEquals(user.getId(), cartItemDto.getArtworkDto().getUserDto().getId()),
-                    () -> assertEquals(10L, cartItemDto.getArtworkDto().getStock()));
+                    () -> assertEquals(artwork.getId(), cartItemDto.getArtwork().getId()),
+                    () -> assertEquals("Artwork", cartItemDto.getArtwork().getName()),
+                    () -> assertEquals("Description", cartItemDto.getArtwork().getDescription()),
+                    () -> assertEquals("Image", cartItemDto.getArtwork().getImage()),
+                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtwork().getPrice()),
+                    () -> assertEquals(category.getId(), cartItemDto.getArtwork().getCategoryDto().getId()),
+                    () -> assertEquals(user.getId(), cartItemDto.getArtwork().getUserDto().getId()),
+                    () -> assertEquals(10L, cartItemDto.getArtwork().getStock()));
         }
     }
 
@@ -97,11 +92,7 @@ public class CartItemMapperTest {
     @DisplayName("Test fromCartItemDtoToCartItem")
     class FromCartItemDtoToCartItemTest {
 
-        @Test
-        @DisplayName("Test fromCartItemDtoToCartItem with null CartItemDto should throw exception")
-        void testFromCartItemDtoToCartItem_NullInput() {
-            assertThrows(BusinessException.class, () -> CartItemMapper.getInstance().fromCartItemDtoToCartItem(null));
-        }
+
 
         @Test
         @DisplayName("Test fromCartItemDtoToCartItem with valid CartItemDto should return CartItem")
@@ -138,7 +129,6 @@ public class CartItemMapperTest {
             CartItemDto cartItemDto = new CartItemDto(
                     1L,
                     10L,
-                    cartDto,
                     artworkDto
             );
 

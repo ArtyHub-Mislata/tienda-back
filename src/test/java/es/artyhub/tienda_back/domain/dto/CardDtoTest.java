@@ -19,7 +19,7 @@ public class CardDtoTest {
     @DisplayName("should create card dto")
     public void shouldCreateCardDto() {
         CardDto cardDto = new CardDto(
-            1L,
+
             "1234567890123456",
             "12/12",
             "123",
@@ -31,25 +31,25 @@ public class CardDtoTest {
 
     static Stream<CardDto> invalidValues() {
         return Stream.of(
-            new CardDto(1L, "", "12/12", "123", "Juan Martinez García"),
-            new CardDto(1L, " ", "12/12", "123", "Juan Martinez García"),
-            new CardDto(1L, null, "12/12", "123", "Juan Martinez García"),
-            new CardDto(1L, "1234", "12/12", "123", "Juan Martinez García"),
-            new CardDto(1L, "123456789012345678", "12/12", "123", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "", "123", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", " ", "123", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", null, "123", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", " ", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", null, "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "12", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "12345", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "000", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "-123", "Juan Martinez García"),
-            new CardDto(1L, "123456790123456", "12/12", "123", ""),
-            new CardDto(1L, "123456790123456", "12/12", "123", " "),
-            new CardDto(1L, "123456790123456", "12/12", "123", null),
-            new CardDto(1L, null, null, null, null)
+            new CardDto( "", "12/12", "123", "Juan Martinez García"),
+            new CardDto( " ", "12/12", "123", "Juan Martinez García"),
+            new CardDto( null, "12/12", "123", "Juan Martinez García"),
+            new CardDto( "1234", "12/12", "123", "Juan Martinez García"),
+            new CardDto( "123456789012345678", "12/12", "123", "Juan Martinez García"),
+            new CardDto( "123456790123456", "", "123", "Juan Martinez García"),
+            new CardDto( "123456790123456", " ", "123", "Juan Martinez García"),
+            new CardDto( "123456790123456", null, "123", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", " ", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", null, "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "12", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "12345", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "000", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "-123", "Juan Martinez García"),
+            new CardDto( "123456790123456", "12/12", "123", ""),
+            new CardDto( "123456790123456", "12/12", "123", " "),
+            new CardDto( "123456790123456", "12/12", "123", null),
+            new CardDto( null, null, null, null)
         );
     }
 

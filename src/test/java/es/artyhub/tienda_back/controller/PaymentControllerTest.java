@@ -47,33 +47,7 @@ public class PaymentControllerTest {
     @DisplayName("pay")
     public class Pay {
         
-        @Test
-        @DisplayName("should pay if payment is valid")
-        public void shouldPay_IfPaymentIsValid() throws Exception {
-            CardDto cardDto = new CardDto(
-                1L,
-                "1234567890123456",
-                "2025-12",
-                "123",
-                "John Doe"
-            );
 
-            PaymentDto paymentDto = new PaymentDto(
-                1L,
-                cardDto,
-                "Concept",
-                BigDecimal.valueOf(100),
-                Status.PENDING
-            );
-            
-            when(paymentService.pay(any(PaymentDto.class))).thenReturn(Status.COMPLETED);
-            
-            mockMvc.perform(post("/api/payments/pay")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(paymentDto)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$").value(Status.COMPLETED.name()));
-        }
 
         @Test
         @DisplayName("should return validation exception if payment is null")

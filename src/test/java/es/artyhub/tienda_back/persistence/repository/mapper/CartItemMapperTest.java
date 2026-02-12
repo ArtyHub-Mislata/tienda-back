@@ -79,7 +79,6 @@ public class CartItemMapperTest {
             CartItemJpaEntity cartItemJpaEntity = new CartItemJpaEntity(
                     1L,
                     10L,
-                    cartJpaEntity,
                     artworkJpaEntity
             );
 
@@ -89,12 +88,12 @@ public class CartItemMapperTest {
                     () -> assertNotNull(cartItemDto),
                     () -> assertEquals(1L, cartItemDto.getId()),
                     () -> assertEquals(10L, cartItemDto.getQuantity()),
-                    () -> assertEquals("Description", cartItemDto.getArtworkDto().getDescription()),
-                    () -> assertEquals("Image", cartItemDto.getArtworkDto().getImage()),
-                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtworkDto().getPrice()),
-                    () -> assertEquals("Category", cartItemDto.getArtworkDto().getCategoryDto().getName()),
-                    () -> assertEquals("User", cartItemDto.getArtworkDto().getUserDto().getName()),
-                    () -> assertEquals(10L, cartItemDto.getArtworkDto().getStock()));
+                    () -> assertEquals("Description", cartItemDto.getArtwork().getDescription()),
+                    () -> assertEquals("Image", cartItemDto.getArtwork().getImage()),
+                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtwork().getPrice()),
+                    () -> assertEquals("Category", cartItemDto.getArtwork().getCategoryDto().getName()),
+                    () -> assertEquals("User", cartItemDto.getArtwork().getUserDto().getName()),
+                    () -> assertEquals(10L, cartItemDto.getArtwork().getStock()));
         }
     }
 
@@ -151,7 +150,6 @@ public class CartItemMapperTest {
             CartItemDto cartItemDto = new CartItemDto(
                     1L,
                     10L,
-                    cartDto,
                     artworkDto
             );
 
@@ -160,13 +158,13 @@ public class CartItemMapperTest {
             assertAll(
                     () -> assertNotNull(cartItemJpaEntityResult),
                     () -> assertEquals(1L, cartItemDto.getId()),
-                    () -> assertEquals("Artwork", cartItemDto.getArtworkDto().getName()),
-                    () -> assertEquals("Description", cartItemDto.getArtworkDto().getDescription()),
-                    () -> assertEquals("Image", cartItemDto.getArtworkDto().getImage()),
-                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtworkDto().getPrice()),
-                    () -> assertEquals("Category", cartItemDto.getArtworkDto().getCategoryDto().getName()),
-                    () -> assertEquals("User", cartItemDto.getArtworkDto().getUserDto().getName()),
-                    () -> assertEquals(10L, cartItemDto.getArtworkDto().getStock()));
+                    () -> assertEquals("Artwork", cartItemDto.getArtwork().getName()),
+                    () -> assertEquals("Description", cartItemDto.getArtwork().getDescription()),
+                    () -> assertEquals("Image", cartItemDto.getArtwork().getImage()),
+                    () -> assertEquals(BigDecimal.valueOf(10.0), cartItemDto.getArtwork().getPrice()),
+                    () -> assertEquals("Category", cartItemDto.getArtwork().getCategoryDto().getName()),
+                    () -> assertEquals("User", cartItemDto.getArtwork().getUserDto().getName()),
+                    () -> assertEquals(10L, cartItemDto.getArtwork().getStock()));
         }
     }
 }

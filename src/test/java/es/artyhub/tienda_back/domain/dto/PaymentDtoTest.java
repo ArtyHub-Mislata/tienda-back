@@ -22,7 +22,7 @@ public class PaymentDtoTest {
     public void shouldCreatePaymentDto() {
         PaymentDto paymentDto = new PaymentDto(
             1L,
-            new CardDto(1L, "1234567890123456", "12/25", "123", "John Doe"),
+            new CardDto( "1234567890123456", "12/25", "123", "John Doe"),
             "Concept",
             new BigDecimal(100),
             Status.PENDING
@@ -34,7 +34,7 @@ public class PaymentDtoTest {
     static Stream<PaymentDto> invalidValues() {
         return Stream.of(
             new PaymentDto(1L, null, "Concept", new BigDecimal(100), Status.PENDING),
-            new PaymentDto(1L, new CardDto(1L, "1234567890123456", "12/25", "123", "John Doe"), "Concept", null, Status.PENDING),
+            new PaymentDto(1L, new CardDto( "1234567890123456", "12/25", "123", "John Doe"), "Concept", null, Status.PENDING),
             new PaymentDto(1L, null, "Concept", null, Status.PENDING)
         );
     }

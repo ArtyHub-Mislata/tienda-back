@@ -26,7 +26,7 @@ public class CartMapperTest {
         @Test
         @DisplayName("Test fromCartJpaEntityToCartDto with null CartJpaEntity should return null")
         void testFromCartJpaEntityToCartDto_NullInput() {
-            CartDto result = CartMapper.getInstance().fromCartJpaEntityToCartDto(null);
+            CartDto result = CartMapper.getInstance().fromCartEntityToShoppingCartDto(null);
             assertNull(result);
         }
 
@@ -49,12 +49,12 @@ public class CartMapperTest {
                     userJpaEntity
             );
 
-            CartDto cartDto = CartMapper.getInstance().fromCartJpaEntityToCartDto(cartJpaEntity);
+            CartDto cartDto = CartMapper.getInstance().fromCartEntityToShoppingCartDto(cartJpaEntity);
 
             assertAll(
                     () -> assertNotNull(cartDto),
                     () -> assertEquals(1L, cartDto.getId()),
-                    () -> assertEquals(userJpaEntity.getId(), cartDto.getUserDto().getId()));
+                    () -> assertEquals(userJpaEntity.getId(), cartDto.getUser().getId()));
         }
     }
 
