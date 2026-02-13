@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.artyhub</groupId>
-	<artifactId>tienda-back</artifactId>
+	<artifactId>artyhub-tienda-back</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tienda-back</name>
 	<description>Demo project for Spring Boot</description>
