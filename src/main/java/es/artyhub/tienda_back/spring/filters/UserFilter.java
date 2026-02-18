@@ -14,13 +14,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 @Order(1)
 public class UserFilter implements Filter {
-    
-    
+
     private final SesionService sesionService;
 
     public UserFilter(SesionService sesionService) {
@@ -29,9 +27,8 @@ public class UserFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
-
 
         String header = req.getHeader("authorization");
         String token = null;
@@ -40,9 +37,10 @@ public class UserFilter implements Filter {
             if (header.startsWith("Bearer ")) {
                 token = header.substring(7);
             } else {
-                token = header; // viene sin Bearer
+                token = header;
             }
         }
+
         UserDto userDto = sesionService.findUserByToken(token);
 
         req.setAttribute("USER_DTO", userDto);

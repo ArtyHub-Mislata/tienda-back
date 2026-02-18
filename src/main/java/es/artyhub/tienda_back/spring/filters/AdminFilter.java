@@ -13,8 +13,10 @@ import java.io.IOException;
 @Component
 @Order(2)
 public class AdminFilter implements Filter {
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
@@ -22,7 +24,9 @@ public class AdminFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
+
         UserDto userDto = (UserDto) req.getAttribute("USER_DTO");
+
         String path = req.getRequestURI();
 
         if (path.startsWith("/api/admin")) {
@@ -33,6 +37,5 @@ public class AdminFilter implements Filter {
         }
 
         filterChain.doFilter(request, response);
-
     }
 }

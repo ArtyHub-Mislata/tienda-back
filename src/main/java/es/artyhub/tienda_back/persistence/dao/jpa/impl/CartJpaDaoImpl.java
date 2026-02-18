@@ -5,10 +5,8 @@ import es.artyhub.tienda_back.persistence.dao.jpa.CartJpaDao;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.ArtworkJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartItemJpaEntity;
 import es.artyhub.tienda_back.persistence.dao.jpa.entity.CartJpaEntity;
-import es.artyhub.tienda_back.persistence.dao.jpa.entity.UserJpaEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
 public class CartJpaDaoImpl implements CartJpaDao {
 
@@ -54,10 +52,10 @@ public class CartJpaDaoImpl implements CartJpaDao {
                     WHERE ci.cart.id = :cartId
                     """;
 
-            int deletedCount = entityManager
-                    .createQuery(jpql)
-                    .setParameter("cartId", cartId)
-                    .executeUpdate();
+            entityManager
+                .createQuery(jpql)
+                .setParameter("cartId", cartId)
+                .executeUpdate();
 
             // Limpiamos la colección en memoria
             cart.getCartItems().clear();

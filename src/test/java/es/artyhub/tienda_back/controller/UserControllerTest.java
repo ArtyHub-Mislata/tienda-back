@@ -10,8 +10,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.artyhub.tienda_back.controller.webmodel.request.RegisterRequest;
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
-import es.artyhub.tienda_back.domain.dto.CartDto;
-import es.artyhub.tienda_back.domain.dto.CartItemDto;
 import es.artyhub.tienda_back.domain.dto.CredentialsDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
@@ -27,8 +25,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

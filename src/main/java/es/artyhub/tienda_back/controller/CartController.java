@@ -8,11 +8,8 @@ import es.artyhub.tienda_back.domain.service.CartService;
 import es.artyhub.tienda_back.domain.validation.DtoValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.HTML;
 
 @RequestMapping("/api/cart")
 @RestController

@@ -1,9 +1,6 @@
 package es.artyhub.tienda_back.controller;
 
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
-
-import java.math.BigDecimal;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -17,9 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import es.artyhub.tienda_back.domain.dto.CardDto;
 import es.artyhub.tienda_back.domain.dto.PaymentDto;
-import es.artyhub.tienda_back.domain.enums.Status;
 import es.artyhub.tienda_back.domain.exception.ValidationException;
 import es.artyhub.tienda_back.domain.service.PaymentService;
 import es.artyhub.tienda_back.domain.service.SesionService;

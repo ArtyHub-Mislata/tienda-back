@@ -14,9 +14,9 @@ import java.util.List;
 @Order(3)
 public class LoginFilter implements Filter {
 
-
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
@@ -25,11 +25,13 @@ public class LoginFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
+
         List<String> loginProtectedUrls = List.of(
                 "/api/users/logout"
         );
 
-        UserDto userDto =(UserDto) req.getAttribute("USER_DTO");
+        UserDto userDto = (UserDto) req.getAttribute("USER_DTO");
+
         String path = req.getRequestURI();
 
         if(loginProtectedUrls.contains(path) && userDto == null){

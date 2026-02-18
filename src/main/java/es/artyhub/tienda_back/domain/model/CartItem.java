@@ -1,7 +1,5 @@
 package es.artyhub.tienda_back.domain.model;
 
-import java.math.BigDecimal;
-
 public class CartItem {
 
     private Long id;

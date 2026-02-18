@@ -3,24 +3,19 @@ package es.artyhub.tienda_back.domain.mapper;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import es.artyhub.tienda_back.domain.dto.ArtworkDto;
-import es.artyhub.tienda_back.domain.dto.CartDto;
 import es.artyhub.tienda_back.domain.dto.CartItemDto;
 import es.artyhub.tienda_back.domain.dto.CategoryDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
-import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Artwork;
-import es.artyhub.tienda_back.domain.model.Cart;
 import es.artyhub.tienda_back.domain.model.CartItem;
 import es.artyhub.tienda_back.domain.model.Category;
 import es.artyhub.tienda_back.domain.model.User;
@@ -59,11 +54,6 @@ public class CartItemMapperTest {
                     category,
                     user,
                     10L
-            );
-            Cart cart = new Cart(
-                    1L,
-                    List.of(),
-                    user
             );
             CartItem cartItem = new CartItem(
                     1L,
@@ -120,11 +110,6 @@ public class CartItemMapperTest {
                     categoryDto,
                     userDto,
                     10L
-            );
-            CartDto cartDto = new CartDto(
-                    1L,
-                    List.of(),
-                    userDto
             );
             CartItemDto cartItemDto = new CartItemDto(
                     1L,

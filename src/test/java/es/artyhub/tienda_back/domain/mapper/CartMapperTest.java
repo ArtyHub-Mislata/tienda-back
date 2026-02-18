@@ -3,7 +3,6 @@ package es.artyhub.tienda_back.domain.mapper;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import es.artyhub.tienda_back.domain.dto.CartDto;
 import es.artyhub.tienda_back.domain.dto.UserDto;
 import es.artyhub.tienda_back.domain.enums.UserRole;
-import es.artyhub.tienda_back.domain.exception.BusinessException;
 import es.artyhub.tienda_back.domain.model.Cart;
 import es.artyhub.tienda_back.domain.model.User;
 
