@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class SesionDto {
+    
     @NotBlank(message = "El campo token no puede estar vacío")
     private String token;
 

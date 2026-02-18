@@ -6,6 +6,7 @@ import es.artyhub.tienda_back.domain.model.Page;
 import java.util.Optional;
 
 public interface ArtworkRepository {
+    
     Page<ArtworkDto> findAll(int pageNumber, int pageSize);
 
     Page<ArtworkDto> findAllArtworksByCategory(int pageNumber, int pageSize, Long id);

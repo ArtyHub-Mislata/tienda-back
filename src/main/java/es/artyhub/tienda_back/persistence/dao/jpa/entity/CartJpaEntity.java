@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 @Table(name = "carts")
 public class CartJpaEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

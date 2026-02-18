@@ -8,16 +8,24 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class UserJpaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String email;
+
     private String password;
+
     private String description;
+
     private String address;
+
     @Column(name = "image_profile_url")
     private String imageProfileUrl;
+    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;

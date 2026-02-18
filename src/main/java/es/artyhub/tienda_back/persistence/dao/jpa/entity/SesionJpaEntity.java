@@ -10,9 +10,12 @@ import java.util.Objects;
 @Entity
 @Table(name = "sesions")
 public class SesionJpaEntity implements Serializable{
+
     @Id
     private String token;
+
     private Long userId;
+
     private Date dateCreate;
 
     public SesionJpaEntity() {

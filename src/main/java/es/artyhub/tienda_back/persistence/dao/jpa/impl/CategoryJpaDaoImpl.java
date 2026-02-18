@@ -45,9 +45,7 @@ public class CategoryJpaDaoImpl implements CategoryJpaDao {
         if(categoryJpaEntity == null){
             throw new ResourceNotFoundException("Category with id " + jpaEntity.getId() + " not found, error when updating");
         }
-        //hacemos la comprobación de si existe ya que si no existe en vez de hacer un update hará in insert
         return entityManager.merge(jpaEntity);
-
     }
 
     @Override

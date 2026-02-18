@@ -4,6 +4,7 @@ import es.artyhub.tienda_back.domain.dto.ArtworkDto;
 import es.artyhub.tienda_back.domain.model.Page;
 
 public interface ArtworkService {
+    
     Page<ArtworkDto> findAll(int pageNumber, int pageSize);
 
     Page<ArtworkDto> findAllArtworksByCategoryId(int pageNumber, int pageSize, Long id);

@@ -48,9 +48,7 @@ public class UserJpaDaoImpl implements UserJpaDao {
         if(userJpaEntity == null){
             throw new ResourceNotFoundException("User with id " + jpaEntity.getId() + " not found, error when updating");
         }
-        //hacemos la comprobación de si existe ya que si no existe en vez de hacer un update hará in insert
         return entityManager.merge(jpaEntity);
-
     }
 
     @Override

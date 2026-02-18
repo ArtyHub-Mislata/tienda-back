@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "cart_items")
 public class CartItemJpaEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

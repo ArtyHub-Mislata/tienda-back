@@ -9,13 +9,18 @@ import java.util.Objects;
 @Entity
 @Table(name= "artworks")
 public class ArtworkJpaEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String description;
+
     @Column(name = "img_url")
     private String imageUrl;
+    
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)

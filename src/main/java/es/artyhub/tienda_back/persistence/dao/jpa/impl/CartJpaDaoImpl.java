@@ -46,7 +46,6 @@ public class CartJpaDaoImpl implements CartJpaDao {
         CartJpaEntity cart = entityManager.find(CartJpaEntity.class, cartId);
 
         if (cart != null) {
-            // Eliminamos todos los items del carrito
             String jpql = """
                     DELETE FROM CartItemJpaEntity ci
                     WHERE ci.cart.id = :cartId
@@ -57,7 +56,6 @@ public class CartJpaDaoImpl implements CartJpaDao {
                 .setParameter("cartId", cartId)
                 .executeUpdate();
 
-            // Limpiamos la colección en memoria
             cart.getCartItems().clear();
         }
     }
@@ -70,7 +68,6 @@ public class CartJpaDaoImpl implements CartJpaDao {
         }
         CartItemJpaEntity itemExistente = findCartItem(cartJpaEntity.getId(), artworkJpa.getId());
 
-        //Si estamos añadiendo un cartItem que ya existe, le sumamos uno a s
         if(itemExistente != null){
             if(artworkJpa.getStock() > itemExistente.getQuantity()) {
                 itemExistente.setQuantity(itemExistente.getQuantity() + 1);

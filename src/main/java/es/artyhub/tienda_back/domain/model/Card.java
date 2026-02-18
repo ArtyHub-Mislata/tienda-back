@@ -2,7 +2,6 @@ package es.artyhub.tienda_back.domain.model;
 
 public class Card {
 
-
     private String nTarget;
     private String dateExpiration;
     private String cvv;
@@ -17,7 +16,6 @@ public class Card {
         this.cvv = cvv;
         this.holderName = holderName;
     }
-
 
     public String getnTarget() {
         return nTarget;

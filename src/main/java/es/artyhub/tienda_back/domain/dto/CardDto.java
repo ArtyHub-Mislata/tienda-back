@@ -8,8 +8,6 @@ import jakarta.validation.constraints.Size;
 
 public class CardDto {
 
-
-
         @JsonProperty("nTarget")
         @NotBlank(message = "El número de la tarjeta no puede ser vacío")
         @Size(min = 16, max = 16, message = "El número de la tarjeta debe tener 16 dígitos")
@@ -36,10 +34,6 @@ public class CardDto {
         this.cvv = cvv;
         this.holderName = holderName;
     }
-
-
-
-
 
     public String getnTarget() {
         return nTarget;

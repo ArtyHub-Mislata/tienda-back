@@ -7,9 +7,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "categories")
 public class CategoryJpaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String nombre;
 
     public CategoryJpaEntity(Long id, String nombre) {
